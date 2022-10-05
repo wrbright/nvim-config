@@ -1,100 +1,133 @@
+"""""""""""""""""""""""""""
+"        Vim-Plug         "
+"""""""""""""""""""""""""""
 call plug#begin()
-  Plug 'ryanoasis/vim-devicons'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'preservim/nerdtree'
   Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-fugitive' 
   Plug 'tpope/vim-surround'
   Plug 'dense-analysis/ale'
   Plug 'vim-airline/vim-airline'
   Plug 'junegunn/fzf.vim'
-  Plug 'akinsho/bufferline.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'romgrk/barbar.nvim'
+  Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
   Plug 'gelguy/wilder.nvim'
   Plug 'sainnhe/gruvbox-material'
   Plug 'preservim/tagbar'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'lambdalisue/suda.vim'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'honza/vim-snippets'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
-
-lua << EOF
-
-
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#aaaaaa gui=nocombine]]
-
-
-
-require("indent_blankline").setup {
-    char_highlight_list = {
-    "IndentBlanklineIndent1",
-   }
-}
-EOF
-
-
-noremap <silent> <C-n> :lua require'tree'.toggle()<CR>
+"""""""""""""""""""""""""""
+"  Plugin Top Line Config "
+"""""""""""""""""""""""""""
+lua require('init')
 
 """""""""""""""""""""""""""
 "        Functions        "
 """""""""""""""""""""""""""
-function! StartUp()
-    if 0 == argc()
-        NERDTree
-    end
-endfunction
+" function! StartUp()
+"   if 0 == argc()
+"     NERDTree
+"   end
+" endfunction
 
 """"""""""""""""""""""""""
 "        Auto Cmd        "
 """"""""""""""""""""""""""
-autocmd BufWinEnter * NERDTreeMirror
+" autocmd BufWinEnter * NERDTreeMirror
 " autocmd VimEnter * NERDTree
-autocmd VimEnter * call StartUp()
-
-
+" autocmd VimEnter * call StartUp()
 
 """"""""""""""""""""""""""
 "   Rebinding Shortcuts  "
 """"""""""""""""""""""""""
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+" nnoremap <C-f> :NERDTreeFocus<CR>
+" nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NvimTreeToggle<CR>
+nnoremap <C-c> :NvimTreeClose<CR>
+map <C-_> gcc 
+
 nnoremap <C-j> :copy .<CR>
+
+nnoremap <A-k> :m -2<CR>==
+nnoremap <A-j> :m +1<CR>==
+
+vnoremap <A-j> :m'>+1<CR>gv=gv
+"`<my`>mzgv`yo`z
+vnoremap <A-k> :m'<-2<CR>gv=gv 
+"`>my`<mzgv`yo`z
+
+
+
+" inoremap ' ''<left>
+" inoremap ` ``<left>
+" inoremap ( ()<left>
+" inoremap [ []<left>
+" inoremap { {}<left>
+" inoremap {<CR> {<CR>}<ESC>O
+" inoremap {;<CR> {<CR>};<ESC>O
 
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-
+let g:gruvbox_material_transparent_background=0
+autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE 
 colorscheme gruvbox-material
 
-" Key bindings can be changed, see below
+
+
+""""""""""""""""""""""""""
+" General Configuration  "
+""""""""""""""""""""""""""
+let g:airline_powerline_fonts = 1
+let g:airline_theme='badwolf'
 call wilder#setup({'modes': [':', '/', '?']})
 
 call wilder#set_option('renderer', wilder#popupmenu_renderer({
       \ 'highlighter': wilder#basic_highlighter(),
       \ }))
 
+let g:coc_global_extensions = ['coc-solargraph']
 
+" let g:airline_section_z+=%PS%ln%v
+
+" function! GetAirlineSectionContent()
+"   return 'hello world'
+" endfunction
+
+" call airline#parts#define_function('func','GetAirlineSectionContent')
+" let g:airline_section_y += airline#section#create_right(['','func'])
+
+" let g:airline#extensions#default#layout = [
+"     \ [ 'a', 'b', 'c' ],
+"     \ [ 'x', 'z', 'error', 'warning', 'y' ]
+"     \ ]
 
 set nocompatible
-filetype on
 
 set mouse=a  " enable mouse
 set number relativenumber  
 set history=1000 " sets amount of command mode commands to store in history
 set signcolumn=yes numberwidth=6
 set linebreak
-set ruler                                       " always show cursor
-set wrap                                        " enable text wrapping
-set scrolloff=5                                 " lines above/below cursor when scrolling
-set confirm
+set ruler " always show cursor
+set wrap " enable text wrapping
+set scrolloff=5 " lines above/below cursor when scrolling
+set confirm 
 set undofile undodir=~/.vim/undo-dir
 
 "" indent guides enabled at startup
 let g:indent_guides_enable_on_vim_startup = 1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
+
+
 
 " Enable plugins and load plugin for the detected file type.
 filetype plugin on
@@ -113,6 +146,7 @@ set shiftwidth=2
 
 
 syntax on
+filetype on
 set number
 
 " Highlight cursor line underneath the cursor horizontally.
@@ -135,7 +169,7 @@ set showmatch
 " Use highlighting when doing a search.
 set hlsearch
 
-" Set the commands to save in history default number is 20.
+" Set the commands to save in history default
 set history=1000
 
 " Enable auto completion menu after pressing TAB.
@@ -153,8 +187,6 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 "Use space character instead of tabs
 
 "Remapping tab to autocomplete for COC auto complete
-set expandtab
-
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
@@ -170,3 +202,10 @@ function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
