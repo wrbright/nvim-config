@@ -9,7 +9,7 @@ call plug#begin()
   Plug 'tpope/vim-surround'
   Plug 'dense-analysis/ale'
   Plug 'vim-airline/vim-airline'
-  Plug 'junegunn/fzf.vim'
+  " Plug 'junegunn/fzf.vim'
   Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
   Plug 'gelguy/wilder.nvim'
   Plug 'sainnhe/gruvbox-material'
@@ -20,17 +20,28 @@ call plug#begin()
   Plug 'lambdalisue/suda.vim'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'honza/vim-snippets'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter' 
+  Plug 'MunifTanjim/prettier.nvim'
+  Plug 'mbbill/undotree'
+  Plug 'wfxr/minimap.vim'
 call plug#end()
+
 
 """""""""""""""""""""""""""
 "  Plugin Top Line Config "
 """""""""""""""""""""""""""
+
+" Lua Config Require (likely ~/.config/nvim/lua)
 lua require('init')
+lua << EOF
+
+EOF
+
 
 """""""""""""""""""""""""""
 "        Functions        "
 """""""""""""""""""""""""""
+
 " function! StartUp()
 "   if 0 == argc()
 "     NERDTree
@@ -40,15 +51,11 @@ lua require('init')
 """"""""""""""""""""""""""
 "        Auto Cmd        "
 """"""""""""""""""""""""""
-" autocmd BufWinEnter * NERDTreeMirror
-" autocmd VimEnter * NERDTree
-" autocmd VimEnter * call StartUp()
 
 """"""""""""""""""""""""""
 "   Rebinding Shortcuts  "
 """"""""""""""""""""""""""
-" nnoremap <C-f> :NERDTreeFocus<CR>
-" nnoremap <C-n> :NERDTree<CR>
+
 nnoremap <C-t> :NvimTreeToggle<CR>
 nnoremap <C-c> :NvimTreeClose<CR>
 map <C-_> gcc 
@@ -76,15 +83,22 @@ vnoremap <A-k> :m'<-2<CR>gv=gv
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
+
 let g:gruvbox_material_transparent_background=0
 autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE 
 colorscheme gruvbox-material
+
+highlight clear EndOfBuffer
 
 
 
 """"""""""""""""""""""""""
 " General Configuration  "
 """"""""""""""""""""""""""
+
+
+" let g:minimap_highlight_search = 1
+" let g:minimap_git_colors = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
 call wilder#setup({'modes': [':', '/', '?']})
@@ -94,6 +108,10 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer({
       \ }))
 
 let g:coc_global_extensions = ['coc-solargraph']
+
+let g:minimap_width = 10
+let g:minimap_auto_start = 1
+let g:minimap_auto_start_win_enter = 1
 
 " let g:airline_section_z+=%PS%ln%v
 
@@ -145,8 +163,8 @@ set softtabstop=2
 set shiftwidth=2
 
 
-syntax on
 filetype on
+syntax on
 set number
 
 " Highlight cursor line underneath the cursor horizontally.
@@ -184,8 +202,6 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-"Use space character instead of tabs
-
 "Remapping tab to autocomplete for COC auto complete
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
@@ -205,7 +221,7 @@ endfunction
 
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
-packloadall
+" packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 silent! helptags ALL
