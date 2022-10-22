@@ -2,28 +2,34 @@
 "        Vim-Plug         "
 """""""""""""""""""""""""""
 call plug#begin()
-  Plug 'lukas-reineke/indent-blankline.nvim'
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'tpope/vim-commentary'
-  Plug 'tpope/vim-fugitive' 
-  Plug 'tpope/vim-surround'
-  Plug 'dense-analysis/ale'
-  Plug 'vim-airline/vim-airline'
-  " Plug 'junegunn/fzf.vim'
-  Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-  Plug 'gelguy/wilder.nvim'
-  Plug 'sainnhe/gruvbox-material'
-  Plug 'preservim/tagbar'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'kyazdani42/nvim-tree.lua'
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'lambdalisue/suda.vim'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'honza/vim-snippets'
-  Plug 'nvim-treesitter/nvim-treesitter' 
-  Plug 'MunifTanjim/prettier.nvim'
-  Plug 'mbbill/undotree'
-  Plug 'wfxr/minimap.vim'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive' 
+    Plug 'tpope/vim-surround'
+    Plug 'dense-analysis/ale'
+    Plug 'vim-airline/vim-airline'
+    " Plug 'junegunn/fzf.vim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+    Plug 'gelguy/wilder.nvim'
+    Plug 'sainnhe/gruvbox-material'
+    Plug 'preservim/tagbar'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'lambdalisue/suda.vim'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'honza/vim-snippets'
+    Plug 'nvim-treesitter/nvim-treesitter' 
+    Plug 'MunifTanjim/prettier.nvim'
+    Plug 'mbbill/undotree'
+    Plug 'wbthomason/packer.nvim' 
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 
@@ -97,21 +103,16 @@ highlight clear EndOfBuffer
 """"""""""""""""""""""""""
 
 
-" let g:minimap_highlight_search = 1
-" let g:minimap_git_colors = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
 call wilder#setup({'modes': [':', '/', '?']})
 
 call wilder#set_option('renderer', wilder#popupmenu_renderer({
-      \ 'highlighter': wilder#basic_highlighter(),
-      \ }))
+            \ 'highlighter': wilder#basic_highlighter(),
+            \ }))
 
 let g:coc_global_extensions = ['coc-solargraph']
 
-let g:minimap_width = 10
-let g:minimap_auto_start = 1
-let g:minimap_auto_start_win_enter = 1
 
 " let g:airline_section_z+=%PS%ln%v
 
@@ -123,105 +124,105 @@ let g:minimap_auto_start_win_enter = 1
 " let g:airline_section_y += airline#section#create_right(['','func'])
 
 " let g:airline#extensions#default#layout = [
-"     \ [ 'a', 'b', 'c' ],
-"     \ [ 'x', 'z', 'error', 'warning', 'y' ]
-"     \ ]
+    "     \ [ 'a', 'b', 'c' ],
+    "     \ [ 'x', 'z', 'error', 'warning', 'y' ]
+    "     \ ]
 
-set nocompatible
+    set nocompatible
 
-set mouse=a  " enable mouse
-set number relativenumber  
-set history=1000 " sets amount of command mode commands to store in history
-set signcolumn=yes numberwidth=6
-set linebreak
-set ruler " always show cursor
-set wrap " enable text wrapping
-set scrolloff=5 " lines above/below cursor when scrolling
-set confirm 
-set undofile undodir=~/.vim/undo-dir
+    set mouse=a  " enable mouse
+    set number relativenumber  
+    set history=1000 " sets amount of command mode commands to store in history
+    set signcolumn=yes numberwidth=6
+    set linebreak
+    set ruler " always show cursor
+    set wrap " enable text wrapping
+    set scrolloff=5 " lines above/below cursor when scrolling
+    set confirm 
+    set undofile undodir=~/.vim/undo-dir
 
-"" indent guides enabled at startup
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
-
-
-" Enable plugins and load plugin for the detected file type.
-filetype plugin on
-
-" Load an indent file for the detected file type.
-filetype indent on
-
-filetype plugin indent on
-" On pressing tab, insert 2 spaces
-set expandtab
-" show existing tab with 2 spaces width
-set tabstop=2
-set softtabstop=2
-" when indenting with '>', use 2 spaces width
-set shiftwidth=2
+    "" indent guides enabled at startup
+    let g:indent_guides_enable_on_vim_startup = 1
+    let g:indent_guides_start_level = 2
+    let g:indent_guides_guide_size = 1
 
 
-filetype on
-syntax on
-set number
 
-" Highlight cursor line underneath the cursor horizontally.
-set cursorline
+    " Enable plugins and load plugin for the detected file type.
+    filetype plugin on
 
-" Set tab width columns.
-set tabstop=2
-" While searching though a file incrementally highlight matching characters as you type.
-set incsearch
+    " Load an indent file for the detected file type.
+    filetype indent on
 
-" Show partial command you type in the last line of the screen.
-set showcmd
+    filetype plugin indent on
+    " On pressing tab, insert 2 spaces
+    set expandtab
+    " show existing tab with 2 spaces width
+    set tabstop=4
+    set softtabstop=4
+    " when indenting with '>', use 2 spaces width
+    set shiftwidth=4
 
-" Show the mode you are on the last line.
-set showmode
 
-" Show matching words during a search.
-set showmatch
+    filetype on
+    syntax on
+    set number
 
-" Use highlighting when doing a search.
-set hlsearch
+    " Highlight cursor line underneath the cursor horizontally.
+    set cursorline
 
-" Set the commands to save in history default
-set history=1000
+    " Set tab width columns.
+    set tabstop=2
+    " While searching though a file incrementally highlight matching characters as you type.
+    set incsearch
 
-" Enable auto completion menu after pressing TAB.
-set wildmenu
+    " Show partial command you type in the last line of the screen.
+    set showcmd
 
-set updatetime=300
+    " Show the mode you are on the last line.
+    set showmode
 
-" Make wildmenu behave like similar to Bash completion.
-set wildmode=list:longest
+    " Show matching words during a search.
+    set showmatch
 
-" There are certain files that we would never want to edit with Vim.
-" Wildmenu will ignore files with these extensions.
-set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+    " Use highlighting when doing a search.
+    set hlsearch
 
-"Remapping tab to autocomplete for COC auto complete
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1):
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+    " Set the commands to save in history default
+    set history=1000
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+    " Enable auto completion menu after pressing TAB.
+    set wildmenu
 
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+    set updatetime=300
 
-" Load all plugins now.
-" Plugins need to be added to runtimepath before helptags can be generated.
-" packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
-silent! helptags ALL
+    " Make wildmenu behave like similar to Bash completion.
+    set wildmode=list:longest
+
+    " There are certain files that we would never want to edit with Vim.
+    " Wildmenu will ignore files with these extensions.
+    set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+    "Remapping tab to autocomplete for COC auto complete
+    inoremap <silent><expr> <TAB>
+                \ coc#pum#visible() ? coc#pum#next(1):
+                \ CheckBackspace() ? "\<Tab>" :
+                \ coc#refresh()
+    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+    " Make <CR> to accept selected completion item or notify coc.nvim to format
+    " <C-g>u breaks current undo, please make your own choice.
+    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+    function! CheckBackspace() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    " Load all plugins now.
+    " Plugins need to be added to runtimepath before helptags can be generated.
+    " packloadall
+    " Load all of the helptags now, after plugins have been loaded.
+    " All messages and errors will be ignored.
+    silent! helptags ALL
