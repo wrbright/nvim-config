@@ -2,34 +2,34 @@
 "        Vim-Plug         "
 """""""""""""""""""""""""""
 call plug#begin()
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive' 
-Plug 'tpope/vim-surround'
-Plug 'dense-analysis/ale'
-Plug 'vim-airline/vim-airline'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-Plug 'gelguy/wilder.nvim'
-Plug 'sainnhe/gruvbox-material'
-Plug 'preservim/tagbar'
-Plug 'jiangmiao/auto-pairs'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'lambdalisue/suda.vim'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'honza/vim-snippets'
-Plug 'nvim-treesitter/nvim-treesitter' 
-Plug 'MunifTanjim/prettier.nvim'
-Plug 'mbbill/undotree'
-Plug 'wbthomason/packer.nvim' 
-Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/mason.nvim'
-Plug 'williamboman/mason-lspconfig.nvim'
-Plug 'neovim/nvim-lspconfig'
-Plug 'lewis6991/gitsigns.nvim'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive' 
+    Plug 'tpope/vim-surround'
+    Plug 'dense-analysis/ale'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+    Plug 'gelguy/wilder.nvim'
+    Plug 'preservim/tagbar'
+    Plug 'jiangmiao/auto-pairs'
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'lambdalisue/suda.vim'
+    Plug 'sainnhe/gruvbox-material'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'vim-airline/vim-airline'
+    Plug 'honza/vim-snippets'
+    Plug 'nvim-treesitter/nvim-treesitter' 
+    Plug 'MunifTanjim/prettier.nvim'
+    Plug 'mbbill/undotree'
+    Plug 'wbthomason/packer.nvim' 
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'williamboman/mason.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 
@@ -48,6 +48,11 @@ EOF
 """""""""""""""""""""""""""
 "        Functions        "
 """""""""""""""""""""""""""
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 
 " function! StartUp()
 "   if 0 == argc()
@@ -65,7 +70,8 @@ EOF
 
 nnoremap <C-t> :NvimTreeToggle<CR>
 nnoremap <C-c> :NvimTreeClose<CR>
-map <C-_> gcc 
+nmap <C-_> gcc 
+vmap <C-_> gc 
 
 nnoremap <C-j> :copy .<CR>
 
@@ -87,7 +93,6 @@ nnoremap <A-l> >>
 let g:gruvbox_material_transparent_background=0
 autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE 
 colorscheme gruvbox-material
-
 highlight clear EndOfBuffer
 
 """"""""""""""""""""""""""
@@ -95,7 +100,7 @@ highlight clear EndOfBuffer
 """"""""""""""""""""""""""
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='gruvbox_material'
 call wilder#setup({'modes': [':', '/', '?']})
 
 call wilder#set_option('renderer', wilder#popupmenu_renderer({
@@ -131,38 +136,28 @@ set scrolloff=5 " lines above/below cursor when scrolling
 set confirm 
 set undofile undodir=~/.vim/undo-dir
 
-"" indent guides enabled at startup
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
-
-
-
 " Enable plugins and load plugin for the detected file type.
 filetype plugin on
 
 " Load an indent file for the detected file type.
 filetype indent on
 
-filetype plugin indent on
-" On pressing tab, insert 2 spaces
+filetype on
+
+" On pressing tab, insert 4 spaces
 set expandtab
-" show existing tab with 2 spaces width
+" show existing tab with 4 spaces width
 set tabstop=4
 set softtabstop=4
-" when indenting with '>', use 2 spaces width
+
+" when indenting with '>', use 4 spaces width
 set shiftwidth=4
 
-
-filetype on
 syntax on
-set number
 
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
-" Set tab width columns.
-set tabstop=2
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
 
@@ -177,9 +172,6 @@ set showmatch
 
 " Use highlighting when doing a search.
 set hlsearch
-
-" Set the commands to save in history default
-set history=1000
 
 " Enable auto completion menu after pressing TAB.
 set wildmenu
@@ -205,14 +197,9 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-function! CheckBackspace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
 " packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
-silent! helptags ALL
+" silent! helptags ALL
