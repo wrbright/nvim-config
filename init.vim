@@ -2,34 +2,34 @@
 "        Vim-Plug         "
 """""""""""""""""""""""""""
 call plug#begin()
-    Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive' 
-    Plug 'tpope/vim-surround'
-    Plug 'dense-analysis/ale'
-    Plug 'vim-airline/vim-airline'
-    " Plug 'junegunn/fzf.vim'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-    Plug 'gelguy/wilder.nvim'
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'preservim/tagbar'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'lambdalisue/suda.vim'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'honza/vim-snippets'
-    Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'MunifTanjim/prettier.nvim'
-    Plug 'mbbill/undotree'
-    Plug 'wbthomason/packer.nvim' 
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
-    Plug 'neovim/nvim-lspconfig'
+Plug 'lukas-reineke/indent-blankline.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive' 
+Plug 'tpope/vim-surround'
+Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+Plug 'gelguy/wilder.nvim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'preservim/tagbar'
+Plug 'jiangmiao/auto-pairs'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'lambdalisue/suda.vim'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'honza/vim-snippets'
+Plug 'nvim-treesitter/nvim-treesitter' 
+Plug 'MunifTanjim/prettier.nvim'
+Plug 'mbbill/undotree'
+Plug 'wbthomason/packer.nvim' 
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 
@@ -39,8 +39,9 @@ call plug#end()
 
 " Lua Config Require (likely ~/.config/nvim/lua)
 lua require('init')
-lua << EOF
 
+lua << EOF
+-- Lua HEREDOC
 EOF
 
 
@@ -75,17 +76,10 @@ vnoremap <A-j> :m'>+1<CR>gv=gv
 "`<my`>mzgv`yo`z
 vnoremap <A-k> :m'<-2<CR>gv=gv 
 "`>my`<mzgv`yo`z
+nnoremap <A-g> :Gitsigns preview_hunk<CR>
 
-
-
-" inoremap ' ''<left>
-" inoremap ` ``<left>
-" inoremap ( ()<left>
-" inoremap [ []<left>
-" inoremap { {}<left>
-" inoremap {<CR> {<CR>}<ESC>O
-" inoremap {;<CR> {<CR>};<ESC>O
-
+nnoremap <A-h> <<
+nnoremap <A-l> >> 
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
@@ -96,12 +90,9 @@ colorscheme gruvbox-material
 
 highlight clear EndOfBuffer
 
-
-
 """"""""""""""""""""""""""
 " General Configuration  "
 """"""""""""""""""""""""""
-
 
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
@@ -124,105 +115,104 @@ let g:coc_global_extensions = ['coc-solargraph']
 " let g:airline_section_y += airline#section#create_right(['','func'])
 
 " let g:airline#extensions#default#layout = [
-    "     \ [ 'a', 'b', 'c' ],
-    "     \ [ 'x', 'z', 'error', 'warning', 'y' ]
-    "     \ ]
+    "    \ [ 'a', 'b', 'c' ],
+    "    \ [ 'x', 'z', 'error', 'warning', 'y' ],
+"\],
+set nocompatible
 
-    set nocompatible
+set mouse=a  " enable mouse
+set number relativenumber  
+set history=1000 " sets amount of command mode commands to store in history
+set signcolumn=yes numberwidth=6
+set linebreak
+set ruler " always show cursor
+set wrap " enable text wrapping
+set scrolloff=5 " lines above/below cursor when scrolling
+set confirm 
+set undofile undodir=~/.vim/undo-dir
 
-    set mouse=a  " enable mouse
-    set number relativenumber  
-    set history=1000 " sets amount of command mode commands to store in history
-    set signcolumn=yes numberwidth=6
-    set linebreak
-    set ruler " always show cursor
-    set wrap " enable text wrapping
-    set scrolloff=5 " lines above/below cursor when scrolling
-    set confirm 
-    set undofile undodir=~/.vim/undo-dir
-
-    "" indent guides enabled at startup
-    let g:indent_guides_enable_on_vim_startup = 1
-    let g:indent_guides_start_level = 2
-    let g:indent_guides_guide_size = 1
-
+"" indent guides enabled at startup
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 
-    " Enable plugins and load plugin for the detected file type.
-    filetype plugin on
 
-    " Load an indent file for the detected file type.
-    filetype indent on
+" Enable plugins and load plugin for the detected file type.
+filetype plugin on
 
-    filetype plugin indent on
-    " On pressing tab, insert 2 spaces
-    set expandtab
-    " show existing tab with 2 spaces width
-    set tabstop=4
-    set softtabstop=4
-    " when indenting with '>', use 2 spaces width
-    set shiftwidth=4
+" Load an indent file for the detected file type.
+filetype indent on
+
+filetype plugin indent on
+" On pressing tab, insert 2 spaces
+set expandtab
+" show existing tab with 2 spaces width
+set tabstop=4
+set softtabstop=4
+" when indenting with '>', use 2 spaces width
+set shiftwidth=4
 
 
-    filetype on
-    syntax on
-    set number
+filetype on
+syntax on
+set number
 
-    " Highlight cursor line underneath the cursor horizontally.
-    set cursorline
+" Highlight cursor line underneath the cursor horizontally.
+set cursorline
 
-    " Set tab width columns.
-    set tabstop=2
-    " While searching though a file incrementally highlight matching characters as you type.
-    set incsearch
+" Set tab width columns.
+set tabstop=2
+" While searching though a file incrementally highlight matching characters as you type.
+set incsearch
 
-    " Show partial command you type in the last line of the screen.
-    set showcmd
+" Show partial command you type in the last line of the screen.
+set showcmd
 
-    " Show the mode you are on the last line.
-    set showmode
+" Show the mode you are on the last line.
+set showmode
 
-    " Show matching words during a search.
-    set showmatch
+" Show matching words during a search.
+set showmatch
 
-    " Use highlighting when doing a search.
-    set hlsearch
+" Use highlighting when doing a search.
+set hlsearch
 
-    " Set the commands to save in history default
-    set history=1000
+" Set the commands to save in history default
+set history=1000
 
-    " Enable auto completion menu after pressing TAB.
-    set wildmenu
+" Enable auto completion menu after pressing TAB.
+set wildmenu
 
-    set updatetime=300
+set updatetime=300
 
-    " Make wildmenu behave like similar to Bash completion.
-    set wildmode=list:longest
+" Make wildmenu behave like similar to Bash completion.
+set wildmode=list:longest
 
-    " There are certain files that we would never want to edit with Vim.
-    " Wildmenu will ignore files with these extensions.
-    set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+" There are certain files that we would never want to edit with Vim.
+" Wildmenu will ignore files with these extensions.
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-    "Remapping tab to autocomplete for COC auto complete
-    inoremap <silent><expr> <TAB>
-                \ coc#pum#visible() ? coc#pum#next(1):
-                \ CheckBackspace() ? "\<Tab>" :
-                \ coc#refresh()
-    inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+"Remapping tab to autocomplete for COC auto complete
+inoremap <silent><expr> <TAB>
+            \ coc#pum#visible() ? coc#pum#next(1):
+            \ CheckBackspace() ? "\<Tab>" :
+            \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-    " Make <CR> to accept selected completion item or notify coc.nvim to format
-    " <C-g>u breaks current undo, please make your own choice.
-    inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-    function! CheckBackspace() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~# '\s'
-    endfunction
+function! CheckBackspace() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-    " Load all plugins now.
-    " Plugins need to be added to runtimepath before helptags can be generated.
-    " packloadall
-    " Load all of the helptags now, after plugins have been loaded.
-    " All messages and errors will be ignored.
-    silent! helptags ALL
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+" packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL

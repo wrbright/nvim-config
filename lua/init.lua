@@ -26,6 +26,9 @@ require("bufferline").setup({
 require("indent_blankline").setup {
 
 }
+
+require('gitsigns').setup()
+
 require("nvim-tree").setup({})
 
 require("telescope").setup{
