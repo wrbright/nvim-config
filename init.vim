@@ -2,34 +2,35 @@
 "        Vim-Plug         "
 """""""""""""""""""""""""""
 call plug#begin()
-    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'williamboman/mason.nvim'
+    Plug 'neovim/nvim-lspconfig'
     Plug 'tpope/vim-commentary'
+    Plug 'mg979/vim-visual-multi'
     Plug 'tpope/vim-fugitive' 
     Plug 'tpope/vim-surround'
     Plug 'dense-analysis/ale'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-    Plug 'gelguy/wilder.nvim'
     Plug 'preservim/tagbar'
     Plug 'jiangmiao/auto-pairs'
     Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'kyazdani42/nvim-web-devicons'
     Plug 'lambdalisue/suda.vim'
+    Plug 'nvim-treesitter/nvim-treesitter' 
+    Plug 'mbbill/undotree'
+    Plug 'honza/vim-snippets'
+    Plug 'wbthomason/packer.nvim' 
+    Plug 'gelguy/wilder.nvim'
+    Plug 'williamboman/mason-lspconfig.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'MunifTanjim/prettier.nvim'
+    " aesthetics
     Plug 'sainnhe/gruvbox-material'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'vim-airline/vim-airline'
-    Plug 'honza/vim-snippets'
-    Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'MunifTanjim/prettier.nvim'
-    Plug 'mbbill/undotree'
-    Plug 'wbthomason/packer.nvim' 
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'williamboman/mason.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'lewis6991/gitsigns.nvim'
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
+    Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
 
 
