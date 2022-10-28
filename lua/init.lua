@@ -8,6 +8,8 @@ require("nvim-treesitter.configs").setup {
   }
 }
 
+require("nvim-autopairs").setup {}
+
 require("bufferline").setup({ 
   options = {
     offsets = {
@@ -15,27 +17,35 @@ require("bufferline").setup({
         filetype = "NvimTree",
         text = "File Explorer" ,
         text_align = "left",
-        separator = true
+        separator = true,
       }
       },
     }
   }
 )
 
-
+require('lualine').setup({
+    theme = 'gruvbox'
+})
 require("indent_blankline").setup {
 
 }
 
 require('gitsigns').setup()
 
-require("nvim-tree").setup({})
+require('Comment').setup()
 
-require("telescope").setup{
-  
-}
-require("mason").setup()
-require("mason-lspconfig").setup()
+require("nvim-tree").setup({
+    open_on_setup = true,
+    focus_empty_on_setup = true,
+    create_in_closed_folder = true,
+    sync_root_with_cwd = true,
+    view = {
+        signcolumn = "yes"
+    }
+})
+
+require("telescope").setup{}
 
 
 
@@ -78,7 +88,9 @@ local lsp_flags = {
   -- This is the default in Nvim 0.7+
   debounce_text_changes = 150,
 }
-require'lspconfig'.sumneko_lua.setup{}
+require('lspconfig').sumneko_lua.setup{}
+
+require('lspconfig').vimls.setup{}
 require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
@@ -87,6 +99,7 @@ require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
+require('lspconfig').taplo.setup{}
 require('lspconfig')['rust_analyzer'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
@@ -95,3 +108,4 @@ require('lspconfig')['rust_analyzer'].setup{
       ["rust-analyzer"] = {}
     }
 }
+

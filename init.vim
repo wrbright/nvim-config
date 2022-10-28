@@ -2,37 +2,33 @@
 "        Vim-Plug         "
 """""""""""""""""""""""""""
 call plug#begin()
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'williamboman/mason.nvim'
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'tpope/vim-commentary'
-    Plug 'mg979/vim-visual-multi'
-    Plug 'tpope/vim-fugitive' 
-    Plug 'tpope/vim-surround'
-    Plug 'dense-analysis/ale'
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'preservim/tagbar'
-    Plug 'jiangmiao/auto-pairs'
-    Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'lambdalisue/suda.vim'
+    " Text, Text Additions, and Text Formatting
+    Plug 'neoclide/coc.nvim', { 'branch': 'release'}
     Plug 'nvim-treesitter/nvim-treesitter' 
-    Plug 'mbbill/undotree'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'dense-analysis/ale'
     Plug 'honza/vim-snippets'
-    Plug 'wbthomason/packer.nvim' 
+    Plug 'windwp/nvim-autopairs'
+    " Additional Panes
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-lua/plenary.nvim' " Telescope dependancy
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'preservim/tagbar'
+    " Alternate Functionality 
+    Plug 'numToStr/Comment.nvim'
+    Plug 'tpope/vim-fugitive' 
+    Plug 'mg979/vim-visual-multi'
+    Plug 'tpope/vim-surround'
+    Plug 'lambdalisue/suda.vim'
     Plug 'gelguy/wilder.nvim'
-    Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'lewis6991/gitsigns.nvim'
-    Plug 'MunifTanjim/prettier.nvim'
     " aesthetics
     Plug 'sainnhe/gruvbox-material'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'vim-airline/vim-airline'
+    Plug 'nvim-lualine/lualine.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
     Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
-
 
 """""""""""""""""""""""""""
 "  Plugin Top Line Config "
@@ -41,10 +37,9 @@ call plug#end()
 " Lua Config Require (likely ~/.config/nvim/lua)
 lua require('init')
 
-lua << EOF
--- Lua HEREDOC
-EOF
-
+" lua << EOF
+" -- Lua HEREDOC
+" EOF
 
 """""""""""""""""""""""""""
 "        Functions        "
@@ -53,13 +48,6 @@ function! CheckBackspace() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-
-
-" function! StartUp()
-"   if 0 == argc()
-"     NERDTree
-"   end
-" endfunction
 
 """"""""""""""""""""""""""
 "        Auto Cmd        "
@@ -74,19 +62,28 @@ nnoremap <C-c> :NvimTreeClose<CR>
 nmap <C-_> gcc 
 vmap <C-_> gc 
 
-nnoremap <C-j> :copy .<CR>
+noremap <C-j> :t .<CR>
+
+nnoremap <A-r> :s/
+nnoremap <A-R> :%s/
 
 nnoremap <A-k> :m -2<CR>==
 nnoremap <A-j> :m +1<CR>==
 
-vnoremap <A-j> :m'>+1<CR>gv=gv
-"`<my`>mzgv`yo`z
 vnoremap <A-k> :m'<-2<CR>gv=gv 
 "`>my`<mzgv`yo`z
+vnoremap <A-j> :m'>+1<CR>gv=gv
+"`<my`>mzgv`.yo`z
 nnoremap <A-g> :Gitsigns preview_hunk<CR>
+nnoremap <A-G> :Gitsigns next_hunk<CR>
 
 nnoremap <A-h> <<
+vnoremap <A-h> <gv
 nnoremap <A-l> >> 
+vnoremap <A-l> >gv 
+
+nnoremap <C-z> :Telescope live_grep<CR>
+
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
@@ -121,14 +118,14 @@ let g:coc_global_extensions = ['coc-solargraph']
 " let g:airline_section_y += airline#section#create_right(['','func'])
 
 " let g:airline#extensions#default#layout = [
-    "    \ [ 'a', 'b', 'c' ],
-    "    \ [ 'x', 'z', 'error', 'warning', 'y' ],
-"\],
+"             \ [ 'a', 'b', 'c' ],
+"             \ [ 'x', 'z', 'error', 'warning', 'y' ],
+"             \]
 set nocompatible
 
 set mouse=a  " enable mouse
 set number relativenumber  
-set history=1000 " sets amount of command mode commands to store in history
+set history=1000 " sets amount of commands, searches, and inserts to store in history
 set signcolumn=yes numberwidth=6
 set linebreak
 set ruler " always show cursor
@@ -189,6 +186,7 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 "Remapping tab to autocomplete for COC auto complete
 inoremap <silent><expr> <TAB>
             \ coc#pum#visible() ? coc#pum#next(1):
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
             \ CheckBackspace() ? "\<Tab>" :
             \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
@@ -198,9 +196,23 @@ inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
 " packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 " silent! helptags ALL
+ 
