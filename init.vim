@@ -1,43 +1,58 @@
-"""""""""""""""""""""""""""
-"        Vim-Plug         "
-"""""""""""""""""""""""""""
+""""""""""""""""""""""""""
+"        Vim-Plug        "
+""""""""""""""""""""""""""
 call plug#begin()
  
     """""
     """ Text, Text Additions, and Text Formatting
     """"
-    Plug 'neoclide/coc.nvim', { 'branch': 'release'}
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'neovim/nvim-lspconfig'
+    " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
     Plug 'honza/vim-snippets'
     Plug 'windwp/nvim-autopairs'
     Plug 'machakann/vim-sandwich'
     Plug 'numToStr/Comment.nvim'
-    "LSP Plugins
-    Plug 'mfussenegger/nvim-jdtls' "java
-  
+    Plug 'vim-scripts/ReplaceWithRegister'
+    " Treesitter
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'p00f/nvim-ts-rainbow'
+ 
     """""
     """ Additional Panes
     """"
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'preservim/tagbar'
+    " Telescope
     Plug 'nvim-telescope/telescope.nvim'
-    " Telescope dependancies
-    Plug 'nvim-lua/plenary.nvim' 
+    Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope-dap.nvim'
   
     """""
-    """ Alternate Functionality 
+    """ Alternate Functionality
     """"
-    Plug 'tpope/vim-fugitive' 
-    Plug 'mg979/vim-visual-multi'
-    Plug 'gelguy/wilder.nvim'
+    Plug 'tpope/vim-fugitive'
     Plug 'lambdalisue/suda.vim'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+    " Dap
     Plug 'mfussenegger/nvim-dap'
     Plug 'rcarriga/nvim-dap-ui'
     Plug 'theHamsta/nvim-dap-virtual-text'
- 
+    " LSP
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'mfussenegger/nvim-jdtls' "java
+    " CMP
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'onsails/lspkind.nvim'
+
     """""
     """ aesthetics
     """"
@@ -46,15 +61,20 @@ call plug#begin()
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
     Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'SmiteshP/nvim-navic'
+    " Plug 'onsails/lspkind.nvim'
 
 call plug#end()
 
-"""""""""""""""""""""""""""
-"  Plugin Top Line Config "
-"""""""""""""""""""""""""""
+""""""""""""""""""""""""""
+" Plugin Top Line Config "
+""""""""""""""""""""""""""
+
+set completeopt=menu,menuone,noselect
 
 " Lua Config Require (likely ~/.config/nvim/lua/init.lua)
 lua require('init')
+
 
 " lua << EOF
 " -- Lua HEREDOC
@@ -68,26 +88,28 @@ function! CheckBackspace() abort
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-""""""""""""""""""""""
-"         Cmd        "
-""""""""""""""""""""""
+"""""""""""""""""""""
+"        Cmd        "
+"""""""""""""""""""""
 command W w
 command Q q
 
-"""""""""""""""""
-"   Remapping   "
-"""""""""""""""""
+""""""""""""""""""""""""
+"   Plugin Remapping   "
+""""""""""""""""""""""""
 let g:mapleader = "\<Space>"
 
 nnoremap <leader>f <cmd>Telescope find_files<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr><Esc>
+nnoremap <leader>fb <cmd>Telescope buffers<cr><Esc>
 nnoremap <leader>gb :lua require('telescope.builtin').live_grep({prompt_title = 'find string in open buffers', grep_open_files=true})<cr>
 nnoremap <leader>gf <cmd>Telescope live_grep<cr>
+nnoremap <leader>m <cmd>Telescope marks<cr>
+nnoremap <leader>r <cmd>Telescope registers<cr>
 nnoremap <C-z> :Telescope live_grep<CR>
 
 nnoremap <leader>h :BufferLineCyclePrev<cr>
 nnoremap <leader>l :BufferLineCycleNex<cr>
-nnoremap gt :BufferLinePick
+nnoremap <leader>t :BufferLinePick<cr>
 nnoremap <leader>x :BufferLinePickClose<cr>
 
 nnoremap <A-g> :Gitsigns preview_hunk<CR>
@@ -106,16 +128,26 @@ nnoremap <C-c> :NvimTreeClose<CR>
 nmap <C-_> gcc
 vmap <C-_> gc
 
+
+"""""""""""""""""""""""""
+"   General Remapping   "
+"""""""""""""""""""""""""
+
 " Copy current line down to next line
 nnoremap <C-j> :copy .<CR>
 
-" copy lines where visual selection is active to the line below the current visual selection
-vnoremap <C-j> o0o$"cygv<Esc>o<Esc>o<Esc>"cp'[v']
+" copy lines where visual selection is active to the line below the
+" current visual selection adding whitespace to pad the selection
+vnoremap <C-j> V"cy`>o<Esc>"cp'[kv']<Esc>o<Esc>gvj
 
-nnoremap <A-r> :s///g<Left><Left>
+" copy lines where visual selection is active to the line below the
+" current visual selection
+vnoremap <Leader>j V"cy`>"cp'[v']$
+
+nnoremap <A-r> :%s///g<Left><Left>
 nnoremap <A-R> :%s///cg<Left><Left><Left>
-vnoremap <A-r> :s///g<Left><Left>
 
+" Search for visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 nnoremap <A-j> :m +1<CR>==
@@ -125,23 +157,23 @@ vnoremap <A-k> :m'<-2<CR>gv=gv
 vnoremap <A-j> :m'>+1<CR>gv=gv
 "`<my`>mzgv`.yo`z
 
-nnoremap <A-h> <<
+nnoremap <A-h> <<<Left><Left><Left><Left>
 vnoremap <A-h> <gv
-nnoremap <A-l> >> 
-vnoremap <A-l> >gv 
+nnoremap <A-l> >><Right><Right><Right><Right>
+vnoremap <A-l> >gv
 
-nnoremap <A-s> saiw 
-vnoremap <Leader>" sa" 
+nnoremap <A-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
 
 nnoremap <A-p> "+p
-nnoremap <leader>p "0p
+nnoremap <A-P> "0p
 
-nnoremap <A-y> "+yy<CR>
-vnoremap <A-y> "+y<CR>
+nnoremap <A-y> "+yy
+vnoremap <A-y> "+y
 
-nnoremap <A-;> @L
+nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
+nnoremap <A-;> mjA;<Esc>`j
 
-inoremap <A-;> <Esc>$a;
+inoremap <A-;> <Esc>mjA;<Esc>`ji
 
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
@@ -163,29 +195,21 @@ cnoremap <A-w> <C-Right>
 """"""""""""""""""""""""""
 
 let g:gruvbox_material_transparent_background=0
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE 
+autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
 colorscheme gruvbox-material
 highlight clear EndOfBuffer
 
-""""""""""""""""""""""""""
-" General Configuration  "
-""""""""""""""""""""""""""
+"""""""""""""""""""""""""""
+"  General Configuration  "
+"""""""""""""""""""""""""""
 
+" let g:coc_global_extensions = ['coc-solargraph']
 
-call wilder#setup({'modes': [':', '/', '?']})
-
-call wilder#set_option('renderer', wilder#popupmenu_renderer({
-        \ 'highlighter': wilder#basic_highlighter(),
-            \ }))
-
-let g:coc_global_extensions = ['coc-solargraph']
-
-let g:tagbar_visibility_symbols = {
+" let g:tagbar_visibility_symbols = {
             \ 'public'    : '🌎',
             \ 'protected' : '🛡',
             \ 'private'   : '🔒'
             \ }
-
 
 " let g:airline_section_z+=%PS%ln%v
 
@@ -201,20 +225,19 @@ let g:tagbar_visibility_symbols = {
 "             \ [ 'x', 'z', 'error', 'warning', 'y' ],
 "             \]
 
-
 " Bufferline Asked for this
 set termguicolors
 set nocompatible
 
 set mouse=a  " enable mouse
-set number relativenumber  
+set number relativenumber
 set history=1000 " sets amount of commands, searches, and inserts to store in history
 set signcolumn=yes numberwidth=6
 set linebreak
 set ruler " always show cursor
 set wrap " enable text wrapping
 set scrolloff=5 " lines above/below cursor when scrolling
-set confirm 
+set confirm
 set undofile undodir=~/.vim/undo-dir
 
 " Enable plugins and load plugin for the detected file type.
@@ -266,36 +289,37 @@ set wildmode=list:longest
 " Wildmenu will ignore files with these extensions.
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
+let g:mkdp_command_for_global = 1
+
 "Remapping tab to autocomplete for COC auto complete
-inoremap <silent><expr> <TAB>
-            \ coc#pum#visible() ? coc#pum#next(1):
-            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ CheckBackspace() ? "\<Tab>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+" inoremap <silent><expr> <TAB>
+"             \ coc#pum#visible() ? coc#pum#next(1):
+"             \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"             \ CheckBackspace() ? "\<Tab>" :
+"             \ coc#refresh()
+" inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format
 " <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+"             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-nnoremap <silent> K :call ShowDocumentation()<CR>
+" nnoremap <silent> K :call ShowDocumentation()<CR>
 
-function! ShowDocumentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
+" function! ShowDocumentation()
+"   if CocAction('hasProvider', 'hover')
+"     call CocActionAsync('doHover')
+"   else
+"     call feedkeys('K', 'in')
+"   endif
+" endfunction
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
 " packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
-" silent! helptags ALL
- 
+silent! helptags ALL
