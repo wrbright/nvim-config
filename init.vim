@@ -6,27 +6,43 @@ call plug#begin()
     """""
     """ Text, Text Additions, and Text Formatting
     """"
-    " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
     Plug 'honza/vim-snippets'
-    Plug 'windwp/nvim-autopairs'
+    Plug 'windwp/nvim-autopairs' 
     Plug 'machakann/vim-sandwich'
     Plug 'numToStr/Comment.nvim'
     Plug 'vim-scripts/ReplaceWithRegister'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'kevinhwang91/nvim-hlslens'
+    Plug 'kevinhwang91/nvim-ufo'
+    Plug 'kevinhwang91/promise-async'
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    Plug 'nvim-treesitter/playground'
     Plug 'p00f/nvim-ts-rainbow'
- 
+    " CMP
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+    Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'rcarriga/cmp-dap'
+    " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
     """""
     """ Additional Panes
     """"
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'preservim/tagbar'
+    " Dap
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'rcarriga/nvim-dap-ui'
+    Plug 'theHamsta/nvim-dap-virtual-text'
     " Telescope
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope-dap.nvim'
   
     """""
     """ Alternate Functionality
@@ -35,34 +51,22 @@ call plug#begin()
     Plug 'lambdalisue/suda.vim'
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-    " Dap
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'rcarriga/nvim-dap-ui'
-    Plug 'theHamsta/nvim-dap-virtual-text'
     " LSP
     Plug 'neovim/nvim-lspconfig'
     Plug 'mfussenegger/nvim-jdtls' "java
-    " CMP
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'L3MON4D3/LuaSnip'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'onsails/lspkind.nvim'
-
+    Plug 'wesQ3/vim-windowswap'
+ 
     """""
     """ aesthetics
     """"
     Plug 'sainnhe/gruvbox-material'
     Plug 'nvim-lualine/lualine.nvim'
-    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'nvim-tree/nvim-web-devicons'
     Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
     Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'onsails/lspkind.nvim'
     Plug 'SmiteshP/nvim-navic'
-    " Plug 'onsails/lspkind.nvim'
+    Plug 'petertriho/nvim-scrollbar'
 
 call plug#end()
 
@@ -79,7 +83,6 @@ lua require('init')
 " lua << EOF
 " -- Lua HEREDOC
 " EOF
-
 """""""""""""""""""""""""""
 "        Functions        "
 """""""""""""""""""""""""""
@@ -104,7 +107,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr><Esc>
 nnoremap <leader>gb :lua require('telescope.builtin').live_grep({prompt_title = 'find string in open buffers', grep_open_files=true})<cr>
 nnoremap <leader>gf <cmd>Telescope live_grep<cr>
 nnoremap <leader>m <cmd>Telescope marks<cr>
-nnoremap <leader>r <cmd>Telescope registers<cr>
+nnoremap <leader>rs <cmd>Telescope resume<cr>
 nnoremap <C-z> :Telescope live_grep<CR>
 
 nnoremap <leader>h :BufferLineCyclePrev<cr>
@@ -117,14 +120,13 @@ nnoremap <A-g>n :Gitsigns next_hunk<CR>
 nnoremap <A-g>N :Gitsigns prev_hunk<CR>
 
 nnoremap <leader>b :lua require'dap'.toggle_breakpoint()<cr>
-nnoremap <leader>s :lua require'dap'.step_into()<cr>
-nnoremap <leader>o :lua require'dap'.step_over()<cr>
-nnoremap <leader>f :lua require'dap'.step_out()<cr>
-nnoremap <leader>d<Leader> :lua require'dap'.continue()<cr>
-nnoremap <leader>c :lua require'dapui'.toggle()<cr>
+nnoremap <A-i> :lua require'dap'.step_into()<cr>
+nnoremap <A-o> :lua require'dap'.step_over()<cr>
+nnoremap <A-O> :lua require'dap'.step_out()<cr>
+nnoremap <leader>d<leader> :lua require'dap'.continue()<cr>
+nnoremap <leader>dd :lua require'dapui'.toggle()<cr>
 
 nnoremap <C-t> :NvimTreeToggle<CR>
-nnoremap <C-c> :NvimTreeClose<CR>
 nmap <C-_> gcc
 vmap <C-_> gc
 
@@ -138,11 +140,11 @@ nnoremap <C-j> :copy .<CR>
 
 " copy lines where visual selection is active to the line below the
 " current visual selection adding whitespace to pad the selection
-vnoremap <C-j> V"cy`>o<Esc>"cp'[kv']<Esc>o<Esc>gvj
+vnoremap g<C-j> V"cy`>o<Esc>"cp'[kv']<Esc>o<Esc>gvj
 
 " copy lines where visual selection is active to the line below the
 " current visual selection
-vnoremap <Leader>j V"cy`>"cp'[v']$
+vnoremap <C-j> V"cy`>"cp'[v']$
 
 nnoremap <A-r> :%s///g<Left><Left>
 nnoremap <A-R> :%s///cg<Left><Left><Left>
@@ -157,9 +159,9 @@ vnoremap <A-k> :m'<-2<CR>gv=gv
 vnoremap <A-j> :m'>+1<CR>gv=gv
 "`<my`>mzgv`.yo`z
 
-nnoremap <A-h> <<<Left><Left><Left><Left>
+nnoremap <A-h> <<4h
 vnoremap <A-h> <gv
-nnoremap <A-l> >><Right><Right><Right><Right>
+nnoremap <A-l> >>4l
 vnoremap <A-l> >gv
 
 nnoremap <A-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
@@ -173,13 +175,22 @@ vnoremap <A-y> "+y
 nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
 nnoremap <A-;> mjA;<Esc>`j
 
+nnoremap <A-n> :noh<cr>
+
 inoremap <A-;> <Esc>mjA;<Esc>`ji
+
+nnoremap <A-H> <C-W>h
+nnoremap <A-J> <C-W>j
+nnoremap <A-K> <C-W>k
+nnoremap <A-L> <C-W>l
 
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-h> <Left>
 inoremap <A-l> <right>
 
+
+nnoremap <C-C> :<Up><cr>
 " Command Line Remappings
 
 cnoremap <A-k> <Up>
@@ -230,9 +241,10 @@ set termguicolors
 set nocompatible
 
 set mouse=a  " enable mouse
+set signcolumn=yes 
 set number relativenumber
+set numberwidth=2
 set history=1000 " sets amount of commands, searches, and inserts to store in history
-set signcolumn=yes numberwidth=6
 set linebreak
 set ruler " always show cursor
 set wrap " enable text wrapping
