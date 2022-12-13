@@ -1,18 +1,30 @@
 -- Disabling netrw (Ex)
 vim.g.loaded = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
 -- fixing unpack
-table.unpack = table.unpack or unpack;
+---@diagnostic disable-next-line: deprecated
+table.unpack = table.unpack or unpack
 
 --------------------------------------------------------------------
 --------------------------- Plugin Setup----------------------------
 --------------------------------------------------------------------
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup{
     highlight = {
         additional_vim_regex_highlighting = true,
         enable = true,
         auto_install = true,
         disable = { "help" },
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gtn",
+            node_incremental = "gti",
+            scope_incremental = "gts",
+            node_decremental = "gtd",
+        },
     },
     refactor = {
         smart_rename = {
@@ -29,13 +41,26 @@ require("nvim-treesitter.configs").setup {
         enable = true,
     },
     textobjects = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
+        select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["al"] = "@loop.outer",
+                ["il"] = "@loop.inner",
+                ["av"] = "@parameter.outer",
+                ["iv"] = "@parameter.inner",
+                ["ik"] = "@block.inner",
+                ["ak"] = "@block.outer",
+            },
+            selection_modes = {
+                ['@parameter.outer'] = 'v', -- charwise
+                ['@function.outer'] = 'V', -- linewise
+                ['@class.outer'] = '<c-v>', -- blockwise
+            },
         },
     },
     rainbow = {
@@ -103,10 +128,25 @@ require('gitsigns').setup {}
 require('Comment').setup {}
 
 require("nvim-tree").setup {
+    -- on_start = {
+    --     open = {
+    --         always = true,
+    --         directory = true,
+    --         unnamed = true,
+    --         empty = true,
+    --         file = true,
+    --     },
+    --     focus_tree = {
+    --         always = false,
+    --         unnamed = true,
+    --         empty = true,
+    --         file = false,
+    --     },
+    -- },
     open_on_setup_file = true,
     open_on_setup = true,
     open_on_tab = true,
-    focus_empty_on_setup = true,
+    -- focus_empty_on_setup = true,
     sync_root_with_cwd = true,
 }
 
@@ -126,7 +166,6 @@ require("dapui").setup({
         {
             elements = {
                 "repl",
-                "console",
             },
             size = 0.25, -- 25% of total lines
             position = "bottom",
@@ -168,35 +207,6 @@ require('scrollbar.handlers.search').setup({
 
 local kopts = { noremap = true, silent = true }
 
--- Remapping search to hlslens search functions
-vim.api.nvim_set_keymap('n', 'n',
-    [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', 'N',
-    [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
-    kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-
--- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
-
-vim.o.foldcolumn = '1'
-vim.o.foldlevel = 99 -- Using ufo provider needs a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-
-require('ufo').setup({
-    provider_selector = function(_, _, _)
-        return { 'treesitter', 'indent' }
-    end
-})
-
 --------------------------------------------------------------------
 ----------------------------- Mappings -----------------------------
 --------------------------------------------------------------------
@@ -208,6 +218,70 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+-- Remapping search to hlslens search functions
+vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    kopts)
+vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+    kopts)
+vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+-- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
+
+-- Absolute Gold. Auto move mappings over from vim file. 
+--
+-- Place Maker G ["G] on your top vimscript mapping and Marker F ["F] over the lua code snippet below then run from vimscript
+-- "zxdw"cdf "vd$dd`G`F€üJf'a"zp;;"cpx;"vp`G
+--
+-- uncomment and plave marker 
+-- vim.api.nvim_set_keymap('', '', '', plugOpts)
+--
+-- Quotations must be fixed. Will flip input line order.
+
+local plugOpts = { noremap = true, silent = true }
+
+
+-- Does not work
+vim.api.nvim_set_keymap('v', "<C-<Bslash>>", 'gc', plugOpts)
+-- Does not work
+vim.api.nvim_set_keymap('n', "<C-Bslash>", 'gcc', plugOpts)
+
+vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', plugOpts)
+
+vim.api.nvim_set_keymap('n', '<space>dd', ':lua require\'dapui\'.toggle()<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>dd', ':lua require\'dapui\'.toggle()<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>d<space>', ':lua require\'dap\'.continue()<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<A-O>', ':lua require\'dap\'.step_out()<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<A-o>', ':lua require\'dap\'.step_over()<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<A-i>', ':lua require\'dap\'.step_into()<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>b', ':lua require\'dap\'.toggle_breakpoint()<cr>', plugOpts)
+
+vim.api.nvim_set_keymap('n', '<F1>', ':TagbarToggle<CR>', plugOpts)
+
+vim.api.nvim_set_keymap('n', '<A-g>N', ':Gitsigns prev_hunk<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<A-g>n', ':Gitsigns next_hunk<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<A-g>', ':Gitsigns preview_hunk<CR>', plugOpts)
+
+vim.api.nvim_set_keymap('n', '<space>x', ':BufferLinePickClose<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>t', ':BufferLinePick<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>l', ':BufferLineCycleNex<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>h', ':BufferLineCyclePrev<cr>', plugOpts)
+
+
+vim.api.nvim_set_keymap('n', '<C-z>', ':Telescope live_grep<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>rs', '<cmd>Telescope resume<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>m', '<cmd>Telescope marks<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>gf', '<cmd>Telescope live_grep<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>gb', ':lua require(\'telescope.builtin\').live_grep({prompt_title = \'find string in open buffers\', grep_open_files=true})<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>f', '<cmd>Telescope find_files<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<space>fb', '<cmd>Telescope buffers<cr><Esc>', plugOpts)
+
+
+
+
+
 --------------------------------------------------------------------
 ---------------------------- LSP Config ----------------------------
 --------------------------------------------------------------------
@@ -215,32 +289,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-    -- nvim-navic binding
-    navic.attach(client, bufnr);
-end
+local on_attach = require("on_attach")
 -- Set up lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
@@ -259,18 +308,24 @@ require('lspconfig').sumneko_lua.setup {
     },
 }
 
-require('lspconfig').ccls.setup {
+-- require('lspconfig').ccls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     init_options = {
+--         compilationDatabaseDirectory = "build";
+--         index = {
+--             threads = 0;
+--         };
+--         clang = {
+--             excludeArgs = { "-frounding-math" };
+--         };
+--     }
+-- }
+
+require 'lspconfig'.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    init_options = {
-        compilationDatabaseDirectory = "build";
-        index = {
-            threads = 0;
-        };
-        clang = {
-            excludeArgs = { "-frounding-math" };
-        };
-    }
+
 }
 
 require('lspconfig').vimls.setup {
@@ -408,11 +463,11 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ['<CR>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
@@ -485,7 +540,7 @@ cmp.setup({
 
             -- The function below will be called before any actual modifications from lspkind
             -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-            before = function(entry, vim_item)
+            before = function(_, vim_item)
                 return vim_item
             end
         })
@@ -493,9 +548,9 @@ cmp.setup({
 })
 
 require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-  sources = {
-    { name = "dap" },
-  },
+    sources = {
+        { name = "dap" },
+    },
 })
 
 require("luasnip.loaders.from_snipmate").lazy_load()

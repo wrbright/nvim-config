@@ -12,34 +12,31 @@ call plug#begin()
     Plug 'numToStr/Comment.nvim'
     Plug 'vim-scripts/ReplaceWithRegister'
     Plug 'L3MON4D3/LuaSnip'
-    Plug 'kevinhwang91/nvim-hlslens'
-    Plug 'kevinhwang91/nvim-ufo'
-    Plug 'kevinhwang91/promise-async'
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     Plug 'nvim-treesitter/playground'
-    Plug 'p00f/nvim-ts-rainbow'
     " CMP
     Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'rcarriga/cmp-dap'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
     Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'rcarriga/cmp-dap'
-    " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+ 
     """""
     """ Additional Panes
     """"
-    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'nvim-tree/nvim-tree.lua'
     Plug 'preservim/tagbar'
     " Dap
     Plug 'mfussenegger/nvim-dap'
-    Plug 'rcarriga/nvim-dap-ui'
     Plug 'theHamsta/nvim-dap-virtual-text'
+    Plug 'rcarriga/nvim-dap-ui'
     " Telescope
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-lua/plenary.nvim'
@@ -51,16 +48,18 @@ call plug#begin()
     Plug 'lambdalisue/suda.vim'
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+    Plug 'kevinhwang91/nvim-hlslens'
+    Plug 'wesQ3/vim-windowswap'
     " LSP
     Plug 'neovim/nvim-lspconfig'
     Plug 'mfussenegger/nvim-jdtls' "java
-    Plug 'wesQ3/vim-windowswap'
  
     """""
     """ aesthetics
     """"
     Plug 'sainnhe/gruvbox-material'
     Plug 'nvim-lualine/lualine.nvim'
+    Plug 'p00f/nvim-ts-rainbow'
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
     Plug 'lukas-reineke/indent-blankline.nvim'
@@ -102,34 +101,13 @@ command Q q
 """"""""""""""""""""""""
 let g:mapleader = "\<Space>"
 
-nnoremap <leader>f <cmd>Telescope find_files<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr><Esc>
-nnoremap <leader>gb :lua require('telescope.builtin').live_grep({prompt_title = 'find string in open buffers', grep_open_files=true})<cr>
-nnoremap <leader>gf <cmd>Telescope live_grep<cr>
-nnoremap <leader>m <cmd>Telescope marks<cr>
-nnoremap <leader>rs <cmd>Telescope resume<cr>
-nnoremap <C-z> :Telescope live_grep<CR>
+"
+" Moved To Lua Init (Likely ./lua/init.lua)
+"
 
-nnoremap <leader>h :BufferLineCyclePrev<cr>
-nnoremap <leader>l :BufferLineCycleNex<cr>
-nnoremap <leader>t :BufferLinePick<cr>
-nnoremap <leader>x :BufferLinePickClose<cr>
-
-nnoremap <A-g> :Gitsigns preview_hunk<CR>
-nnoremap <A-g>n :Gitsigns next_hunk<CR>
-nnoremap <A-g>N :Gitsigns prev_hunk<CR>
-
-nnoremap <leader>b :lua require'dap'.toggle_breakpoint()<cr>
-nnoremap <A-i> :lua require'dap'.step_into()<cr>
-nnoremap <A-o> :lua require'dap'.step_over()<cr>
-nnoremap <A-O> :lua require'dap'.step_out()<cr>
-nnoremap <leader>d<leader> :lua require'dap'.continue()<cr>
-nnoremap <leader>dd :lua require'dapui'.toggle()<cr>
-
-nnoremap <C-t> :NvimTreeToggle<CR>
+" cannot map / in lua
 nmap <C-_> gcc
 vmap <C-_> gc
-
 
 """""""""""""""""""""""""
 "   General Remapping   "
@@ -148,6 +126,9 @@ vnoremap <C-j> V"cy`>"cp'[v']$
 
 nnoremap <A-r> :%s///g<Left><Left>
 nnoremap <A-R> :%s///cg<Left><Left><Left>
+
+
+nnoremap <A-/> /\c<Left><Left>
 
 " Search for visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -181,16 +162,21 @@ inoremap <A-;> <Esc>mjA;<Esc>`ji
 
 nnoremap <A-H> <C-W>h
 nnoremap <A-J> <C-W>j
-nnoremap <A-K> <C-W>k
+nnoremap <A-K> <C-W>
 nnoremap <A-L> <C-W>l
+
+nnoremap <A-<> :vertical resize +5 <CR>
+nnoremap <A->> :vertical resize -5 <CR>
+
+nnoremap <A-=> :horizontal resize +5 <CR>
+nnoremap <A--> :horizontal resize -5 <CR>
 
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-h> <Left>
 inoremap <A-l> <right>
 
-
-nnoremap <C-C> :<Up><cr>
+nnoremap <A-w> <C-w>
 " Command Line Remappings
 
 cnoremap <A-k> <Up>
@@ -215,12 +201,6 @@ highlight clear EndOfBuffer
 """""""""""""""""""""""""""
 
 " let g:coc_global_extensions = ['coc-solargraph']
-
-" let g:tagbar_visibility_symbols = {
-            \ 'public'    : '🌎',
-            \ 'protected' : '🛡',
-            \ 'private'   : '🔒'
-            \ }
 
 " let g:airline_section_z+=%PS%ln%v
 
