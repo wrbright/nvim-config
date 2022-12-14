@@ -18,8 +18,8 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     Plug 'nvim-treesitter/playground'
     " CMP
-    Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/nvim-cmp'
     Plug 'rcarriga/cmp-dap'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
@@ -125,53 +125,64 @@ vnoremap g<C-j> V"cy`>o<Esc>"cp'[kv']<Esc>o<Esc>gvj
 " current visual selection
 vnoremap <C-j> V"cy`>"cp'[v']$
 
+" replace previous search
 nnoremap <A-r> :%s///g<Left><Left>
 nnoremap <A-R> :%s///cg<Left><Left><Left>
 
 
+
+" search, not case sensitive 
 nnoremap <A-/> /\c<Left><Left>
 
 " Search for visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+" Move text selection
 nnoremap <A-j> :m +1<CR>==
 nnoremap <A-k> :m -2<CR>==
 vnoremap <A-k> :m'<-2<CR>gv=gv
-"`>my`<mzgv`yo`z
 vnoremap <A-j> :m'>+1<CR>gv=gv
-"`<my`>mzgv`.yo`z
 
+" Shift keys by shiftwidth and maintain cursor position on text
 nnoremap <A-h> <<4h
 vnoremap <A-h> <gv
 nnoremap <A-l> >>4l
 vnoremap <A-l> >gv
 
-nnoremap <A-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
+" Move content to right of cursor to new line, remove whitespace
+nnoremap <C-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
 
+" Paste from the sytem clipboard
 nnoremap <A-p> "+p
 nnoremap <A-P> "0p
 
+" Alternatively copy into system register
 nnoremap <A-y> "+yy
 vnoremap <A-y> "+y
 
+" Remove trailing space
 nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
 nnoremap <A-;> mjA;<Esc>`j
 
 nnoremap <A-n> :noh<cr>
 
+" Add semicolon to the end of the current line
 inoremap <A-;> <Esc>mjA;<Esc>`ji
 
+" Easier window navigation
 nnoremap <A-H> <C-W>h
-" nnoremap <A-J> <C-W>j
+nnoremap <A-J> <C-W>j
 nnoremap <A-K> <C-W>
 nnoremap <A-L> <C-W>l
 
+" Resize windows
 nnoremap <A-<> :vertical resize +5 <CR>
 nnoremap <A->> :vertical resize -5 <CR>
-
 nnoremap <A-=> :horizontal resize +5 <CR>
 nnoremap <A--> :horizontal resize -5 <CR>
 
+
+" Quick nav in insert 
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-h> <Left>
@@ -180,14 +191,18 @@ inoremap <A-l> <right>
 nnoremap <A-w> <C-w>
 " Command Line Remappings
 
+" Vim movement in command mode
 cnoremap <A-k> <Up>
-cnoremap n n
 cnoremap <A-j> <Down>
 cnoremap <A-h> <Left>
 cnoremap <A-l> <Right>
 
+" Back and forward by word
 cnoremap <A-b> <C-Left>
 cnoremap <A-w> <C-Right>
+
+" It may be dumb, but it works. (hlsearch cycles when n is pressed in command mode)
+cnoremap n n
 
 """"""""""""""""""""""""""
 "  Colour Configuration  "
@@ -202,21 +217,6 @@ highlight clear EndOfBuffer
 "  General Configuration  "
 """""""""""""""""""""""""""
 
-" let g:coc_global_extensions = ['coc-solargraph']
-
-" let g:airline_section_z+=%PS%ln%v
-
-" function! GetAirlineSectionContent()
-"   return 'hello world'
-" endfunction
-
-" call airline#parts#define_function('func','GetAirlineSectionContent')
-" let g:airline_section_y += airline#section#create_right(['','func'])
-
-" let g:airline#extensions#default#layout = [
-"             \ [ 'a', 'b', 'c' ],
-"             \ [ 'x', 'z', 'error', 'warning', 'y' ],
-"             \]
 
 " Bufferline Asked for this
 set termguicolors
@@ -285,6 +285,12 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 let g:mkdp_command_for_global = 1
 
+" """""""""""""""""""""
+" " COC Configuration "
+" """""""""""""""""""""
+
+" let g:coc_global_extensions = ['coc-solargraph']
+
 "Remapping tab to autocomplete for COC auto complete
 " inoremap <silent><expr> <TAB>
 "             \ coc#pum#visible() ? coc#pum#next(1):
@@ -316,4 +322,8 @@ let g:mkdp_command_for_global = 1
 " packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
+
+" """""""""""""""""""""
+" " COC Configuration "
+" """""""""""""""""""""
 silent! helptags ALL
