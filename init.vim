@@ -26,7 +26,7 @@ call plug#begin()
     Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
     Plug 'saadparwaiz1/cmp_luasnip'
     Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'neoclide/coc.nvim', { 'branch': 'release'}
+    " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
  
     """""
     """ Additional Panes
@@ -91,10 +91,11 @@ function! CheckBackspace() abort
 endfunction
 
 """""""""""""""""""""
-"        Cmd        "
+"        CMD        "
 """""""""""""""""""""
 command W w
 command Q q
+command Spell set spell spelllang=en_us
 
 """"""""""""""""""""""""
 "   Plugin Remapping   "
@@ -161,7 +162,7 @@ nnoremap <A-n> :noh<cr>
 inoremap <A-;> <Esc>mjA;<Esc>`ji
 
 nnoremap <A-H> <C-W>h
-nnoremap <A-J> <C-W>j
+" nnoremap <A-J> <C-W>j
 nnoremap <A-K> <C-W>
 nnoremap <A-L> <C-W>l
 
@@ -180,6 +181,7 @@ nnoremap <A-w> <C-w>
 " Command Line Remappings
 
 cnoremap <A-k> <Up>
+cnoremap n n
 cnoremap <A-j> <Down>
 cnoremap <A-h> <Left>
 cnoremap <A-l> <Right>

@@ -328,6 +328,12 @@ require 'lspconfig'.clangd.setup {
 
 }
 
+require 'lspconfig'.marksman.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+
+}
+
 require('lspconfig').vimls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
