@@ -1,0 +1,16 @@
+{
+    "Console Log Here": {
+        "prefix" :  "log",
+        "body": ["console.log(${1:\"here\"})"]
+    },
+    "Console Log Color": {
+        "prefix" :  "logC",
+        "body": ["console.log(${1:\"here\"}, \"color: ${2:red}\"})"],
+        "description": "Console log but coloured"
+    },
+    "Console Log Color Background": {
+        "prefix" :  "logCB",
+        "body": ["console.log(${1:\"here\"}, \"color: ${2:red}, ${3:background: blue}\"})"],
+        "description": "Console log but coloured with a background"
+    }
+}

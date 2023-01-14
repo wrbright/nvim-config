@@ -1,8 +1,9 @@
 """"""""""""""""""""""""""
 "        Vim-Plug        "
 """"""""""""""""""""""""""
-call plug#begin()
- 
+call plug#begin("~/InstalledApplicationsDev/nvim")
+    " Dependency needed for many plugins
+    Plug 'nvim-lua/plenary.nvim'
     """""
     """ Text, Text Additions, and Text Formatting
     """"
@@ -17,15 +18,18 @@ call plug#begin()
     Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     Plug 'nvim-treesitter/playground'
+    Plug 'windwp/nvim-ts-autotag'
     " CMP
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/nvim-cmp'
-    Plug 'rcarriga/cmp-dap'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
     Plug 'saadparwaiz1/cmp_luasnip'
+    Plug 'rcarriga/cmp-dap'
     Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'Saecki/crates.nvim'
+    Plug 'David-Kunz/cmp-npm'
     " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
  
     """""
@@ -39,8 +43,8 @@ call plug#begin()
     Plug 'rcarriga/nvim-dap-ui'
     " Telescope
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-lua/plenary.nvim'
-  
+    Plug 'nvim-telescope/telescope-project.nvim'
+ 
     """""
     """ Alternate Functionality
     """"
@@ -50,8 +54,11 @@ call plug#begin()
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
     Plug 'kevinhwang91/nvim-hlslens'
     Plug 'wesQ3/vim-windowswap'
+    Plug 'samodostal/image.nvim'
+    Plug 'nvim-colortils/colortils.nvim'
     " LSP
     Plug 'neovim/nvim-lspconfig'
+    Plug 'mxsdev/nvim-dap-vscode-js'
     Plug 'mfussenegger/nvim-jdtls' "java
  
     """""
@@ -63,17 +70,19 @@ call plug#begin()
     Plug 'nvim-tree/nvim-web-devicons'
     Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
     Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'onsails/lspkind.nvim'
     Plug 'SmiteshP/nvim-navic'
     Plug 'petertriho/nvim-scrollbar'
-
+    Plug 'NvChad/nvim-colorizer.lua'
+    Plug 'onsails/lspkind.nvim'
+    Plug 'j-hui/fidget.nvim'
 call plug#end()
 
 """"""""""""""""""""""""""
 " Plugin Top Line Config "
 """"""""""""""""""""""""""
+let g:mkdp_auto_close = 0
 
-set completeopt=menu,menuone,noselect
+set termguicolors
 
 " Lua Config Require (likely ~/.config/nvim/lua/init.lua)
 lua require('init')
@@ -82,20 +91,40 @@ lua require('init')
 " lua << EOF
 " -- Lua HEREDOC
 " EOF
+" Do not auto close the markdown preview browser tab on switching buffer
+
 """""""""""""""""""""""""""
 "        Functions        "
 """""""""""""""""""""""""""
-function! CheckBackspace() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! CheckBackspace() abort
+"     let col = col('.') - 1
+"     return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
 
 """""""""""""""""""""
 "        CMD        "
 """""""""""""""""""""
-command W w
-command Q q
+
+" enable spellcheck
 command Spell set spell spelllang=en_us
+
+" rebind j to gj and other g altered keys for the session
+command GJ nnoremap j gj|nnoremap k gk|nnoremap 0 g0|nnoremap $ g$
+
+" Save session in 
+command Restoreable mks ~/nvim_session_storage/neovim.session
+
+" Install New Plugins
+command Install so ~/.config/nvim/init.vim |PlugInstall
+
+
+" Oops, fat-fingered command
+command W w
+command Wq wq
+command WQ wq
+command Q q
+command Qa qa
+command QA qa
 
 """"""""""""""""""""""""
 "   Plugin Remapping   "
@@ -106,19 +135,18 @@ let g:mapleader = "\<Space>"
 " Moved To Lua Init (Likely ./lua/init.lua)
 "
 
-" cannot map / in lua
+" cannot map / in lua (or, I am an idiot)
 nmap <C-_> gcc
-vmap <C-_> gc
+vmap <C-_> gcgv
 
 """""""""""""""""""""""""
 "   General Remapping   "
 """""""""""""""""""""""""
-
 " Copy current line down to next line
 nnoremap <C-j> :copy .<CR>
 
 " copy lines where visual selection is active to the line below the
-" current visual selection adding whitespace to pad the selection
+" current visual selection adding white space to pad the selection
 vnoremap g<C-j> V"cy`>o<Esc>"cp'[kv']<Esc>o<Esc>gvj
 
 " copy lines where visual selection is active to the line below the
@@ -128,8 +156,6 @@ vnoremap <C-j> V"cy`>"cp'[v']$
 " replace previous search
 nnoremap <A-r> :%s///g<Left><Left>
 nnoremap <A-R> :%s///cg<Left><Left><Left>
-
-
 
 " search, not case sensitive 
 nnoremap <A-/> /\c<Left><Left>
@@ -150,14 +176,14 @@ nnoremap <A-l> >>4l
 vnoremap <A-l> >gv
 
 " Move content to right of cursor to new line, remove whitespace
-nnoremap <C-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
+" nnoremap <C-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
 
-" Paste from the sytem clipboard
+" Paste from the system clipboard
 nnoremap <A-p> "+p
 nnoremap <A-P> "0p
 
 " Alternatively copy into system register
-nnoremap <A-y> "+yy
+nnoremap <A-y> "+y
 vnoremap <A-y> "+y
 
 " Remove trailing space
@@ -167,29 +193,40 @@ nnoremap <A-;> mjA;<Esc>`j
 nnoremap <A-n> :noh<cr>
 
 " Add semicolon to the end of the current line
-inoremap <A-;> <Esc>mjA;<Esc>`ji
+inoremap <A-;> <Esc>mjA;<Esc>`ja
+
+" Rebind f1 off of help (now rebound to :Tagbar)
+" inoremap <F1> <Esc>
 
 " Easier window navigation
 nnoremap <A-H> <C-W>h
 nnoremap <A-J> <C-W>j
-nnoremap <A-K> <C-W>
+nnoremap <A-K> <C-W>k
 nnoremap <A-L> <C-W>l
 
-" Resize windows
-nnoremap <A-<> :vertical resize +5 <CR>
-nnoremap <A->> :vertical resize -5 <CR>
-nnoremap <A-=> :horizontal resize +5 <CR>
-nnoremap <A--> :horizontal resize -5 <CR>
+nnoremap <A-v> :horizontal split<cr>
+nnoremap <A-V> :vertical split<cr>
 
+" Re-size windows
+nnoremap <A-<> :vertical resize +5<CR>
+nnoremap <A->> :vertical resize -5<CR>
+nnoremap <A-=> :horizontal resize +5<CR>
+nnoremap <A--> :horizontal resize -5<CR>
 
-" Quick nav in insert 
+" vim keybindings in insert mode
 inoremap <A-j> <Down>
 inoremap <A-k> <Up>
 inoremap <A-h> <Left>
 inoremap <A-l> <right>
 
+inoremap <A-w> <C-right>
+inoremap <A-b> <C-left>
+
 nnoremap <A-w> <C-w>
-" Command Line Remappings
+
+"""""""""""""""""""""""""""
+" Command Mode Remappings "
+"""""""""""""""""""""""""""
 
 " Vim movement in command mode
 cnoremap <A-k> <Up>
@@ -197,32 +234,29 @@ cnoremap <A-j> <Down>
 cnoremap <A-h> <Left>
 cnoremap <A-l> <Right>
 
-" Back and forward by word
+" Back and forward by WORD(ish)
 cnoremap <A-b> <C-Left>
 cnoremap <A-w> <C-Right>
-
-" It may be dumb, but it works. (hlsearch cycles when n is pressed in command mode)
-cnoremap n n
 
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
 
-let g:gruvbox_material_transparent_background=0
+let g:gruvbox_material_transparent_background=1
 autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
 colorscheme gruvbox-material
 highlight clear EndOfBuffer
+
 
 """""""""""""""""""""""""""
 "  General Configuration  "
 """""""""""""""""""""""""""
 
-
 " Bufferline Asked for this
-set termguicolors
 set nocompatible
+" set termguicolors
 
-set mouse=a  " enable mouse
+" set mouse=a  " enable mouse, default on in neovim
 set signcolumn=yes 
 set number relativenumber
 set numberwidth=2
@@ -240,51 +274,59 @@ filetype plugin on
 " Load an indent file for the detected file type.
 filetype indent on
 
+" Why isn't this default?
+set fileencoding=utf-8
+
+" detect current file type
 filetype on
 
-" On pressing tab, insert 4 spaces
+" On pressing tab, add [tabstop] spaces instead of a tab
 set expandtab
-" show existing tab with 4 spaces width
+" show tab with 4 spaces width
 set tabstop=4
 set softtabstop=4
 
 " when indenting with '>', use 4 spaces width
 set shiftwidth=4
 
-"Set Regex Highlighting
-syntax on
+" Set Regex Highlighting
+" syntax on
+
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
+"
+" Use highlighting when doing a search.
+set hlsearch
 
 " Show partial command you type in the last line of the screen.
 set showcmd
 
-" Show the mode you are on the last line.
-set showmode
-
 " Show matching words during a search.
 set showmatch
 
-" Use highlighting when doing a search.
-set hlsearch
-
-" Enable auto completion menu after pressing TAB.
+" Enable auto completion menu after pressing TAB. (default in neovim)
 set wildmenu
 
+" Time to wait between edits before writing to the swap file
 set updatetime=300
 
 " Make wildmenu behave like similar to Bash completion.
 set wildmode=list:longest
 
-" There are certain files that we would never want to edit with Vim.
-" Wildmenu will ignore files with these extensions.
+" Wildmenu will ignore files with these extensions when attempting to open a
+" file for editing
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+
+" disable auto text wrapping
+set textwidth=0
 
 let g:mkdp_command_for_global = 1
 
+" Disabled until needed
+"
 " """""""""""""""""""""
 " " COC Configuration "
 " """""""""""""""""""""

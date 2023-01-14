@@ -1,4 +1,4 @@
-    local on_attach = function(client, bufnr)
+local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -22,8 +22,6 @@
     vim.keymap.set('n', '<space>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
 
 
-    local navic = require("nvim-navic");
-    -- nvim-navic binding
-    navic.attach(client, bufnr);
+    require("nvim-navic").attach(client, bufnr);
 end
-    return on_attach
+return on_attach

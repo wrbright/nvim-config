@@ -12,7 +12,8 @@ config['init_options'] = {
     bundles = bundles;
 }
 
-config['on_attach'] = require("on_attach")
+vim.cmd('set expandtab')
+config['on_attach'] = require("sConf/on_attach")
 
 
-require('jdtls').start_or_attach(config)
+require'jdtls'.start_or_attach(config)
