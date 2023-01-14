@@ -25,11 +25,12 @@ require "dapui".setup {
     }
 }
 
-require("nvim-dap-virtual-text").setup {
+require"nvim-dap-virtual-text".setup {
     commented = true,
 }
 
-local dap = require('dap')
+local dap = require'dap'
+
 dap.adapters.lldb = {
     type = "executable",
     command = "/usr/bin/lldb-vscode",
@@ -102,20 +103,20 @@ dap.configurations.typescript = {
     firefoxExecutable = '/usr/bin/firefox'
 }
 
-local dapui = require("dapui")
+local dapui = require"dapui"
 dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
 end
 -- "~/InstalledApplicationsDev/vscode-js-debug", -- Path to vscode-js-debug installation.
 
-require"dap-vscode-js".setup({
+require"dap-vscode-js".setup {
     -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
     debugger_path = os.getenv('HOME') .. '/InstalledApplicationsDev/vscode-js-debug/dist/adapter.bundle.js',
     adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
     -- log_file_path = "/dap_vscode_js.log" -- Path for file logging
     -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
     -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
-})
+}
 
 -- for _, language in ipairs({ "typescript", "javascript" }) do
 dap.configurations.javascript = {

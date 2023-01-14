@@ -18,10 +18,10 @@ vim.keymap.set('n', '<space>]', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Mappings, includes, etc. that must only be set when the LSP Client has been attached
-local on_attach = require'sConf/on_attach'
+local on_attach = require'luaConf/on_attach'
 
 -- Set up lspconfig.
-local capabilities = require'cmp_nvim_lsp'.default_capabilities()
+local capabilities = require'cmp_nvim_lsp'.default_capabilities{}
 
 local lsp_flags = {
     debounce_text_changes = 100,
@@ -65,7 +65,7 @@ require'lspconfig'.marksman.setup {
     capabilities = capabilities,
 }
 
-local vscodeCapabilities = vim.lsp.protocol.make_client_capabilities()
+local vscodeCapabilities = vim.lsp.protocol.make_client_capabilities{}
 vscodeCapabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require'lspconfig'.jsonls.setup {
@@ -78,7 +78,7 @@ require'lspconfig'.cssls.setup {
     capabilities = {capabilities, vscodeCapabilities},
 }
 
-require'lspconfig'.eslint.setup { }
+require'lspconfig'.eslint.setup {}
 
 require'lspconfig'.vimls.setup {
     on_attach = on_attach,
@@ -106,12 +106,12 @@ require'lspconfig'.taplo.setup {
     capabilities = capabilities,
 }
 
-require('lspconfig').bashls.setup {
+require'lspconfig'.bashls.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 }
 
-require('lspconfig').rust_analyzer.setup {
+require'lspconfig'.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     flags = lsp_flags,

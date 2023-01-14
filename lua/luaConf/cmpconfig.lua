@@ -9,30 +9,30 @@ table.unpack = table.unpack or unpack
 require'cmp-npm'.setup {}
 require'crates'.setup {}
 
-local cmp = require('cmp');
-local lspkind = require('lspkind');
-local luasnip = require("luasnip");
+local cmp = require'cmp';
+local lspkind = require'lspkind';
+local luasnip = require"luasnip";
+
 --------------------------------------------------------------------
 ----------------------------- Nvim CMP  ----------------------------
 --------------------------------------------------------------------
 
 local has_words_before = function()
     local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match"%s" == nil
 end
 
--- ['<C-l>'] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
-cmp.setup({
+cmp.setup{
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            require'luasnip'.lsp_expand(args.body)
         end,
     },
     window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
-    mapping = cmp.mapping.preset.insert({
+    mapping = cmp.mapping.preset.insert{
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-l>'] = cmp.mapping.complete(),
@@ -59,8 +59,8 @@ cmp.setup({
                 fallback()
             end
         end, { "i", "s" }),
-    }),
-    sources = cmp.config.sources{
+    },
+    sources = cmp.config.sources {
         { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'nvim_lua' },
@@ -76,10 +76,10 @@ cmp.setup({
     },
     enabled = function()
         return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-            or require("cmp_dap").is_dap_buffer()
+            or require"cmp_dap".is_dap_buffer()
     end,
     formatting = {
-        format = lspkind.cmp_format({
+        format = lspkind.cmp_format {
             mode = 'symbol_text', -- show only symbol annotations
             ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
             symbol_map = {
@@ -90,11 +90,11 @@ cmp.setup({
             before = function(_, vim_item)
                 return vim_item
             end
-        })
+        }
     }
-})
+}
 
-require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+require"cmp".setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
     sources = {
         { name = "dap" },
     },

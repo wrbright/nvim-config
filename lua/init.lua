@@ -5,7 +5,7 @@ vim.g.loaded_netrwPlugin = 1
 --------------------------------------------------------------------
 --------------------------- Plugin Setup----------------------------
 --------------------------------------------------------------------
-require('nvim-treesitter.configs').setup {
+require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
         auto_install = true,
@@ -143,7 +143,7 @@ require'scrollbar'.setup {
         Search = { color = "#ff7700" }
     }
 }
-require'scrollbar.handlers.gitsigns'.setup()
+require'scrollbar.handlers.gitsigns'.setup {}
 
 -- require"scrollbar.handlers.search".setup{
 --     override_lens = function() end,
