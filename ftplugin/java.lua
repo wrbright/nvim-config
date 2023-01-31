@@ -13,7 +13,7 @@ config['init_options'] = {
 }
 
 vim.cmd('set expandtab')
-config['on_attach'] = require("sConf/on_attach")
+config['on_attach'] = require("luaConf/on_attach")
 
 
 require'jdtls'.start_or_attach(config)

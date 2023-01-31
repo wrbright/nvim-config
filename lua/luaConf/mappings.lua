@@ -1,22 +1,32 @@
 ---------------------------------------------------------------------
 -------------------------- Plugin Mappings --------------------------
 ---------------------------------------------------------------------
-local kopts = { noremap = true, silent = true }
+local lspOpts = { noremap = true, silent = true }
 
 -- Remapping search to hlslens search functions in order to highlight in the scrollbar
 -- This plugin is otherwise disabled
-vim.api.nvim_set_keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+vim.api.nvim_set_keymap(
+	"n",
+	"n",
+	[[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+	lspOpts
+)
+vim.api.nvim_set_keymap(
+	"n",
+	"N",
+	[[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+	lspOpts
+)
+vim.api.nvim_set_keymap("n", "*", [[*<Cmd>lua require('hlslens').start()<CR>]], lspOpts)
+vim.api.nvim_set_keymap("n", "#", [[#<Cmd>lua require('hlslens').start()<CR>]], lspOpts)
+vim.api.nvim_set_keymap("n", "g*", [[g*<Cmd>lua require('hlslens').start()<CR>]], lspOpts)
+vim.api.nvim_set_keymap("n", "g#", [[g#<Cmd>lua require('hlslens').start()<CR>]], lspOpts)
 
 -- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
 
 --[[
-Absolute Gold. Auto move mappings over from vim file.
-New: "zxdw"cdf "vd$dd`F :copy .
+Auto move mappings over from vim file.
+New (must include newline): "zxdw"cdf "vd$dd`F :copy .
 f'"zp;;"cpx;"vp`G
 old (requires personal remappings): "zxdw"cdf "vd$dd`F üJf'"zp;;"cpx;"vp`G
 --]]
@@ -28,39 +38,36 @@ old (requires personal remappings): "zxdw"cdf "vd$dd`F üJf'"zp;;"cpx;"vp`G
 local plugOpts = { noremap = true, silent = true }
 
 -- Does not work
-vim.api.nvim_set_keymap('v', "<C-<Bslash>>", 'gc', plugOpts)
+vim.api.nvim_set_keymap("v", "<C-<Bslash>>", "gc", plugOpts)
 -- vim.api.nvim_set_keymap('v', "<C-_>", 'gc', plugOpts)
 -- Does not work
-vim.api.nvim_set_keymap('n', "<C-Bslash>", 'gcc', plugOpts)
+vim.api.nvim_set_keymap("n", "<C-Bslash>", "gcc", plugOpts)
 
-vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', plugOpts)
+vim.api.nvim_set_keymap("n", "<C-t>", ":NvimTreeToggle<CR>", plugOpts)
 
-vim.api.nvim_set_keymap('n', '<space>dd', ':lua require\'dapui\'.toggle()<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>dd', ':lua require\'dapui\'.toggle()<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>d<space>', ':lua require\'dap\'.continue()<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<A-O>', ':lua require\'dap\'.step_out()<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<A-o>', ':lua require\'dap\'.step_over()<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<A-i>', ':lua require\'dap\'.step_into()<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>b', ':lua require\'dap\'.toggle_breakpoint()<cr>', plugOpts)
+vim.api.nvim_set_keymap("n", "<F1>", ":TagbarToggle<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<F2>", ":LazyGit<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<F5>", ":lua require'dapui'.toggle()<cr>", plugOpts)
 
-vim.api.nvim_set_keymap('n', '<F1>', ':TagbarToggle<CR>', plugOpts)
+vim.api.nvim_set_keymap("n", "<A-g>N", ":Gitsigns prev_hunk<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<A-g>n", ":Gitsigns next_hunk<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<A-g>", ":Gitsigns preview_hunk<CR>", plugOpts)
 
-vim.api.nvim_set_keymap('n', '<A-g>N', ':Gitsigns prev_hunk<CR>', plugOpts)
-vim.api.nvim_set_keymap('n', '<A-g>n', ':Gitsigns next_hunk<CR>', plugOpts)
-vim.api.nvim_set_keymap('n', '<A-g>', ':Gitsigns preview_hunk<CR>', plugOpts)
+vim.api.nvim_set_keymap("n", "<space>x", ":BufferLinePickClose<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>t", ":BufferLinePick<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>l", ":BufferLineCycleNex<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>h", ":BufferLineCyclePrev<cr>", plugOpts)
 
-vim.api.nvim_set_keymap('n', '<space>x', ':BufferLinePickClose<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>t', ':BufferLinePick<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>l', ':BufferLineCycleNex<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>h', ':BufferLineCyclePrev<cr>', plugOpts)
-
-
-vim.api.nvim_set_keymap('n', '<C-z>', ':Telescope live_grep<CR>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>rs', '<cmd>Telescope resume<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>m', '<cmd>Telescope marks<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>gf', '<cmd>Telescope live_grep<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>gb', ':lua require(\'telescope.builtin\').live_grep({prompt_title = \'find string in open buffers\', grep_open_files=true})<cr>' , plugOpts)
-vim.api.nvim_set_keymap('n', '<space>f', '<cmd>Telescope find_files<cr>', plugOpts)
-vim.api.nvim_set_keymap('n', '<space>fb', '<cmd>Telescope buffers<cr><Esc>', plugOpts)
-
-
+vim.api.nvim_set_keymap("n", "<C-z>", ":Telescope live_grep<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>rs", "<cmd>Telescope resume<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>m", "<cmd>Telescope marks<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>gf", "<cmd>Telescope live_grep<cr>", plugOpts)
+vim.api.nvim_set_keymap(
+	"n",
+	"<space>gb",
+	":lua require('telescope.builtin').live_grep({prompt_title = 'find string in open buffers', grep_open_files=true})<cr>"
+	,
+	plugOpts
+)
+vim.api.nvim_set_keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<space>fb", "<cmd>Telescope buffers<cr><Esc>", plugOpts)

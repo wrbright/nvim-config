@@ -1,97 +1,21 @@
-""""""""""""""""""""""""""
-"        Vim-Plug        "
-""""""""""""""""""""""""""
-call plug#begin("~/InstalledApplicationsDev/nvim")
-    " Dependency needed for many plugins
-    Plug 'nvim-lua/plenary.nvim'
-    """""
-    """ Text, Text Additions, and Text Formatting
-    """"
-    Plug 'honza/vim-snippets'
-    Plug 'windwp/nvim-autopairs' 
-    Plug 'machakann/vim-sandwich'
-    Plug 'numToStr/Comment.nvim'
-    Plug 'vim-scripts/ReplaceWithRegister'
-    Plug 'L3MON4D3/LuaSnip'
-    " Treesitter
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-treesitter/nvim-treesitter-refactor'
-    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-    Plug 'nvim-treesitter/playground'
-    Plug 'windwp/nvim-ts-autotag'
-    " CMP
-    Plug 'hrsh7th/cmp-cmdline'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
-    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-    Plug 'saadparwaiz1/cmp_luasnip'
-    Plug 'rcarriga/cmp-dap'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'Saecki/crates.nvim'
-    Plug 'David-Kunz/cmp-npm'
-    " Plug 'neoclide/coc.nvim', { 'branch': 'release'}
- 
-    """""
-    """ Additional Panes
-    """"
-    Plug 'nvim-tree/nvim-tree.lua'
-    Plug 'preservim/tagbar'
-    " Dap
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'theHamsta/nvim-dap-virtual-text'
-    Plug 'rcarriga/nvim-dap-ui'
-    " Telescope
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-project.nvim'
- 
-    """""
-    """ Alternate Functionality
-    """"
-    Plug 'tpope/vim-fugitive'
-    Plug 'lambdalisue/suda.vim'
-    Plug 'lewis6991/gitsigns.nvim'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-    Plug 'kevinhwang91/nvim-hlslens'
-    Plug 'wesQ3/vim-windowswap'
-    Plug 'samodostal/image.nvim'
-    Plug 'nvim-colortils/colortils.nvim'
-    " LSP
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'mxsdev/nvim-dap-vscode-js'
-    Plug 'mfussenegger/nvim-jdtls' "java
- 
-    """""
-    """ aesthetics
-    """"
-    Plug 'sainnhe/gruvbox-material'
-    Plug 'nvim-lualine/lualine.nvim'
-    Plug 'p00f/nvim-ts-rainbow'
-    Plug 'nvim-tree/nvim-web-devicons'
-    Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
-    Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'SmiteshP/nvim-navic'
-    Plug 'petertriho/nvim-scrollbar'
-    Plug 'NvChad/nvim-colorizer.lua'
-    Plug 'onsails/lspkind.nvim'
-    Plug 'j-hui/fidget.nvim'
-call plug#end()
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
+" Vim Based Configurations.                                                  "
+" Goal: This file should work when using vim (not neovim) without plugins.   "
+" Non-Goal: No errors on startup or during usage when used with vim          "
+" ToDo: Fix Highlighting																									   "
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
 
 """"""""""""""""""""""""""
 " Plugin Top Line Config "
 """"""""""""""""""""""""""
+" Do not auto close the markdown preview browser tab on switching buffer
 let g:mkdp_auto_close = 0
 
-set termguicolors
+if has('nvim')
+	" Lua Config Require (likely ~/.config/nvim/lua/init.lua)
+	lua require('init')
+endif
 
-" Lua Config Require (likely ~/.config/nvim/lua/init.lua)
-lua require('init')
-
-
-" lua << EOF
-" -- Lua HEREDOC
-" EOF
-" Do not auto close the markdown preview browser tab on switching buffer
 
 """""""""""""""""""""""""""
 "        Functions        "
@@ -111,14 +35,13 @@ command Spell set spell spelllang=en_us
 " rebind j to gj and other g altered keys for the session
 command GJ nnoremap j gj|nnoremap k gk|nnoremap 0 g0|nnoremap $ g$
 
-" Save session in 
+" Save Session
 command Restoreable mks ~/nvim_session_storage/neovim.session
 
-" Install New Plugins
-command Install so ~/.config/nvim/init.vim |PlugInstall
+" Soure init.vim and init.lua
+command Source so ~/.config/nvim/init.vim |luafile ~/.config/nvim/lua/init.lua
 
-
-" Oops, fat-fingered command
+" oops
 command W w
 command Wq wq
 command WQ wq
@@ -170,12 +93,12 @@ vnoremap <A-k> :m'<-2<CR>gv=gv
 vnoremap <A-j> :m'>+1<CR>gv=gv
 
 " Shift keys by shiftwidth and maintain cursor position on text
-nnoremap <A-h> <<4h
+nmap <A-h> <<2h
+nmap <A-l> >>2l
 vnoremap <A-h> <gv
-nnoremap <A-l> >>4l
 vnoremap <A-l> >gv
 
-" Move content to right of cursor to new line, remove whitespace
+" Move content to right of cursor to new line, remove whitespace (need to find new binding)
 " nnoremap <C-J> mji<CR><Esc>`j:s/\s\+$//e<CR>`j
 
 " Paste from the system clipboard
@@ -188,14 +111,22 @@ vnoremap <A-y> "+y
 
 " Remove trailing space
 nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
+
+" Add semicolon to the end of the current line
 nnoremap <A-;> mjA;<Esc>`j
+" Add semicolon to the end of the current line
+inoremap <A-;> <Esc>mjA;<Esc>`ja
+" add a trailing comma to the end of the current line
+nnoremap <A-,> mjA,<Esc>`j
+" add a trailing comma to the end of the current line
+inoremap <A-,> <Esc>mjA,<Esc>`ja
 
 nnoremap <A-n> :noh<cr>
 
-" Add semicolon to the end of the current line
-inoremap <A-;> <Esc>mjA;<Esc>`ja
+" Move to end of line
+inoremap <A-a> <C-o>A
 
-" Rebind f1 off of help (now rebound to :Tagbar)
+" Rebind f1 off of help (now rebound to :Tagbar) 
 " inoremap <F1> <Esc>
 
 " Easier window navigation
@@ -238,66 +169,65 @@ cnoremap <A-l> <Right>
 cnoremap <A-b> <C-Left>
 cnoremap <A-w> <C-Right>
 
-""""""""""""""""""""""""""
-"  Colour Configuration  "
-""""""""""""""""""""""""""
 
-let g:gruvbox_material_transparent_background=1
-autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-colorscheme gruvbox-material
-highlight clear EndOfBuffer
-
-
-"""""""""""""""""""""""""""
-"  General Configuration  "
-"""""""""""""""""""""""""""
-
-" Bufferline Asked for this
-set nocompatible
-" set termguicolors
-
-" set mouse=a  " enable mouse, default on in neovim
-set signcolumn=yes 
-set number relativenumber
-set numberwidth=2
-set history=1000 " sets amount of commands, searches, and inserts to store in history
-set linebreak
-set ruler " always show cursor
-set wrap " enable text wrapping
-set scrolloff=5 " lines above/below cursor when scrolling
-set confirm
-set undofile undodir=~/.vim/undo-dir
-
-" Enable plugins and load plugin for the detected file type.
-filetype plugin on
-
-" Load an indent file for the detected file type.
-filetype indent on
-
-" Why isn't this default?
-set fileencoding=utf-8
+""""""""""""""""""""""""""""
+"  Base Vim Configuration  "
+""""""""""""""""""""""""""""
+if has('nvim')
+	set signcolumn=yes 
+endif
 
 " detect current file type
 filetype on
 
+" Don't pretend to be VI
+set nocompatible
+
+
+" enable 24bit color
+set termguicolors
+
+" set mouse=a  " enable mouse, default on in neovim
+
+
+" Add offset number in column offset on the left
+set number relativenumber
+
+" Ensure number column is at minimum, two characters wide
+set numberwidth=2
+
+" disable text wrapping
+set nowrap 
+
+" non-selected lines above/below cursor when scrolling
+set scrolloff=5 
+
+" When saving a file with a newer swap, quitting, or other issues with any
+" exit of the buffer arise, give list of choices on intended behavior 
+set confirm
+
+" Enable persistant undos and set the location of the persistant undo file
+set undofile undodir=~/.vim/undo-dir
+
+" sets amount of commands, searches, and inserts to store in history
+set history=1000 
+
+" Why isn't this default?
+set fileencoding=utf-8
+
 " On pressing tab, add [tabstop] spaces instead of a tab
-set expandtab
-" show tab with 4 spaces width
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 
 " when indenting with '>', use 4 spaces width
-set shiftwidth=4
-
-" Set Regex Highlighting
-" syntax on
+set shiftwidth=2
 
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
 " While searching though a file incrementally highlight matching characters as you type.
 set incsearch
-"
+
 " Use highlighting when doing a search.
 set hlsearch
 
@@ -320,13 +250,38 @@ set wildmode=list:longest
 " file for editing
 set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
-" disable auto text wrapping
+" disable auto text wrapping when in insert mode
 set textwidth=0
 
+""""""""""""""""""""""""
+" Plugin Configuration "
+""""""""""""""""""""""""
+
+" Enable plugins and load plugin for the detected file type.
+filetype plugin on
+
+" Load an indent file for the detected file type.
+filetype indent on
+
+" Allow for Markdown command to be run from anywhere
 let g:mkdp_command_for_global = 1
 
-" Disabled until needed
-"
+""""""""""""""""""""""""""
+"  Colour Configuration  "
+""""""""""""""""""""""""""
+
+if has('nvim') 
+	let g:gruvbox_material_transparent_background=1
+	autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+	colorscheme gruvbox-material
+	highlight clear EndOfBuffer
+else
+	set nocursorline
+endif
+
+" Comment Left on purpose. COC can be re-enabled when inside an unfamiliar
+" languages codebase for completion and LSP support
+
 " """""""""""""""""""""
 " " COC Configuration "
 " """""""""""""""""""""

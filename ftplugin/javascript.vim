@@ -6,3 +6,6 @@ set softtabstop=2
 set shiftwidth=2
 
 set nowrap " disable text wrapping
+
+nnoremap <A-h> <<2h
+nnoremap <A-l> >>2l
