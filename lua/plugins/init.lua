@@ -7,26 +7,10 @@ return {
 	-----------------------------------------------
 
 	"honza/vim-snippets",
-	"windwp/nvim-autopairs",
 	"machakann/vim-sandwich",
 	"numToStr/Comment.nvim",
 	"vim-scripts/ReplaceWithRegister",
 	"L3MON4D3/LuaSnip",
-	{
-		"nvim-treesitter/nvim-treesitter",
-		event = "BufEnter",
-		build = function()
-			pcall(require("nvim-treesitter.install").update({ with_sync = true }))
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-refactor",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"nvim-treesitter/playground",
-			"windwp/nvim-ts-autotag",
-			"p00f/nvim-ts-rainbow",
-			"CKolkey/ts-node-action",
-		},
-	},
 	--CMP
 	{
 		"hrsh7th/nvim-cmp",
@@ -48,10 +32,6 @@ return {
 	----------------------
 
 	"mbbill/undotree",
-	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-	},
 	"preservim/tagbar",
 	--Dap
 	{
@@ -86,11 +66,6 @@ return {
 	"kevinhwang91/nvim-hlslens",
 	"wesQ3/vim-windowswap",
 	"samodostal/image.nvim",
-	{
-		"princejoogie/chafa.nvim",
-		dependencies = { "m00qek/baleia.nvim" },
-	},
-	"nvim-colortils/colortils.nvim",
 	---------
 	-- LSP --
 	---------
@@ -106,18 +81,13 @@ return {
 	----------------
 	-- aesthetics --
 	----------------
+	{
+		"SmiteshP/nvim-navic",
+		requires = "neovim/nvim-lspconfig"
+	},
 
 	"sainnhe/gruvbox-material",
-	"nvim-lualine/lualine.nvim",
-	{
-		"akinsho/bufferline.nvim",
-		branch = "v3.*",
-		dependencies = "nvim-tree/nvim-web-devicons",
-	},
-	"lukas-reineke/indent-blankline.nvim",
-	"SmiteshP/nvim-navic",
-	"petertriho/nvim-scrollbar",
-	"NvChad/nvim-colorizer.lua",
+
 	"onsails/lspkind.nvim",
 	"j-hui/fidget.nvim",
 }

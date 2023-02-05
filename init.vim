@@ -16,7 +16,6 @@ if has('nvim')
 	lua require('init')
 endif
 
-
 """""""""""""""""""""""""""
 "        Functions        "
 """""""""""""""""""""""""""
