@@ -31,6 +31,7 @@ return {
 	-- Additional Panes --
 	----------------------
 
+	'kevinhwang91/rnvimr',
 	"mbbill/undotree",
 	"preservim/tagbar",
 	--Dap

@@ -45,6 +45,8 @@ vim.api.nvim_set_keymap("n", "<C-Bslash>", "gcc", plugOpts)
 
 vim.api.nvim_set_keymap("n", "<C-t>", ":NvimTreeToggle<CR>", plugOpts)
 
+vim.api.nvim_set_keymap("n", "<Leader>rr", ":RnvimrToggle<CR>", plugOpts)
+
 vim.api.nvim_set_keymap("n", "<F1>", ":TagbarToggle<CR>", plugOpts)
 vim.api.nvim_set_keymap("n", "<F2>", ":LazyGit<CR>", plugOpts)
 vim.api.nvim_set_keymap("n", "<F5>", ":lua require'dapui'.toggle()<cr>", plugOpts)
