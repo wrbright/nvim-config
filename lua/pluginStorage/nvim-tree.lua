@@ -1,20 +1,25 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	config = function()
+		local function open_in_default(node)
+			-- vim.cmd("!gwenview " .. node.absolute_path .. " &")
+			print(node.absolute_path)
+			-- open silently
+			vim.cmd("!xdg-open " .. node.absolute_path .. " &")
+		end
 
 		local function open_nvim_tree(data)
-			-- buffer is a [No Name]
+			-- buffer is [No Name]
 			local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
 
-			-- buffer is a directory
-			local directory = vim.fn.isdirectory(data.file) == 1
+			local isDirectory = vim.fn.isdirectory(data.file) == 1
 
-			if not no_name and not directory then
+			if not no_name and not isDirectory then
 				return
 			end
 
 			-- change to the directory
-			if directory then
+			if isDirectory then
 				vim.cmd.cd(data.file)
 			end
 			require"nvim-tree.api".tree.open()
