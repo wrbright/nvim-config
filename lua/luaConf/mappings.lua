@@ -43,7 +43,8 @@ vim.api.nvim_set_keymap("v", "<C-<Bslash>>", "gc", plugOpts)
 -- Does not work
 vim.api.nvim_set_keymap("n", "<C-Bslash>", "gcc", plugOpts)
 
-vim.api.nvim_set_keymap("n", "<C-t>", ":NvimTreeToggle<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<C-t>", ":NeoTreeShowToggle<CR>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>t", ":NeoTreeFloatToggle<CR>", plugOpts)
 
 vim.api.nvim_set_keymap("n", "<Leader>rr", ":RnvimrToggle<CR>", plugOpts)
 
@@ -55,21 +56,21 @@ vim.api.nvim_set_keymap("n", "<A-g>N", ":Gitsigns prev_hunk<CR>", plugOpts)
 vim.api.nvim_set_keymap("n", "<A-g>n", ":Gitsigns next_hunk<CR>", plugOpts)
 vim.api.nvim_set_keymap("n", "<A-g>", ":Gitsigns preview_hunk<CR>", plugOpts)
 
-vim.api.nvim_set_keymap("n", "<space>x", ":BufferLinePickClose<cr>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>t", ":BufferLinePick<cr>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>l", ":BufferLineCycleNex<cr>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>h", ":BufferLineCyclePrev<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>x", ":BufferLinePickClose<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>b", ":BufferLinePick<cr>", plugOpts);
+vim.api.nvim_set_keymap("n", "<Leader>l", ":BufferLineCycleNex<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>h", ":BufferLineCyclePrev<cr>", plugOpts)
 
 vim.api.nvim_set_keymap("n", "<C-z>", ":Telescope live_grep<CR>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>rs", "<cmd>Telescope resume<cr>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>m", "<cmd>Telescope marks<cr>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>gf", "<cmd>Telescope live_grep<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>rs", "<cmd>Telescope resume<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>m", "<cmd>Telescope marks<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>gf", "<cmd>Telescope live_grep<cr>", plugOpts)
 vim.api.nvim_set_keymap(
 	"n",
-	"<space>gb",
+	"<Leader>gb",
 	":lua require('telescope.builtin').live_grep({prompt_title = 'find string in open buffers', grep_open_files=true})<cr>"
 	,
 	plugOpts
 )
-vim.api.nvim_set_keymap("n", "<space>f", "<cmd>Telescope find_files<cr>", plugOpts)
-vim.api.nvim_set_keymap("n", "<space>fb", "<cmd>Telescope buffers<cr><Esc>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>f", "<cmd>Telescope find_files<cr>", plugOpts)
+vim.api.nvim_set_keymap("n", "<Leader>fb", "<cmd>Telescope buffers<cr><Esc>", plugOpts)

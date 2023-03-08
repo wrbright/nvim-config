@@ -25,7 +25,5 @@ require'lazy'.setup'plugins'
 ------------------------ Lua Config Requires------------------------
 --------------------------------------------------------------------
 
-require'luaConf/lsp' -- general LSP configuration
 require'luaConf/mappings' -- general plugin remappings
 require'luaConf/cmpconfig' -- all completion config
-require'luaConf/debugging' -- all debugging config
