@@ -24,5 +24,12 @@
     "body": [
       "<div>$0</div>"
     ]
+  },
+  "React Constructor": {
+    "prefix": "constructor",
+    "body": [
+      "constructor(props) {\n this.state = {\n\"${1:key}\"${1:\"value\"}\n} \n}"
+    ],
+    "description": "Console log but coloured with a background"
   }
 }

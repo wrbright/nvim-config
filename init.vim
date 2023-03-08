@@ -1,32 +1,32 @@
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
-" Vim Based Configurations.                                                  "
-" Goal: This file should work when using vim (not neovim) without plugins.   "
-" Non-Goal: No errors on startup or during usage when used with vim          "
-" ToDo: Fix Highlighting																									   "
+"  Vim Based Configurations.                                                 "
+"                                                                            "
+"  Goal: This file should work when using vim (not neovim) without plugins.  "
+"  Non-Goal: No errors on startup or during usage when used with vim.        "
+"  ToDo: Re-reate vim specific ColorScheme                                   "
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
 
-""""""""""""""""""""""""""
+" """""""""""""""""""""" "
 " Plugin Top Line Config "
-""""""""""""""""""""""""""
-" Do not auto close the markdown preview browser tab on switching buffer
-let g:mkdp_auto_close = 0
+" """""""""""""""""""""" "
 
 if has('nvim')
 	" Lua Config Require (likely ~/.config/nvim/lua/init.lua)
 	lua require('init')
 endif
 
-"""""""""""""""""""""""""""
-"        Functions        "
-"""""""""""""""""""""""""""
+" """"""""""""""""" "
+"     Functions     "
+" """"""""""""""""" "
+
 " function! CheckBackspace() abort
 "     let col = col('.') - 1
 "     return !col || getline('.')[col - 1]  =~# '\s'
 " endfunction
 
-"""""""""""""""""""""
-"        CMD        "
-"""""""""""""""""""""
+" """""""""""""""""""""" "
+"   CMD Mode Remapping   "
+" """""""""""""""""""""" "
 
 " enable spellcheck
 command Spell set spell spelllang=en_us
@@ -102,10 +102,12 @@ vnoremap <A-l> >gv
 
 " Paste from the system clipboard
 nnoremap <A-p> "+p
-nnoremap <A-P> "0p
+nnoremap <A-P> "+P
+nnoremap <Leader>p "0p
 
-" Alternatively copy into system register
+" Alternatively, copy into system register
 nnoremap <A-y> "+y
+nnoremap <A-y><A-y> "+yy
 vnoremap <A-y> "+y
 
 " Remove trailing space
@@ -137,6 +139,8 @@ nnoremap <A-L> <C-W>l
 nnoremap <A-v> :horizontal split<cr>
 nnoremap <A-V> :vertical split<cr>
 
+" nnoremap <A-w> <C-w>
+
 " Re-size windows
 nnoremap <A-<> :vertical resize +5<CR>
 nnoremap <A->> :vertical resize -5<CR>
@@ -152,11 +156,10 @@ inoremap <A-l> <right>
 inoremap <A-w> <C-right>
 inoremap <A-b> <C-left>
 
-nnoremap <A-w> <C-w>
 
-"""""""""""""""""""""""""""
-" Command Mode Remappings "
-"""""""""""""""""""""""""""
+" """"""""""""""""""""""""""" "
+"   Command Mode Remappings   "
+""""""""""""""""""""""""""""" "
 
 " Vim movement in command mode
 cnoremap <A-k> <Up>
@@ -169,25 +172,31 @@ cnoremap <A-b> <C-Left>
 cnoremap <A-w> <C-Right>
 
 
-""""""""""""""""""""""""""""
-"  Base Vim Configuration  "
-""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""" "
+"   Program Specific Configuration   "
+"""""""""""""""""""""""""""""""""""" "
 if has('nvim')
 	set signcolumn=yes 
+	set history=10000 " sets amount of commands, searches, and inserts to store in history
+else
+	set wildmenu " Enable auto completion menu after pressing TAB. 
+	set signcolumn=auto:3 "Only show signs if needed, max width of 3
+	set mouse=a  " enable mouse
+	set history=500 " sets amount of commands, searches, and inserts to store in history
+	set autoindent " Automatically indent
+	set belloff " Should be default
+	set nocompatible " Don't pretend to be VI (Default in Neovim)
+	filetype on " detect current file type
+
 endif
 
-" detect current file type
-filetype on
-
-" Don't pretend to be VI
-set nocompatible
-
+""""""""""""""""""""""""""" "
+"   General Configuration   "
+""""""""""""""""""""""""""" "
+set shell=/bin/bash
 
 " enable 24bit color
 set termguicolors
-
-" set mouse=a  " enable mouse, default on in neovim
-
 
 " Add offset number in column offset on the left
 set number relativenumber
@@ -208,26 +217,23 @@ set confirm
 " Enable persistant undos and set the location of the persistant undo file
 set undofile undodir=~/.vim/undo-dir
 
-" sets amount of commands, searches, and inserts to store in history
-set history=1000 
-
 " Why isn't this default?
 set fileencoding=utf-8
 
-" On pressing tab, add [tabstop] spaces instead of a tab
+" Tabs are shown 2 spaces wide
 set tabstop=2
 set softtabstop=2
 
-" when indenting with '>', use 4 spaces width
+" when indenting with '>', use 2 spaces width
 set shiftwidth=2
 
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 
-" While searching though a file incrementally highlight matching characters as you type.
+" While searching though a file incrementally highlight matching characters as you type. (neovim default)
 set incsearch
 
-" Use highlighting when doing a search.
+" Use highlighting when doing a search. (neovim default)
 set hlsearch
 
 " Show partial command you type in the last line of the screen.
@@ -236,8 +242,6 @@ set showcmd
 " Show matching words during a search.
 set showmatch
 
-" Enable auto completion menu after pressing TAB. (default in neovim)
-set wildmenu
 
 " Time to wait between edits before writing to the swap file
 set updatetime=300
@@ -262,9 +266,13 @@ filetype plugin on
 " Load an indent file for the detected file type.
 filetype indent on
 
-" Allow for Markdown command to be run from anywhere
-let g:mkdp_command_for_global = 1
+if has('nvim')
+	" Allow for Markdown command to be run from anywhere (useless without Markdown Plugin)
+	let g:mkdp_command_for_global = 1
 
+	" Do not auto close the markdown preview browser tab on switching buffer
+	let g:mkdp_auto_close = 0
+endif
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
@@ -319,7 +327,9 @@ endif
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 
-" """""""""""""""""""""
-" " COC Configuration "
-" """""""""""""""""""""
+" """""""""""""""""""""""""
+" " COC Configuration end "
+" """""""""""""""""""""""""
+
+" Create helptags, suppress command output
 silent! helptags ALL
