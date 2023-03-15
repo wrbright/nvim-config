@@ -1,5 +1,6 @@
 return {
 	"mfussenegger/nvim-dap",
+	keys = "<Leader>dd",
 	config = function ()
 		--------------------------------------------------------------------
 		---------------------- Nvim-Dap Configuration ----------------------

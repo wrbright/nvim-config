@@ -1,10 +1,6 @@
 ------------------------------------------
 -- Lazy.nvim Begin Plugin Configuration --
 ------------------------------------------
-
-local function is_git_repo()
-end
-
 return {
 	--Dependency needed for many plugins
 	'nvim-lua/plenary.nvim',
@@ -13,55 +9,57 @@ return {
 	-- Text, Text Additions, and Text Formatting --
 	-----------------------------------------------
 
+	{'nvim-treesitter/playground', cmd='TSPlaygroundToggle'},
 	'honza/vim-snippets',
-	'machakann/vim-sandwich',
+	{'machakann/vim-sandwich', keys='s'},
 	{'vim-scripts/ReplaceWithRegister', keys='grr'},
 	'L3MON4D3/LuaSnip',
 	--CMP
-	{
-		'hrsh7th/nvim-cmp',
-		dependencies = {
-			'hrsh7th/cmp-cmdline',
-			'hrsh7th/cmp-buffer',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-nvim-lsp-signature-help',
-			'saadparwaiz1/cmp_luasnip',
-			'rcarriga/cmp-dap',
-			'hrsh7th/cmp-nvim-lsp',
-			'Saecki/crates.nvim',
-			'David-Kunz/cmp-npm',
-		},
-	},
 
 	----------------------
 	-- Additional Panes --
 	----------------------
 
+	{'nvim-treesitter/playground', cmd='TSPlaygroundToggle'},
 	{'kevinhwang91/rnvimr', cmd='RnvimrToggle'},
 	{'mbbill/undotree', cmd='UndotreeShow'},
 	{'preservim/tagbar', keys='<F1>', cmd='TagbarToggle'},
+	{
+		'CKolkey/ts-node-action',
+		keys='<C-n>',
+		config = function ()
+			require'ts-node-action'.setup {}
+			vim.keymap.set({ 'n' }, '<C-n>', require'ts-node-action'.node_action, { desc = 'Trigger Node Action' })
+		end
+	},
 
 	--Telescope
-	'nvim-telescope/telescope.nvim',
+	{
+		'nvim-telescope/telescope.nvim',
+		cmd='Telescope',
+		-- init= function ()
+		-- 	require'telescope'.load_extension('project');
+		-- end
 
+	},
 	-----------------------------
 	-- Alternate Functionality --
 	-----------------------------
 
 	{
 		'tpope/vim-fugitive',
-		cond=function()
-			local isGit = vim.fn.system("isGit.sh") == 'true\n';
-			return isGit;
-		end
+		-- cond=function()
+		-- 	local isGit = vim.fn.system('isGit.sh') == 'true\n';
+		-- 	return isGit;
+		-- end
 	},
-	'lambdalisue/suda.vim',
-	'lewis6991/gitsigns.nvim',
+	{'lambdalisue/suda.vim', cmd='SudaWrite'},
+	{ 'lewis6991/gitsigns.nvim', opts = {} },
 	{
 		'iamcco/markdown-preview.nvim',
 		build = 'cd app && yarn install',
 		cmd='MarkdownPreview',
-		init = function()
+		init = function ()
 			vim.g.mkdp_filetypes = { 'markdown' }
 		end,
 	},
