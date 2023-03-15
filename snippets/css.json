@@ -1,6 +1,6 @@
 {
     "css comment": {
-        "prefix" :  "\/",
+        "prefix" :  "\/\/",
         "body": ["\/*${1:comment}*\/"],
         "description": "css comment"
     }

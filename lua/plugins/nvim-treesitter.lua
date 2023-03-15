@@ -1,12 +1,12 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
+	'nvim-treesitter/nvim-treesitter',
 	lazy = false,
-	event = "BufRead",
+	event = 'BufRead',
 	build = function()
-		pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+		pcall(require('nvim-treesitter.install').update({ with_sync = true }))
 	end,
 	config = function ()
-		require"nvim-treesitter.configs".setup {
+		require'nvim-treesitter.configs'.setup {
 			highlight = {
 				enable = true,
 				auto_install = true,
@@ -17,27 +17,27 @@ return {
 			incremental_selection = {
 				enable = true,
 				keymaps = {
-					init_selection = "<A-cr>",
-					node_incremental = "<A-cr>",
-					scope_incremental = "gts",
-					node_decremental = "gtd",
+					init_selection = '<A-cr>',
+					node_incremental = '<A-cr>',
+					scope_incremental = 'gts',
+					node_decremental = 'gtd',
 				},
 			},
 			refactor = {
 				navigation = {
 					enable = true,
 					keymaps = {
-						-- goto_definition = "gnd",
-						-- list_definitions = "gnD",
-						-- list_definitions_toc = "gO",
-						goto_next_usage = "<a-*>",
-						goto_previous_usage = "<a-#>",
+						-- goto_definition = 'gnd',
+						-- list_definitions = 'gnD',
+						-- list_definitions_toc = 'gO',
+						goto_next_usage = '<a-*>',
+						goto_previous_usage = '<a-#>',
 					},
 				},
 				smart_rename = {
 					enable = true,
 					keymaps = {
-						smart_rename = "<space>grr",
+						smart_rename = '<space>grr',
 					},
 				},
 			},
@@ -52,21 +52,21 @@ return {
 					enable = true,
 					lookahead = true,
 					keymaps = {
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["al"] = "@loop.outer",
-						["il"] = "@loop.inner",
-						["ac"] = "@comment.outer",
-						["ic"] = "@comment.inner",
-						["av"] = "@parameter.outer",
-						["iv"] = "@parameter.inner",
-						["ik"] = "@block.inner",
-						["ak"] = "@block.outer",
+						['af'] = '@function.outer',
+						['if'] = '@function.inner',
+						['al'] = '@loop.outer',
+						['il'] = '@loop.inner',
+						['ac'] = '@comment.outer',
+						['ic'] = '@comment.inner',
+						['av'] = '@parameter.outer',
+						['iv'] = '@parameter.inner',
+						['ik'] = '@block.inner',
+						['ak'] = '@block.outer',
 					},
 					selection_modes = {
-						["@parameter.outer"] = "v", -- charwise
-						["@function.outer"] = "V", -- linewise
-						["@class.outer"] = "<c-v>", -- blockwise
+						['@parameter.outer'] = 'v', -- charwise
+						['@function.outer'] = 'V', -- linewise
+						['@class.outer'] = '<c-v>', -- blockwise
 					},
 				},
 			},
@@ -76,16 +76,11 @@ return {
 				max_file_lines = nil,
 			},
 		}
-		vim.keymap.set({ "n" }, "<C-n>", require"ts-node-action".node_action, { desc = "Trigger Node Action" })
-
-
 	end,
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter-refactor",
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		"nvim-treesitter/playground",
-		"windwp/nvim-ts-autotag",
-		"p00f/nvim-ts-rainbow",
-		"CKolkey/ts-node-action",
+		'nvim-treesitter/nvim-treesitter-refactor',
+		'nvim-treesitter/nvim-treesitter-textobjects',
+		'windwp/nvim-ts-autotag',
+		'p00f/nvim-ts-rainbow',
 	},
 }

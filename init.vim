@@ -12,7 +12,7 @@
 
 if has('nvim')
 	" Lua Config Require (likely ~/.config/nvim/lua/init.lua)
-	lua require('init')
+	lua require'init'
 endif
 
 " """"""""""""""""" "
@@ -180,7 +180,6 @@ if has('nvim')
 	set history=10000 " sets amount of commands, searches, and inserts to store in history
 else
 	set wildmenu " Enable auto completion menu after pressing TAB. 
-	set signcolumn=auto:3 "Only show signs if needed, max width of 3
 	set mouse=a  " enable mouse
 	set history=500 " sets amount of commands, searches, and inserts to store in history
 	set autoindent " Automatically indent

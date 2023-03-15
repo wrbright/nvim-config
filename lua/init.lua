@@ -26,4 +26,3 @@ require'lazy'.setup'plugins'
 --------------------------------------------------------------------
 
 require'luaConf/mappings' -- general plugin remappings
-require'luaConf/cmpconfig' -- all completion config

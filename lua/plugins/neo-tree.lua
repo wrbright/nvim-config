@@ -1,11 +1,18 @@
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	config = function()
+		-- vim.api.nvim_create_autocmd( "BufEnter" , {
+		-- 	callback = function(args)
+		-- 		if vim.api.nvim_buf_get_name(args.buf) == "" then
+		-- 			vim.cmd'NeoTreeReveal'
+		-- 		end
+		-- 	end,
+		-- })
+
 		local delete = function(state)
 			local inputs = require("neo-tree.ui.inputs")
 			local path = state.tree:get_node().path
 			inputs.confirm("Are you sure you want to trash " .. path, function(confirmed)
-
 				if not confirmed then
 					return
 				end
@@ -42,7 +49,14 @@ return {
 			end)
 		end
 
-		require("neo-tree").setup({
+		local function open_in_default(node)
+			-- vim.cmd("!gwenview " .. node.absolute_path .. " &")
+			print(node.absolute_path)
+			-- open silently
+			vim.cmd("!xdg-open " .. node.absolute_path .. " &")
+		end
+
+		require"neo-tree".setup{
 			sources = {
 				"filesystem",
 				"buffers",
@@ -52,7 +66,13 @@ return {
 				winbar = true,
 				statusline = false,
 			},
+      window = {
+        mappings = {
+          ["P"] = { "toggle_preview", config = { use_float = false } },
+        }
+      },
 			filesystem = {
+				follow_current_file = true,
 				commands = {
 					delete = delete,
 					delete_visual = delete_visual,
@@ -60,7 +80,7 @@ return {
 			},
 			enable_modified_markers = true,
 			enable_git_status = true,
-		})
+		}
 	end,
 	dependencies = { "MunifTanjim/nui.nvim" },
 }
