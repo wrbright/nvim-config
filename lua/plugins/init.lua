@@ -45,7 +45,12 @@ return {
 	-----------------------------
 	-- Alternate Functionality --
 	-----------------------------
-
+	-- {
+		-- 'edluffy/hologram.nvim',
+		-- opts = {
+			-- auto_display = true
+		-- }
+	-- },
 	{
 		'tpope/vim-fugitive',
 		-- cond=function()

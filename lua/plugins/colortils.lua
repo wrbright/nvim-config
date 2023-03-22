@@ -1,6 +1,6 @@
 return {
 	"nvim-colortils/colortils.nvim",
-	config = {
+	opts = {
 		-- register to store color value
 		register = "c",
 		border = "single",

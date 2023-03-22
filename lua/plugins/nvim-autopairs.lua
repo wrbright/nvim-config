@@ -1,6 +1,6 @@
 return {
 	"windwp/nvim-autopairs",
-	config = {
+	opts = {
 		enable_check_bracket_line = false,
 	}
 }

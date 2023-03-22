@@ -57,9 +57,9 @@ let g:mapleader = "\<Space>"
 " Moved To Lua Init (Likely ./lua/init.lua)
 "
 
-" cannot map / in lua (or, I am an idiot)
-nmap <C-_> gcc
-vmap <C-_> gcgv
+" cannot map / in lua (or, I am an fool)
+nmap <C-/> gcc
+vmap <C-/> gcgv
 
 """""""""""""""""""""""""
 "   General Remapping   "
