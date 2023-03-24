@@ -14,7 +14,7 @@ return {
 		vim.api.nvim_set_keymap("n", "<A-o>", ":lua require'dap'.step_over()<cr>", plugOpts)
 		vim.api.nvim_set_keymap("n", "<A-i>", ":lua require'dap'.step_into()<cr>", plugOpts)
 		vim.api.nvim_set_keymap("n", "<A-f>", ":lua require'dap'.step_forward()<cr>", plugOpts)
-		vim.api.nvim_set_keymap("n", "<space>b", ":lua require'dap'.toggle_breakpoint()<cr>", plugOpts)
+		vim.api.nvim_set_keymap("n", "<space>db", ":lua require'dap'.toggle_breakpoint()<cr>", plugOpts)
 
 		require"dapui".setup {
 			layouts = {
