@@ -12,7 +12,7 @@ Lazy Loaded with Lazy.nvim, nvim-cmp for completion, LSP integrationg with lspco
 "                                                                            "
 "  Goal: This file should work when using vim (not neovim) without plugins.  "
 "  Non-Goal: No errors on startup or during usage when used with vim.        "
-"  ToDo: Re-reate vim specific ColorScheme                                   "
+"  ToDo: Re-create vim specific ColorScheme                                   "
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
 ```
 
