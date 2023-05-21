@@ -30,6 +30,14 @@ return {
 		require'nvim-tree'.setup {
 			open_on_tab = true,
 			sync_root_with_cwd = true,
+			on_attach = function (bufnr)
+				local api = require'nvim-tree.api'
+
+				api.config.mappings.default_on_attach(bufnr)
+
+				vim.keymap.del( 'n', '<C-t>', { buffer = bufnr })
+				vim.keymap.set( 'n', '<C-t>', api.tree.toggle)
+			end
 		}
 	end,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
