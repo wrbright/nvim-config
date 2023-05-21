@@ -40,6 +40,9 @@ command Restoreable mks ~/nvim_session_storage/neovim.session
 " Soure init.vim and init.lua
 command Source so ~/.config/nvim/init.vim |luafile ~/.config/nvim/lua/init.lua
 
+" Add [pwd] to runtimepath
+command AddRun :let &runtimepath.=','.escape(expand('%:p:h'), '\,')
+
 " oops
 command W w
 command Wq wq
@@ -54,12 +57,15 @@ command QA qa
 let g:mapleader = "\<Space>"
 
 "
-" Moved To Lua Init (Likely ./lua/init.lua)
+" (Mostly) moved To Lua Init (Likely ./lua/init.lua)
 "
 
 " cannot map / in lua (or, I am an fool)
 nmap <C-/> gcc
 vmap <C-/> gcgv
+
+nmap <C-_> gcc
+vmap <C-_> gcgv
 
 """""""""""""""""""""""""
 "   General Remapping   "
@@ -117,10 +123,16 @@ nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
 nnoremap <A-;> mjA;<Esc>`j
 " Add semicolon to the end of the current line
 inoremap <A-;> <Esc>mjA;<Esc>`ja
+
 " add a trailing comma to the end of the current line
 nnoremap <A-,> mjA,<Esc>`j
 " add a trailing comma to the end of the current line
 inoremap <A-,> <Esc>mjA,<Esc>`ja
+
+" add a trailing comma to the end of the current line
+nnoremap <A-.> mjA.<Esc>`j
+" add a trailing comma to the end of the current line
+inoremap <A-.> <Esc>mjA.<Esc>`ja
 
 nnoremap <A-n> :noh<cr>
 
@@ -156,7 +168,6 @@ inoremap <A-l> <right>
 inoremap <A-w> <C-right>
 inoremap <A-b> <C-left>
 
-
 " """"""""""""""""""""""""""" "
 "   Command Mode Remappings   "
 """"""""""""""""""""""""""""" "
@@ -170,7 +181,6 @@ cnoremap <A-l> <Right>
 " Back and forward by WORD(ish)
 cnoremap <A-b> <C-Left>
 cnoremap <A-w> <C-Right>
-
 
 """""""""""""""""""""""""""""""""""" "
 "   Program Specific Configuration   "
@@ -241,7 +251,6 @@ set showcmd
 " Show matching words during a search.
 set showmatch
 
-
 " Time to wait between edits before writing to the swap file
 set updatetime=300
 
@@ -272,6 +281,115 @@ if has('nvim')
 	" Do not auto close the markdown preview browser tab on switching buffer
 	let g:mkdp_auto_close = 0
 endif
+
+if !has('nvim')
+	" Tabline/Buffer line
+	set showtabline=2
+	set tabline="%1T"
+
+	" Statusline
+	" https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
+
+	let g:currentmode={
+				\ 'n'  : 'N ',
+				\ 'no' : 'N·Operator Pending ',
+				\ 'v'  : 'V ',
+				\ 'V'  : 'V·Line ',
+				\ 'x22' : 'V·Block ',
+				\ 's'  : 'Select ',
+				\ 'S'  : 'S·Line ',
+				\ 'x19' : 'S·Block ',
+				\ 'i'  : 'I ',
+				\ 'R'  : 'R ',
+				\ 'Rv' : 'V·Replace ',
+				\ 'c'  : 'Command ',
+				\ 'cv' : 'Vim Ex ',
+				\ 'ce' : 'Ex ',
+				\ 'r'  : 'Prompt ',
+				\ 'rm' : 'More ',
+				\ 'r?' : 'Confirm ',
+				\ '!'  : 'Shell ',
+				\ 't'  : 'Terminal '
+				\}
+
+
+	highlight User1 cterm=None gui=None ctermfg=007 guifg=#ffffff
+	highlight User2 cterm=None gui=None ctermfg=008 guifg=#ffffff
+	highlight User3 cterm=None gui=None ctermfg=008 guifg=#ffffff
+	highlight User4 cterm=None gui=None ctermfg=008 guifg=#ffffff
+	highlight User5 cterm=None gui=None ctermfg=008 guifg=#ffffff
+	highlight User7 cterm=None gui=None ctermfg=008 guifg=#ffffff
+	highlight User8 cterm=None gui=None ctermfg=008 guifg=#ffffff
+	highlight User9 cterm=None gui=None ctermfg=007 guifg=#ffffff
+
+	" Automatically change the statusline color depending on mode
+	function! ChangeStatuslineColor()
+		if (mode() =~# '\v(n|no)')
+			exe 'hi! StatusLine ctermfg=008 guifg=#ffffff gui=None cterm=None'
+		elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
+			exe 'hi! StatusLine ctermfg=005 guifg=#00ff00 gui=None cterm=None'
+		elseif (mode() ==# 'i')
+			exe 'hi! StatusLine ctermfg=004 guifg=#6CBCE8 gui=None cterm=None'
+		else
+			exe 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
+		endif
+
+		return ''
+	endfunction
+
+	" Find out current buffer's size and output it.
+	function! FileSize()
+		let bytes = getfsize(expand('%:p'))
+		if (bytes >= 1024)
+			let kbytes = bytes / 1024
+		endif
+		if (exists('kbytes') && kbytes >= 1000)
+			let mbytes = kbytes / 1000
+		endif
+
+		if bytes <= 0
+			return '0'
+		endif
+
+		if (exists('mbytes'))
+			return mbytes . 'MB '
+		elseif (exists('kbytes'))
+			return kbytes . 'KB '
+		else
+			return bytes . 'B '
+		endif
+	endfunction
+
+	function! ReadOnly()
+		if &readonly || !&modifiable
+			return ''
+		else
+			return ''
+		endif
+	endfunction
+
+	" function! GitInfo()
+	" 	let git = fugitive#head()
+	" 	if git != ''
+	" 		return ' '.fugitive#head()
+	" 	else
+	" 		return ''
+	" 	endfunction
+
+	" http://stackoverflow.com/a/10416234/213124
+	set laststatus=2
+	set statusline=
+	set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
+	set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
+	set statusline+=%8*\ [%n]                                " buffernr
+	set statusline+=%8*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
+	set statusline+=%*
+	set statusline+=%9*\ %=                                  " Space
+	set statusline+=%8*\ %y\                                 " FileType
+	set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
+	set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
+	set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
+endif
 """"""""""""""""""""""""""
 "  Colour Configuration  "
 """"""""""""""""""""""""""
@@ -284,6 +402,8 @@ if has('nvim')
 else
 	set nocursorline
 endif
+
+highlight CursorLineNr guifg=#BEB6B0
 
 " Comment Left on purpose. COC can be re-enabled when inside an unfamiliar
 " languages codebase for completion and LSP support
@@ -329,6 +449,11 @@ endif
 " """""""""""""""""""""""""
 " " COC Configuration end "
 " """""""""""""""""""""""""
+
+" """""""""""""""""""""""""
+" " COC Configuration end "
+" """""""""""""""""""""""""
+
 
 " Create helptags, suppress command output
 silent! helptags ALL
