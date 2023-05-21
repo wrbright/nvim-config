@@ -6,9 +6,9 @@
 "  ToDo: Re-reate vim specific ColorScheme                                   "
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
 
-" """""""""""""""""""""" "
-" Plugin Top Line Config "
-" """""""""""""""""""""" "
+" """""""""""""""""""""""" "
+"  Plugin Top Line Config  "
+" """""""""""""""""""""""" "
 
 if has('nvim')
 	" Lua Config Require (likely ~/.config/nvim/lua/init.lua)
@@ -24,9 +24,9 @@ endif
 "     return !col || getline('.')[col - 1]  =~# '\s'
 " endfunction
 
-" """""""""""""""""""""" "
-"   CMD Mode Remapping   "
-" """""""""""""""""""""" "
+" """""""""""""""""""" "
+"  CMD Mode Remapping  "
+" """""""""""""""""""" "
 
 " enable spellcheck
 command Spell set spell spelllang=en_us
@@ -51,9 +51,9 @@ command Q q
 command Qa qa
 command QA qa
 
-""""""""""""""""""""""""
-"   Plugin Remapping   "
-""""""""""""""""""""""""
+" """"""""""""""""""" "
+"   Plugin Remapping  "
+" """"""""""""""""""" "
 let g:mapleader = "\<Space>"
 
 "
@@ -67,9 +67,9 @@ vmap <C-/> gcgv
 nmap <C-_> gcc
 vmap <C-_> gcgv
 
-"""""""""""""""""""""""""
-"   General Remapping   "
-"""""""""""""""""""""""""
+" """"""""""""""""""" "
+"  General Remapping  "
+" """"""""""""""""""" "
 " Copy current line down to next line
 nnoremap <C-j> :copy .<CR>
 
@@ -168,9 +168,9 @@ inoremap <A-l> <right>
 inoremap <A-w> <C-right>
 inoremap <A-b> <C-left>
 
-" """"""""""""""""""""""""""" "
-"   Command Mode Remappings   "
-""""""""""""""""""""""""""""" "
+" """"""""""""""""""""""""" "
+"  Command Mode Remappings  "
+""""""""""""""""""""""""""" "
 
 " Vim movement in command mode
 cnoremap <A-k> <Up>
@@ -182,9 +182,9 @@ cnoremap <A-l> <Right>
 cnoremap <A-b> <C-Left>
 cnoremap <A-w> <C-Right>
 
-"""""""""""""""""""""""""""""""""""" "
-"   Program Specific Configuration   "
-"""""""""""""""""""""""""""""""""""" "
+" """""""""""""""""""""""""""""""" "
+"  Program Specific Configuration  "
+" """""""""""""""""""""""""""""""" "
 if has('nvim')
 	set signcolumn=yes 
 	set history=10000 " sets amount of commands, searches, and inserts to store in history
@@ -199,9 +199,9 @@ else
 
 endif
 
-""""""""""""""""""""""""""" "
+" """"""""""""""""""""""""" "
 "   General Configuration   "
-""""""""""""""""""""""""""" "
+" """"""""""""""""""""""""" "
 set shell=/bin/bash
 
 " enable 24bit color
@@ -264,9 +264,9 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 " disable auto text wrapping when in insert mode
 set textwidth=0
 
-""""""""""""""""""""""""
+" """""""""""""""""""" "
 " Plugin Configuration "
-""""""""""""""""""""""""
+" """""""""""""""""""" "
 
 " Enable plugins and load plugin for the detected file type.
 filetype plugin on
@@ -282,12 +282,17 @@ if has('nvim')
 	let g:mkdp_auto_close = 0
 endif
 
+" """"""""""""""""""""""""""""""""""""" "
+"  Vim Specific Statusline and Tabline  "
+" """"""""""""""""""""""""""""""""""""" "
+
 if !has('nvim')
-	" Tabline/Buffer line
+
+	" Tabline 
 	set showtabline=2
 	set tabline="%1T"
 
-	" Statusline
+	" Statusline. Mildly altered from:
 	" https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
 
 	let g:currentmode={
@@ -312,16 +317,6 @@ if !has('nvim')
 				\ 't'  : 'Terminal '
 				\}
 
-
-	highlight User1 cterm=None gui=None ctermfg=007 guifg=#ffffff
-	highlight User2 cterm=None gui=None ctermfg=008 guifg=#ffffff
-	highlight User3 cterm=None gui=None ctermfg=008 guifg=#ffffff
-	highlight User4 cterm=None gui=None ctermfg=008 guifg=#ffffff
-	highlight User5 cterm=None gui=None ctermfg=008 guifg=#ffffff
-	highlight User7 cterm=None gui=None ctermfg=008 guifg=#ffffff
-	highlight User8 cterm=None gui=None ctermfg=008 guifg=#ffffff
-	highlight User9 cterm=None gui=None ctermfg=007 guifg=#ffffff
-
 	" Automatically change the statusline color depending on mode
 	function! ChangeStatuslineColor()
 		if (mode() =~# '\v(n|no)')
@@ -337,12 +332,14 @@ if !has('nvim')
 		return ''
 	endfunction
 
-	" Find out current buffer's size and output it.
+	" Find out the size of the file loaded by the buffer and output it.
 	function! FileSize()
 		let bytes = getfsize(expand('%:p'))
+
 		if (bytes >= 1024)
 			let kbytes = bytes / 1024
 		endif
+
 		if (exists('kbytes') && kbytes >= 1000)
 			let mbytes = kbytes / 1000
 		endif
@@ -358,14 +355,17 @@ if !has('nvim')
 		else
 			return bytes . 'B '
 		endif
+
 	endfunction
 
 	function! ReadOnly()
+
 		if &readonly || !&modifiable
 			return ''
 		else
 			return ''
 		endif
+
 	endfunction
 
 	" function! GitInfo()
@@ -390,9 +390,10 @@ if !has('nvim')
 	set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
 	set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
 endif
-""""""""""""""""""""""""""
+
+" """"""""""""""""""""""" "
 "  Colour Configuration  "
-""""""""""""""""""""""""""
+" """"""""""""""""""""""" "
 
 if has('nvim') 
 	let g:gruvbox_material_transparent_background=1
@@ -408,9 +409,9 @@ highlight CursorLineNr guifg=#BEB6B0
 " Comment Left on purpose. COC can be re-enabled when inside an unfamiliar
 " languages codebase for completion and LSP support
 
-" """""""""""""""""""""
-" " COC Configuration "
-" """""""""""""""""""""
+" " """"""""""""""""""" "
+" "  COC Configuration  "
+" " """"""""""""""""""" "
 
 " let g:coc_global_extensions = ['coc-solargraph']
 
@@ -446,13 +447,13 @@ highlight CursorLineNr guifg=#BEB6B0
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
 
-" """""""""""""""""""""""""
-" " COC Configuration end "
-" """""""""""""""""""""""""
+" " """"""""""""""""""""""" "
+" "  COC Configuration end  "
+" " """"""""""""""""""""""" "
 
-" """""""""""""""""""""""""
-" " COC Configuration end "
-" """""""""""""""""""""""""
+" " """"""""""""""""""""""" "
+" "  COC Configuration end  "
+" " """"""""""""""""""""""" "
 
 
 " Create helptags, suppress command output
