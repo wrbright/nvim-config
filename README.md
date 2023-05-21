@@ -2,7 +2,7 @@
 
 "It's absolute trash but it's -my- absolute trash"
 
-NeoVim configured for general programming use. Usability comperable to and exceeding an IDE. Most configuration uses Lua, however base Vim settings and keybindings are set in init.vim. This is so I can use the file on servers using the command ``vim -Nu <(curl https://raw.githubusercontent.com/wrbright/nvim-config/init.vim)`` to source directly from this github repo
+NeoVim configured for general programming use. Usability comperable to and exceeding VSCode. Most configuration uses Lua, however base Vim settings and keybindings are set in init.vim. This is so I can use the file on servers using the command ``vim -Nu <(curl https://raw.githubusercontent.com/wrbright/nvim-config/master/init.vim)`` in bash to source directly from this github repo
 
 Lazy Loaded with Lazy.nvim, nvim-cmp for completion, LSP integrationg with lspconfig boilerplate, Dap integration, gruvbox colors with transparent background. Requires transparent terminal for transparency
 
