@@ -1,34 +1,34 @@
 return {
 	'akinsho/toggleterm.nvim',
 	config = function ()
-		require("toggleterm").setup()
+		require'toggleterm'.setup{}
 
-		local term = require("toggleterm.terminal").Terminal
+		local term = require'toggleterm.terminal'.Terminal
 
 		local docker_client = term:new {
-			cmd = "lazydocker",
+			cmd = 'lazydocker',
 			hidden = true,
-			direction = "float",
+			direction = 'float',
 			float_opts = {
-				border = "single",
+				border = 'single',
 			},
 		}
 
 		local ctop_client = term:new {
-			cmd = "ctop",
+			cmd = 'ctop',
 			hidden = true,
-			direction = "float",
+			direction = 'float',
 			float_opts = {
-				border = "single",
+				border = 'single',
 			},
 		}
 
 		local btop_client = term:new {
-			cmd = "btop",
+			cmd = 'btop',
 			hidden = true,
-			direction = "float",
+			direction = 'float',
 			float_opts = {
-				border = "single",
+				border = 'single',
 			},
 		}
 

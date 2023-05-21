@@ -1,11 +1,11 @@
 return {
-	"nvim-lualine/lualine.nvim",
+	'nvim-lualine/lualine.nvim',
 	config = function ()
 
-		local navic = require"nvim-navic"
+		local navic = require'nvim-navic'
 
-		require"lualine".setup {
-			theme = "gruvbox",
+		require'lualine'.setup {
+			theme = 'gruvbox',
 			sections = {
 				lualine_c = {
 					{ navic.get_location, cond = navic.is_available },

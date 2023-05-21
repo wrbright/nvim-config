@@ -1,23 +1,23 @@
 return {
-	"akinsho/bufferline.nvim",
+	'akinsho/bufferline.nvim',
 	opts = {
 		highlights = {
 			background = {
 				-- bg = '#141414',
 				-- fg = '#141414',
-				},
+			},
 		},
 		options = {
-			diagnostics = "nvim_lsp",
+			diagnostics = 'nvim_lsp',
 			offsets = {
 				{
-					filetype = "neo-tree",
-					text = "File Explorer",
-					text_align = "left",
+					filetype = 'NvimTree',
+					text = 'File Explorer',
+					text_align = 'left',
 					separator = true,
 				},
 			},
 		},
 	},
-	dependencies = "nvim-tree/nvim-web-devicons",
+	dependencies = 'nvim-tree/nvim-web-devicons',
 }

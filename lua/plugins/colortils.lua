@@ -1,9 +1,9 @@
 return {
-	"nvim-colortils/colortils.nvim",
+	'nvim-colortils/colortils.nvim',
 	opts = {
 		-- register to store color value
-		register = "c",
-		border = "single",
+		register = 'c',
+		border = 'single',
 	},
-	cmd="Colortils"
+	cmd='Colortils'
 }

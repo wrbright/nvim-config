@@ -9,12 +9,10 @@ return {
 	-- Text, Text Additions, and Text Formatting --
 	-----------------------------------------------
 
-	{'nvim-treesitter/playground', cmd='TSPlaygroundToggle'},
 	'honza/vim-snippets',
 	{'machakann/vim-sandwich', keys='s'},
 	{'vim-scripts/ReplaceWithRegister', keys='grr'},
 	'L3MON4D3/LuaSnip',
-	--CMP
 
 	----------------------
 	-- Additional Panes --
@@ -29,7 +27,12 @@ return {
 		keys='<C-n>',
 		config = function ()
 			require'ts-node-action'.setup {}
-			vim.keymap.set({ 'n' }, '<C-n>', require'ts-node-action'.node_action, { desc = 'Trigger Node Action' })
+			vim.keymap.set(
+				{ 'n' },
+				'<C-n>',
+				require'ts-node-action'.node_action,
+				{ desc = 'Trigger Node Action' }
+			)
 		end
 	},
 
@@ -52,6 +55,10 @@ return {
 		-- }
 	-- },
 	{
+    'jedrzejboczar/possession.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+	},
+	{
 		'tpope/vim-fugitive',
 		-- cond=function()
 		-- 	local isGit = vim.fn.system('isGit.sh') == 'true\n';
@@ -71,11 +78,17 @@ return {
 	'kevinhwang91/nvim-hlslens',
 	{'wesQ3/vim-windowswap', keys='<Leader>ww'},
 	'samodostal/image.nvim',
+
 	----------------
 	-- aesthetics --
 	----------------
-	{ 'SmiteshP/nvim-navic', requires='neovim/nvim-lspconfig', event = 'LspAttach',  },
 
+	{
+		'SmiteshP/nvim-navic',
+		requires='neovim/nvim-lspconfig',
+		event = 'LspAttach',
+	},
+	{ "Fildo7525/pretty_hover", event = "LspAttach", opts = {} },
 	'sainnhe/gruvbox-material',
 	{ 'onsails/lspkind.nvim', event = 'LspAttach' },
 	{ 'j-hui/fidget.nvim', event = 'LspAttach' },
