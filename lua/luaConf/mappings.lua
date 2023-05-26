@@ -72,6 +72,8 @@ vim.api.nvim_set_keymap('n', '<Leader>b', ':BufferLinePick<cr>', plugOpts);
 vim.api.nvim_set_keymap('n', '<Leader>l', ':BufferLineCycleNex<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>h', ':BufferLineCyclePrev<cr>', plugOpts)
 
+vim.api.nvim_set_keymap('n', '<Leader>o', ':Oil --float<CR>', plugOpts)
+
 vim.api.nvim_set_keymap('n', '<C-z>', ':Telescope live_grep<CR>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>rs', '<cmd>Telescope resume<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>m', '<cmd>Telescope marks<cr>', plugOpts)

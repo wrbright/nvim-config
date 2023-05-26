@@ -37,7 +37,8 @@ vim.api.nvim_create_autocmd('FileType', {
 		'qf',
 		'lspinfo',
 		'man',
-		'checkhealth'
+		'checkhealth',
+		'oil'
 	},
 	command = [[
 		nnoremap <buffer><silent> q :close<CR>

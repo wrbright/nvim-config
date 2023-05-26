@@ -196,7 +196,7 @@ else
 	set belloff " Should be default
 	set nocompatible " Don't pretend to be VI (Default in Neovim)
 	filetype on " detect current file type
-
+	set nocursorline
 endif
 
 " """"""""""""""""""""""""" "
@@ -230,8 +230,8 @@ set undofile undodir=~/.vim/undo-dir
 set fileencoding=utf-8
 
 " Tabs are shown 2 spaces wide
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+set softtabstop=4
 
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2
@@ -301,6 +301,7 @@ if !has('nvim')
 				\ 'v'  : 'V ',
 				\ 'V'  : 'V·Line ',
 				\ 'x22' : 'V·Block ',
+				\ '^V' : 'V·Block ',
 				\ 's'  : 'Select ',
 				\ 'S'  : 'S·Line ',
 				\ 'x19' : 'S·Block ',
@@ -320,13 +321,13 @@ if !has('nvim')
 	" Automatically change the statusline color depending on mode
 	function! ChangeStatuslineColor()
 		if (mode() =~# '\v(n|no)')
-			exe 'hi! StatusLine ctermfg=008 guifg=#ffffff gui=None cterm=None'
+			execute 'hi! StatusLine ctermfg=008 guifg=#000000 gui=None cterm=None'
 		elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-			exe 'hi! StatusLine ctermfg=005 guifg=#00ff00 gui=None cterm=None'
+			execute 'hi! StatusLine ctermfg=005 guifg=#007D00 gui=None cterm=None'
 		elseif (mode() ==# 'i')
-			exe 'hi! StatusLine ctermfg=004 guifg=#6CBCE8 gui=None cterm=None'
+			execute 'hi! StatusLine ctermfg=004 guifg=#3080AC gui=None cterm=None'
 		else
-			exe 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
+			execute 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
 		endif
 
 		return ''
@@ -396,12 +397,12 @@ endif
 " """"""""""""""""""""""" "
 
 if has('nvim') 
-	let g:gruvbox_material_transparent_background=1
-	autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-	colorscheme gruvbox-material
-	highlight clear EndOfBuffer
+  let g:gruvbox_material_transparent_background=1
+  colorscheme gruvbox-material
+  autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+  highlight clear EndOfBuffer
 else
-	set nocursorline
+  colorscheme sorbet
 endif
 
 highlight CursorLineNr guifg=#BEB6B0
