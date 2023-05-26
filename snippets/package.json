@@ -1,34 +1,34 @@
 {
-    "name": "Snippets In VSCode Style",
-    "version": "0.0.1",
-    "categories": ["Snippets"],
-    "contributes": {
-        "snippets": [
-            {
-                "language": "css",
-                "path": "./css.json"
-            },
-            {
-                "language": "javascript",
-                "path": "./javascript.json"
-            },
-            {
-                "language": "typescript",
-                "path": "./javascript.json"
-            },
-            {
-                "language": "typescriptreact",
-                "path": "./javascript.json"
-            },
-            {
-                "language": "javascriptreact",
-                "path": "./javascript.json"
-            },
-            {
-                "language": "java",
-                "path": "./java.json"
-            }
-        ]
-    }
+	"name": "Snippets In VSCode Style",
+	"version": "0.0.1",
+	"categories": ["Snippets"],
+	"contributes": {
+		"snippets": [
+			{
+				"language": "css",
+				"path": "./css.json"
+			},
+			{
+				"language": "javascript",
+				"path": "./javascript.json"
+			},
+			{
+				"language": "typescript",
+				"path": "./javascript.json"
+			},
+			{
+				"language": "typescriptreact",
+				"path": "./javascript.json"
+			},
+			{
+				"language": "javascriptreact",
+				"path": "./javascript.json"
+			},
+			{
+				"language": "java",
+				"path": "./java.json"
+			}
+		]
+	}
 }
 

@@ -1,7 +1,7 @@
 {
-    "css comment": {
-        "prefix" :  "\/\/",
-        "body": ["\/*${1:comment}*\/"],
-        "description": "css comment"
-    }
+	"css comment": {
+		"prefix" :  "\/\/",
+		"body": ["\/*${1:comment}*\/"],
+		"description": "css comment"
+	}
 }

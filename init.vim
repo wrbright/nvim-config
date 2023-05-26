@@ -11,8 +11,8 @@
 " """""""""""""""""""""""" "
 
 if has('nvim')
-	" Lua Config Require (likely ~/.config/nvim/lua/init.lua)
-	lua require'init'
+  " Lua Config Require (likely ~/.config/nvim/lua/init.lua)
+  lua require'init'
 endif
 
 " """"""""""""""""" "
@@ -186,17 +186,17 @@ cnoremap <A-w> <C-Right>
 "  Program Specific Configuration  "
 " """""""""""""""""""""""""""""""" "
 if has('nvim')
-	set signcolumn=yes 
-	set history=10000 " sets amount of commands, searches, and inserts to store in history
+  set signcolumn=yes 
+  set history=10000 " sets amount of commands, searches, and inserts to store in history
 else
-	set wildmenu " Enable auto completion menu after pressing TAB. 
-	set mouse=a  " enable mouse
-	set history=500 " sets amount of commands, searches, and inserts to store in history
-	set autoindent " Automatically indent
-	set belloff " Should be default
-	set nocompatible " Don't pretend to be VI (Default in Neovim)
-	filetype on " detect current file type
-	set nocursorline
+  set wildmenu " Enable auto completion menu after pressing TAB. 
+  set mouse=a  " enable mouse
+  set history=500 " sets amount of commands, searches, and inserts to store in history
+  set autoindent " Automatically indent
+  set belloff " Should be default
+  set nocompatible " Don't pretend to be VI (Default in Neovim)
+  filetype on " detect current file type
+  set nocursorline
 endif
 
 " """"""""""""""""""""""""" "
@@ -275,11 +275,11 @@ filetype plugin on
 filetype indent on
 
 if has('nvim')
-	" Allow for Markdown command to be run from anywhere (useless without Markdown Plugin)
-	let g:mkdp_command_for_global = 1
+  " Allow for Markdown command to be run from anywhere (useless without Markdown Plugin)
+  let g:mkdp_command_for_global = 1
 
-	" Do not auto close the markdown preview browser tab on switching buffer
-	let g:mkdp_auto_close = 0
+  " Do not auto close the markdown preview browser tab on switching buffer
+  let g:mkdp_auto_close = 0
 endif
 
 " """"""""""""""""""""""""""""""""""""" "
@@ -288,108 +288,108 @@ endif
 
 if !has('nvim')
 
-	" Tabline 
-	set showtabline=2
-	set tabline="%1T"
+  " Tabline 
+  set showtabline=2
+  set tabline="%1T"
 
-	" Statusline. Mildly altered from:
-	" https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
+  " Statusline. Mildly altered from:
+  " https://github.com/Greduan/dotfiles/blob/76e16dd8a04501db29989824af512c453550591d/vim/after/plugin/statusline.vim
 
-	let g:currentmode={
-				\ 'n'  : 'N ',
-				\ 'no' : 'N·Operator Pending ',
-				\ 'v'  : 'V ',
-				\ 'V'  : 'V·Line ',
-				\ 'x22' : 'V·Block ',
-				\ '^V' : 'V·Block ',
-				\ 's'  : 'Select ',
-				\ 'S'  : 'S·Line ',
-				\ 'x19' : 'S·Block ',
-				\ 'i'  : 'I ',
-				\ 'R'  : 'R ',
-				\ 'Rv' : 'V·Replace ',
-				\ 'c'  : 'Command ',
-				\ 'cv' : 'Vim Ex ',
-				\ 'ce' : 'Ex ',
-				\ 'r'  : 'Prompt ',
-				\ 'rm' : 'More ',
-				\ 'r?' : 'Confirm ',
-				\ '!'  : 'Shell ',
-				\ 't'  : 'Terminal '
-				\}
+  let g:currentmode={
+		\ 'n'  : 'N ',
+		\ 'no' : 'N·Operator Pending ',
+		\ 'v'  : 'V ',
+		\ 'V'  : 'V·Line ',
+		\ 'x22' : 'V·Block ',
+		\ '^V' : 'V·Block ',
+		\ 's'  : 'Select ',
+		\ 'S'  : 'S·Line ',
+		\ 'x19' : 'S·Block ',
+		\ 'i'  : 'I ',
+		\ 'R'  : 'R ',
+		\ 'Rv' : 'V·Replace ',
+		\ 'c'  : 'Command ',
+		\ 'cv' : 'Vim Ex ',
+		\ 'ce' : 'Ex ',
+		\ 'r'  : 'Prompt ',
+		\ 'rm' : 'More ',
+		\ 'r?' : 'Confirm ',
+		\ '!'  : 'Shell ',
+		\ 't'  : 'Terminal '
+		\}
 
-	" Automatically change the statusline color depending on mode
-	function! ChangeStatuslineColor()
-		if (mode() =~# '\v(n|no)')
-			execute 'hi! StatusLine ctermfg=008 guifg=#000000 gui=None cterm=None'
-		elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-			execute 'hi! StatusLine ctermfg=005 guifg=#007D00 gui=None cterm=None'
-		elseif (mode() ==# 'i')
-			execute 'hi! StatusLine ctermfg=004 guifg=#3080AC gui=None cterm=None'
-		else
-			execute 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
-		endif
+  " Automatically change the statusline color depending on mode
+  function! ChangeStatuslineColor()
+	if (mode() =~# '\v(n|no)')
+	  execute 'hi! StatusLine ctermfg=008 guifg=#000000 gui=None cterm=None'
+	elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
+	  execute 'hi! StatusLine ctermfg=005 guifg=#007D00 gui=None cterm=None'
+	elseif (mode() ==# 'i')
+	  execute 'hi! StatusLine ctermfg=004 guifg=#3080AC gui=None cterm=None'
+	else
+	  execute 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
+	endif
 
-		return ''
-	endfunction
+	return ''
+  endfunction
 
-	" Find out the size of the file loaded by the buffer and output it.
-	function! FileSize()
-		let bytes = getfsize(expand('%:p'))
+  " Find out the size of the file loaded by the buffer and output it.
+  function! FileSize()
+	let bytes = getfsize(expand('%:p'))
 
-		if (bytes >= 1024)
-			let kbytes = bytes / 1024
-		endif
+	if (bytes >= 1024)
+	  let kbytes = bytes / 1024
+	endif
 
-		if (exists('kbytes') && kbytes >= 1000)
-			let mbytes = kbytes / 1000
-		endif
+	if (exists('kbytes') && kbytes >= 1000)
+	  let mbytes = kbytes / 1000
+	endif
 
-		if bytes <= 0
-			return '0'
-		endif
+	if bytes <= 0
+	  return '0'
+	endif
 
-		if (exists('mbytes'))
-			return mbytes . 'MB '
-		elseif (exists('kbytes'))
-			return kbytes . 'KB '
-		else
-			return bytes . 'B '
-		endif
+	if (exists('mbytes'))
+	  return mbytes . 'MB '
+	elseif (exists('kbytes'))
+	  return kbytes . 'KB '
+	else
+	  return bytes . 'B '
+	endif
 
-	endfunction
+  endfunction
 
-	function! ReadOnly()
+  function! ReadOnly()
 
-		if &readonly || !&modifiable
-			return ''
-		else
-			return ''
-		endif
+	if &readonly || !&modifiable
+	  return ''
+	else
+	  return ''
+	endif
 
-	endfunction
+  endfunction
 
-	" function! GitInfo()
-	" 	let git = fugitive#head()
-	" 	if git != ''
-	" 		return ' '.fugitive#head()
-	" 	else
-	" 		return ''
-	" 	endfunction
+  " function! GitInfo()
+  " 	let git = fugitive#head()
+  " 	if git != ''
+  " 		return ' '.fugitive#head()
+  " 	else
+  " 		return ''
+  " 	endfunction
 
-	" http://stackoverflow.com/a/10416234/213124
-	set laststatus=2
-	set statusline=
-	set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
-	set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
-	set statusline+=%8*\ [%n]                                " buffernr
-	set statusline+=%8*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
-	set statusline+=%*
-	set statusline+=%9*\ %=                                  " Space
-	set statusline+=%8*\ %y\                                 " FileType
-	set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
-	set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
-	set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
+  " http://stackoverflow.com/a/10416234/213124
+  set laststatus=2
+  set statusline=
+  set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
+  set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
+  set statusline+=%8*\ [%n]                                " buffernr
+  set statusline+=%8*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
+  set statusline+=%*
+  set statusline+=%9*\ %=                                  " Space
+  set statusline+=%8*\ %y\                                 " FileType
+  set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
+  set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
+  set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
 endif
 
 " """"""""""""""""""""""" "

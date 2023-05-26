@@ -4,14 +4,14 @@ vim.g.loaded_netrwPlugin = 1
 
 local lazypath = vim.fn.stdpath'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system {
-		'git',
-		'clone',
-		'--filter=blob:none',
-		'https://github.com/folke/lazy.nvim.git',
-		'--branch=stable', -- latest stable release
-		lazypath,
-	}
+  vim.fn.system {
+	'git',
+	'clone',
+	'--filter=blob:none',
+	'https://github.com/folke/lazy.nvim.git',
+	'--branch=stable', -- latest stable release
+	lazypath,
+  }
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -31,17 +31,17 @@ require'luaConf/mappings' -- general plugin remappings
 --------------------------------------------------------------------
 
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = {
-		'help',
-		'startuptime',
-		'qf',
-		'lspinfo',
-		'man',
-		'checkhealth',
-		'oil'
-	},
-	command = [[
+  pattern = {
+	'help',
+	'startuptime',
+	'qf',
+	'lspinfo',
+	'man',
+	'checkhealth',
+	'oil'
+  },
+  command = [[
 		nnoremap <buffer><silent> q :close<CR>
 		set nobuflisted
-	]],
+  ]],
 })
