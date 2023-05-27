@@ -230,8 +230,8 @@ set undofile undodir=~/.vim/undo-dir
 set fileencoding=utf-8
 
 " Tabs are shown 2 spaces wide
-set tabstop=4
-set softtabstop=4
+set tabstop=2
+set softtabstop=2
 
 " when indenting with '>', use 2 spaces width
 set shiftwidth=2

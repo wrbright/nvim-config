@@ -67,12 +67,12 @@ return {
 				winbar = true,
 				statusline = false,
 			},
-      window = {
-        mappings = {
-          ['P'] = { 'toggle_preview', config = { use_float = false } },
-		  ['o'] = {command = open_in_default}
-        }
-      },
+			window = {
+				mappings = {
+					['P'] = { 'toggle_preview', config = { use_float = false } },
+					['o'] = {command = open_in_default}
+				}
+			},
 			filesystem = {
 				follow_current_file = true,
 				commands = {
