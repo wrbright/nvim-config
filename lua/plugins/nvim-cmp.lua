@@ -1,15 +1,13 @@
 return {
 	'hrsh7th/nvim-cmp',
 	-- Not Actually Dependancies, do not do this
+	events = 'InsertEnter',
+	-- keys = ':',
 	dependencies = {
 		'hrsh7th/cmp-cmdline',
 		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-path',
-		'hrsh7th/cmp-nvim-lsp-signature-help',
-		'saadparwaiz1/cmp_luasnip',
-		'rcarriga/cmp-dap',
 		'hrsh7th/cmp-nvim-lsp',
-		'Saecki/crates.nvim',
 		'David-Kunz/cmp-npm',
 	},
 	config = function ()
@@ -23,7 +21,6 @@ return {
 		--------------------------------------------------------------------
 
 		require'cmp-npm'.setup {}
-		require'crates'.setup {}
 
 		local cmp = require'cmp'
 		local lspkind = require'lspkind'

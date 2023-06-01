@@ -36,13 +36,13 @@ return {
 				if nearest then
 					local cnt = #posList
 					if indicator ~= '' then
-						text = ('%s - [%d/%d]'):format(indicator, idx, cnt)
+						text = ('[%s - %d/%d]'):format(indicator, idx, cnt)
 					else
 						text = ('[%d/%d]'):format(idx, cnt)
 					end
 					chunks = { { ' ', 'Ignore' }, { text, 'HlSearchLensNear' } }
 				else
-					text = ('%s [%d/%d]'):format(indicator, idx, #posList)
+					text = ('[%s - %d/%d]'):format(indicator, idx, #posList)
 					chunks = { { ' ', 'Ignore' }, { text, 'HlSearchLens' } }
 				end
 				render.setVirt(0, lnum - 1, col - 1, chunks, nearest)

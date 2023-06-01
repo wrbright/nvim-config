@@ -170,7 +170,6 @@ return {
 	dependencies = {
 		"theHamsta/nvim-dap-virtual-text",
 		"rcarriga/nvim-dap-ui",
-		"kdheepak/lazygit.nvim",
 		"mxsdev/nvim-dap-vscode-js",
 	},
 }

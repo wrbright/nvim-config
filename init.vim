@@ -318,78 +318,78 @@ if !has('nvim')
 		\ 't'  : 'Terminal '
 		\}
 
-  " Automatically change the statusline color depending on mode
-  function! ChangeStatuslineColor()
-	if (mode() =~# '\v(n|no)')
-	  execute 'hi! StatusLine ctermfg=008 guifg=#000000 gui=None cterm=None'
-	elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
-	  execute 'hi! StatusLine ctermfg=005 guifg=#007D00 gui=None cterm=None'
-	elseif (mode() ==# 'i')
-	  execute 'hi! StatusLine ctermfg=004 guifg=#3080AC gui=None cterm=None'
-	else
-	  execute 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
-	endif
+	" Automatically change the statusline color depending on mode
+	function! ChangeStatuslineColor()
+		if (mode() =~# '\v(n|no)')
+			execute 'hi! StatusLine ctermfg=008 guifg=#000000 gui=None cterm=None'
+		elseif (mode() =~# '\v(v|V)' || g:currentmode[mode()] ==# 'V·Block' || get(g:currentmode, mode(), '') ==# 't')
+			execute 'hi! StatusLine ctermfg=005 guifg=#007D00 gui=None cterm=None'
+		elseif (mode() ==# 'i')
+			execute 'hi! StatusLine ctermfg=004 guifg=#3080AC gui=None cterm=None'
+		else
+			execute 'hi! StatusLine ctermfg=006 guifg=orange gui=None cterm=None'
+		endif
 
-	return ''
-  endfunction
+		return ''
+	endfunction
 
-  " Find out the size of the file loaded by the buffer and output it.
-  function! FileSize()
-	let bytes = getfsize(expand('%:p'))
+	" Find out the size of the file loaded by the buffer and output it.
+	function! FileSize()
+		let bytes = getfsize(expand('%:p'))
 
-	if (bytes >= 1024)
-	  let kbytes = bytes / 1024
-	endif
+		if (bytes >= 1024)
+			let kbytes = bytes / 1024
+		endif
 
-	if (exists('kbytes') && kbytes >= 1000)
-	  let mbytes = kbytes / 1000
-	endif
+		if (exists('kbytes') && kbytes >= 1000)
+			let mbytes = kbytes / 1000
+		endif
 
-	if bytes <= 0
-	  return '0'
-	endif
+		if bytes <= 0
+			return '0'
+		endif
 
-	if (exists('mbytes'))
-	  return mbytes . 'MB '
-	elseif (exists('kbytes'))
-	  return kbytes . 'KB '
-	else
-	  return bytes . 'B '
-	endif
+		if (exists('mbytes'))
+			return mbytes . 'MB '
+		elseif (exists('kbytes'))
+			return kbytes . 'KB '
+		else
+			return bytes . 'B '
+		endif
 
-  endfunction
+	endfunction
 
-  function! ReadOnly()
+	function! ReadOnly()
 
-	if &readonly || !&modifiable
-	  return ''
-	else
-	  return ''
-	endif
+		if &readonly || !&modifiable
+			return ''
+		else
+			return ''
+		endif
 
-  endfunction
+	endfunction
 
-  " function! GitInfo()
-  " 	let git = fugitive#head()
-  " 	if git != ''
-  " 		return ' '.fugitive#head()
-  " 	else
-  " 		return ''
-  " 	endfunction
+	" function! GitInfo()
+	" 	let git = fugitive#head()
+	" 	if git != ''
+	" 		return ' '.fugitive#head()
+	" 	else
+	" 		return ''
+	" 	endfunction
 
-  " http://stackoverflow.com/a/10416234/213124
-  set laststatus=2
-  set statusline=
-  set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
-  set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
-  set statusline+=%8*\ [%n]                                " buffernr
-  set statusline+=%8*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
-  set statusline+=%*
-  set statusline+=%9*\ %=                                  " Space
-  set statusline+=%8*\ %y\                                 " FileType
-  set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
-  set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
-  set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
+	" http://stackoverflow.com/a/10416234/213124
+	set laststatus=2
+	set statusline=
+	set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
+	set statusline+=%0*\ %{toupper(g:currentmode[mode()])}   " Current mode
+	set statusline+=%8*\ [%n]                                " buffernr
+	set statusline+=%8*\ %<%F\ %{ReadOnly()}\ %m\ %w\        " File+path
+	set statusline+=%*
+	set statusline+=%9*\ %=                                  " Space
+	set statusline+=%8*\ %y\                                 " FileType
+	set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
+	set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
+	set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
 endif
 
 " """"""""""""""""""""""" "
@@ -397,12 +397,12 @@ endif
 " """"""""""""""""""""""" "
 
 if has('nvim') 
-  let g:gruvbox_material_transparent_background=1
-  colorscheme gruvbox-material
-  autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-  highlight clear EndOfBuffer
+	let g:gruvbox_material_transparent_background=1
+	colorscheme gruvbox-material
+	autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
+	highlight clear EndOfBuffer
 else
-  colorscheme sorbet
+	colorscheme sorbet
 endif
 
 highlight CursorLineNr guifg=#BEB6B0

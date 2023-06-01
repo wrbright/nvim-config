@@ -15,38 +15,30 @@ return {
 	{'vim-scripts/ReplaceWithRegister', keys='grr'},
 	'L3MON4D3/LuaSnip',
 
+	-- Nvim cmp add-ins
+
+	{'hrsh7th/cmp-nvim-lsp-signature-help', event='LspAttach'},
+	{
+		'saecki/crates.nvim',
+		event = { "BufRead Cargo.toml" },
+		config = function()
+			require'crates'.setup {}
+		end
+	},
+	{ 'rcarriga/cmp-dap', keys = '<Leader>dd' },
+	{ 'saadparwaiz1/cmp_luasnip', event = 'InsertEnter',  },
 	----------------------
 	-- Additional Panes --
 	----------------------
 
+	"kdheepak/lazygit.nvim",
 	{'nvim-treesitter/playground', cmd='TSPlaygroundToggle'},
 	{'kevinhwang91/rnvimr', cmd='RnvimrToggle'},
 	{'mbbill/undotree', cmd='UndotreeShow'},
 	{'preservim/tagbar', keys='<F1>', cmd='TagbarToggle'},
-	{
-		'CKolkey/ts-node-action',
-		keys='<C-n>',
-		config = function ()
-			require'ts-node-action'.setup {}
-			vim.keymap.set(
-				{ 'n' },
-				'<C-n>',
-				require'ts-node-action'.node_action,
-				{ desc = 'Trigger Node Action' }
-			)
-		end
-	},
 
 	--Telescope
-	{
-		'nvim-telescope/telescope.nvim',
-		-- cmd='Telescope',
-		lazy = false,
-		-- init= function ()
-		-- 	require'telescope'.load_extension('project');
-		-- end
-
-	},
+	{ 'nvim-telescope/telescope.nvim', lazy = false, tag = '0.1.1',  },
 	-----------------------------
 	-- Alternate Functionality --
 	-----------------------------
@@ -56,12 +48,13 @@ return {
 	-- auto_display = true
 	-- }
 	-- },
-	{
-		'jedrzejboczar/possession.nvim',
-		requires = { 'nvim-lua/plenary.nvim' },
-	},
+	-- {
+	-- 	'jedrzejboczar/possession.nvim',
+	-- 	requires = { 'nvim-lua/plenary.nvim' },
+	-- },
 	{
 		'tpope/vim-fugitive',
+		event = 'BufEnter',
 		-- cond=function()
 		-- 	local isGit = vim.fn.system('isGit.sh') == 'true\n';
 		-- 	return isGit;
@@ -72,14 +65,15 @@ return {
 	{
 		'iamcco/markdown-preview.nvim',
 		build = 'cd app && yarn install',
-		cmd='MarkdownPreview',
+		ft = 'markdown',
+		-- cmd='MarkdownPreview',
 		init = function ()
 			vim.g.mkdp_filetypes = { 'markdown' }
 		end,
 	},
 	'kevinhwang91/nvim-hlslens',
 	{'wesQ3/vim-windowswap', keys='<Leader>ww'},
-	'samodostal/image.nvim',
+	-- 'samodostal/image.nvim',
 
 	----------------
 	-- aesthetics --
