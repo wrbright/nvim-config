@@ -39,67 +39,73 @@ Lazy Loaded with Lazy.nvim, nvim-cmp for completion, LSP integrationg with lspco
 
 ## Plugins (lazy output)
 
+Loaded: Plugins loaded by default when entering a directory.
+
+Unloaded: Plugins not loaded until an event fires
 ```
-  Total: 58 plugins
-  
-  Loaded (45)
-    ● LuaSnip 3.96ms   nvim-cmp
-    ● bufferline.nvim 4.06ms  start
+  Total: 60 plugins
+
+  Loaded (38)
+    ● LuaSnip 4.06ms   nvim-cmp
+    ● bufferline.nvim 3.33ms  start
     ● cmp-buffer 0.14ms   nvim-cmp
-    ● cmp-cmdline 0.19ms   nvim-cmp
-    ● cmp-dap 0.21ms   nvim-cmp
-    ● cmp-npm 0.21ms   nvim-cmp
-    ● cmp-nvim-lsp 0.19ms   nvim-cmp
-    ● cmp-nvim-lsp-signature-help 0.19ms   nvim-cmp
-    ● cmp-path 0.21ms   nvim-cmp
-    ● cmp_luasnip 0.19ms   nvim-cmp
-    ● crates.nvim 0.5ms   nvim-cmp
-    ● fidget.nvim 0.1ms   nvim-lspconfig
-    ● gitsigns.nvim 9.75ms  start
+    ● cmp-cmdline 0.15ms   nvim-cmp
+    ● cmp-npm 0.19ms   nvim-cmp
+    ● cmp-nvim-lsp 0.14ms   nvim-cmp
+    ● cmp-path 0.15ms   nvim-cmp
+    ● fidget.nvim 0.05ms   nvim-lspconfig
+    ● gitsigns.nvim 0.83ms   nvim-scrollbar
     ● gruvbox-material 0.06ms  start
-    ● image.nvim 0.06ms  start
-    ● indent-blankline.nvim 2.07ms  start
-    ● lazy.nvim 7.47ms   init.lua
-    ● lazygit.nvim 0.7ms   nvim-dap
-    ● lspkind.nvim 0.13ms   nvim-cmp
-    ● lualine.nvim 13.05ms  start
-    ● neo-tree.nvim 19.81ms  start
-    ● nui.nvim 0.45ms   neo-tree.nvim
-    ● null-ls.nvim 0.25ms   nvim-lspconfig
-    ● nvim-autopairs 1.59ms  start
-    ● nvim-cmp 22.75ms  start
-    ● nvim-colorizer.lua 3.24ms  BufEnter
-    ● nvim-dap 9.78ms   cmp-dap
-    ● nvim-dap-ui 0.31ms   nvim-dap
-    ● nvim-dap-virtual-text 0.38ms   nvim-dap
-    ● nvim-dap-vscode-js 0.31ms   nvim-dap
-    ● nvim-hlslens 0.52ms  start
-    ● nvim-jdtls 0.46ms   nvim-lspconfig
-    ● nvim-lspconfig 13.48ms  start
-    ● nvim-navic 0.09ms   lualine.nvim
-    ● nvim-scrollbar 4.95ms  start
-    ● nvim-treesitter 10.71ms  start
-    ● nvim-treesitter-refactor 3.88ms   nvim-treesitter
-    ● nvim-treesitter-textobjects 1.92ms   nvim-treesitter
-    ● nvim-ts-autotag 1.22ms   nvim-treesitter
-    ● nvim-ts-rainbow 0.75ms   nvim-treesitter
-    ● nvim-web-devicons 0.42ms   bufferline.nvim
-    ● plenary.nvim 4.6ms  start
-    ● toggleterm.nvim 1.7ms  start
-    ● vim-fugitive 1.81ms  start
-    ● vim-snippets 0.38ms  start
-  
-  Not Loaded (13)
+    ● indent-blankline.nvim 0.89ms  start
+    ● lazy.nvim 4.33ms   init.lua
+    ● lazygit.nvim 0.29ms  start
+    ● lspkind.nvim 0.11ms   nvim-cmp
+    ● lualine.nvim 9.12ms  start
+    ● null-ls.nvim 0.22ms   nvim-lspconfig
+    ● nvim-cmp 15.52ms  start
+    ● nvim-colorizer.lua 1.29ms  BufEnter
+    ● nvim-hlslens 0.14ms   nvim-scrollbar
+    ● nvim-jdtls 0.41ms   nvim-lspconfig
+    ● nvim-lspconfig 7.71ms  start
+    ● nvim-navic 0.06ms   lualine.nvim
+    ● nvim-scrollbar 4.01ms  start
+    ● nvim-tree.lua 6.94ms  start
+    ● nvim-treesitter 5.16ms  start
+    ● nvim-treesitter-refactor 1.52ms   nvim-treesitter
+    ● nvim-treesitter-textobjects 0.84ms   nvim-treesitter
+    ● nvim-ts-autotag 0.46ms   nvim-treesitter
+    ● nvim-ts-rainbow 0.38ms   nvim-treesitter
+    ● nvim-web-devicons 0.28ms   bufferline.nvim
+    ● oil.nvim 2.79ms  start
+    ● plenary.nvim 0.18ms   nvim-cmp
+    ● possession.nvim 1.44ms  start
+    ● telescope.nvim 0.29ms  start
+    ● toggleterm.nvim 1ms  start
+    ● vim-fugitive 1.26ms  BufEnter
+    ● vim-snippets 0.32ms  start
+    ● yayb 0.18ms  start
+
+  Not Loaded (22)
     ○ Comment.nvim   gc
     ○ ReplaceWithRegister   grr
+    ○ cmp-dap   <Leader>dd
+    ○ cmp-nvim-lsp-signature-help  LspAttach
+    ○ cmp_luasnip  InsertEnter
     ○ colortils.nvim   Colortils
-    ○ markdown-preview.nvim   MarkdownPreview
+    ○ crates.nvim  BufRead Cargo.toml
+    ○ markdown-preview.nvim   markdown
+    ○ nvim-autopairs  InsertEnter
+    ○ nvim-dap   <Leader>dd
+    ○ nvim-dap-ui   nvim-dap
+    ○ nvim-dap-virtual-text   nvim-dap
+    ○ nvim-dap-vscode-js   nvim-dap
     ○ playground   TSPlaygroundToggle
+    ○ pretty_hover  LspAttach
     ○ rnvimr   RnvimrToggle
     ○ suda.vim   SudaWrite
     ○ tagbar   TagbarToggle   <F1>
-    ○ telescope.nvim   Telescope
     ○ ts-node-action   <C-n>
     ○ undotree   UndotreeShow
     ○ vim-sandwich   s
     ○ vim-windowswap   <Leader>ww
+```
