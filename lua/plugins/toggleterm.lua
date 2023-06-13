@@ -32,6 +32,14 @@ return {
 			},
 		}
 
+		local elinks_client = term:new {
+			cmd = 'elinks',
+			hidden = true,
+			direction = 'float',
+			float_opts = {
+				border = 'single',
+			},
+		}
 
 		vim.api.nvim_create_user_command('LazyDocker',
 			function ()
@@ -46,6 +54,16 @@ return {
 		vim.api.nvim_create_user_command('Ctop',
 			function ()
 				ctop_client:toggle()
+			end, {}
+		)
+		vim.api.nvim_create_user_command('Elinks',
+			function ()
+				elinks_client:toggle()
+			end, {}
+		)
+		vim.api.nvim_create_user_command('Elinks',
+			function ()
+				elinks_client:toggle()
 			end, {}
 		)
 	end
