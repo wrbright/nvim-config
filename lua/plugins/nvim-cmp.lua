@@ -26,6 +26,10 @@ return {
 		local lspkind = require'lspkind'
 		local luasnip = require'luasnip'
 
+		luasnip.setup {
+			region_check_events = 'InsertEnter',
+		}
+
 		--------------------------------------------------------------------
 		----------------------------- Nvim CMP  ----------------------------
 		--------------------------------------------------------------------
@@ -38,7 +42,7 @@ return {
 		cmp.setup {
 			snippet = {
 				expand = function(args)
-					require('luasnip').lsp_expand(args.body)
+					luasnip.lsp_expand(args.body)
 				end,
 			},
 			window = {
@@ -108,11 +112,30 @@ return {
 			},
 		}
 
-		require'cmp'.setup.filetype({ 'dap-repl', 'dapui_watches', 'dapui_hover' }, {
-			sources = {
-				{ name = 'dap' },
+		require'cmp'.setup.filetype(
+			{
+				'dap-repl',
+				'dapui_watches',
+				'dapui_hover'
 			},
-		})
+			{
+				sources = {
+					{ name = 'dap' },
+				},
+			}
+		)
+
+		-- vim.api.nvim_create_autocmd('ModeChanged', {
+		-- 	pattern = '*',
+		-- 	callback = function()
+		-- 		if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+		-- 				and luasnip.session.current_nodes[vim.api.nvim_get_current_buf()]
+		-- 				and not luasnip.session.jump_active
+		-- 		then
+		-- 			luasnip.unlink_current()
+		-- 		end
+		-- 	end
+		-- })
 
 		require'luasnip.loaders.from_snipmate'.lazy_load {}
 		require'luasnip.loaders.from_vscode'.lazy_load { paths = { '~/.config/nvim/snippets/' } }
@@ -126,11 +149,6 @@ return {
 		--     }
 		-- }
 
-		luasnip.config.set_config {
-			history = false,
-			updateevents = 'TextChanged, TextChangedI',
-		}
-
 		-- Set configuration for specific filetype.
 		cmp.setup.filetype('gitcommit', {
 			sources = cmp.config.sources({
@@ -141,21 +159,17 @@ return {
 		})
 
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-		cmp.setup.cmdline({ '/', '?' }, {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = 'buffer' },
-			},
-		})
+		cmp.setup.cmdline(
+			{ ' / ', '?' },
+			{ mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'buffer' },  },  }
+		)
 
 		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 		cmp.setup.cmdline(':', {
 			mapping = cmp.mapping.preset.cmdline(),
 			sources = cmp.config.sources({
 				{ name = 'path' },
-				}, {
-					{ name = 'cmdline' },
-			}),
+			}, { { name = 'cmdline' }, }),
 		})
 
 	end

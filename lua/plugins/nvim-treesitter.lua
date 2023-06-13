@@ -18,7 +18,7 @@ return {
 				keymaps = {
 					init_selection = '<A-cr>',
 					node_incremental = '<A-cr>',
-					scope_incremental = 'gts',
+					scope_incremental = 'gti',
 					node_decremental = 'gtd',
 				},
 			},
@@ -26,9 +26,9 @@ return {
 				navigation = {
 					enable = true,
 					keymaps = {
-						-- goto_definition = 'gnd',
-						-- list_definitions = 'gnD',
-						-- list_definitions_toc = 'gO',
+						goto_definition = 'gnd',
+						list_definitions = 'gnD',
+						list_definitions_toc = 'gO',
 						goto_next_usage = '<a-*>',
 						goto_previous_usage = '<a-#>',
 					},
@@ -36,7 +36,7 @@ return {
 				smart_rename = {
 					enable = true,
 					keymaps = {
-						smart_rename = '<space>grr',
+						smart_rename = '<space>grn',
 					},
 				},
 			},

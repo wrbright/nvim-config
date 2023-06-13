@@ -6,6 +6,18 @@ return {
 
 		require'lualine'.setup {
 			theme = 'gruvbox',
+			options = {
+				ignore_focus = { -- lua print(vim.bo.filetype) to print filetype
+					'dapui_watches',
+					'dapui_stacks',
+					'dapui_breakpoints',
+					'dapui_scopes',
+					'dap-repl',
+					'dapui_console',
+					'NvimTree',
+					'neo-tree',
+				}
+			},
 			sections = {
 				lualine_c = {
 					{ navic.get_location, cond = navic.is_available },
@@ -14,3 +26,4 @@ return {
 		}
 	end
 }
+
