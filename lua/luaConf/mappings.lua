@@ -51,9 +51,9 @@ local plugOpts = { noremap = true, silent = true }
 -- Does not work
 vim.api.nvim_set_keymap('n', '<C-Bslash>', 'gcc', plugOpts)
 
--- vim.api.nvim_set_keymap('n', '<C-t>', ':NeoTreeShowToggle<CR>', plugOpts)
--- vim.api.nvim_set_keymap('n', '<Leader>t', ':NeoTreeFloatToggle<CR>', plugOpts)
-vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<C-t>', ':NeoTreeShowToggle<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<Leader>t', ':NeoTreeFloatToggle<CR>', plugOpts)
+-- vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', plugOpts)
 
 vim.api.nvim_set_keymap('n', '<Leader>rr', ':RnvimrToggle<CR>', plugOpts)
 
@@ -64,8 +64,10 @@ vim.api.nvim_set_keymap('n', '<F5>', ':lua require\'dapui\'.toggle()<cr>', plugO
 vim.api.nvim_set_keymap('n', '<Leader>gN', ':Gitsigns prev_hunk<CR>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>gn', ':Gitsigns next_hunk<CR>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>g', ':Gitsigns preview_hunk<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<Leader>gh', ':Gitsigns preview_hunk<CR>', plugOpts)
 
 vim.api.nvim_set_keymap('n', '<Leader>xx', ':BufferLinePickClose<cr>', plugOpts)
+vim.api.nvim_set_keymap('n', '<A-x>', ':BufferLinePickClose<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>xl', ':BufferLineCloseRight<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>xh', ':BufferLineCloseLeft<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>b', ':BufferLinePick<cr>', plugOpts);

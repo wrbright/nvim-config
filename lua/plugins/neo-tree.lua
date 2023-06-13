@@ -70,7 +70,8 @@ return {
 			window = {
 				mappings = {
 					['P'] = { 'toggle_preview', config = { use_float = false } },
-					['o'] = {command = open_in_default}
+					['o'] = {command = open_in_default},
+					['/'] = {}
 				}
 			},
 			filesystem = {
