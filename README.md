@@ -22,8 +22,11 @@ Lazy Loaded with Lazy.nvim, nvim-cmp for completion, LSP integrationg with lspco
 ![image](https://user-images.githubusercontent.com/55282244/227053398-78597a9e-19e4-46b2-8c7b-dd749e41f9ef.png)
 
 ### ToggleTerm + extras
+#### Lazy Git
 ![image](https://user-images.githubusercontent.com/55282244/227053539-29a461a2-ae71-4e9d-9ae8-b5038109fe7b.png)
+#### Ranger
 ![image](https://user-images.githubusercontent.com/55282244/227054369-c7d07e12-73a8-4b3d-8b01-660042b14070.png)
+#### Lazy Docker
 ![image](https://user-images.githubusercontent.com/55282244/231551059-05dbf841-b19f-4c7a-b7c0-eba8ccb4f6f0.png)
 
 
