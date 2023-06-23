@@ -5,6 +5,7 @@
 ---------------------------
 -- All in one place, for ease of use. Will not be moved
 --------------------
+
 local lspOpts = { noremap = true, silent = true }
 
 -- Remapping search to hlslens search functions in order to highlight in the scrollbar
@@ -28,28 +29,8 @@ vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]]
 
 -- vim.api.nvim_set_keymap('n', '<Leader>l', '<Cmd>noh<CR>', kopts)
 
---[[
-Auto move mappings over from vim file.
-New (must include newline): "zxdw"cdf "vd$dd`F :copy .
-f'"zp;;"cpx;"vp`G
-old (requires personal remappings): "zxdw"cdf "vd$dd`F ÂÃ¼Jf'"zp;;"cpx;"vp`G
---]]
---[[
---Works in TTY session: "xxdw"cdt x"vDdd`K:copyukbkby .f'"xp";;"cp';;"vp`J
---]]
-
--- Place Maker G ["G] on your top vimscript mapping and Marker F ["F] over the lua code snippet below then run from vimscript
--- quotations must be fixed. Will flip input line order.
 local plugOpts = { noremap = true, silent = true }
 
--- uncomment and place marker
--- vim.api.nvim_set_keymap('', '', '', plugOpts)
-
--- Does not work
--- vim.api.nvim_set_keymap('v', '<C-<Bslash>>', 'gc', plugOpts)
--- vim.api.nvim_set_keymap('v', '<C-_>', 'gc', plugOpts)
--- Does not work
-vim.api.nvim_set_keymap('n', '<C-Bslash>', 'gcc', plugOpts)
 
 vim.api.nvim_set_keymap('n', '<C-t>', ':NeoTreeShowToggle<CR>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>t', ':NeoTreeFloatToggle<CR>', plugOpts)
@@ -90,3 +71,27 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('n', '<Leader>ff', '<cmd>Telescope find_files<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>fb', '<cmd>Telescope buffers<cr><Esc>', plugOpts)
 
+-- Does not work
+-- vim.api.nvim_set_keymap('v', '<C-<Bslash>>', 'gc', plugOpts)
+-- vim.api.nvim_set_keymap('v', '<C-_>', 'gc', plugOpts)
+-- Does not work
+-- vim.api.nvim_set_keymap('n', '<C-Bslash>', 'gcc', plugOpts)
+
+-- ----------------------------------- -- 
+--   Stored Recordings For This File   --
+-- ----------------------------------- --
+
+--[[
+Auto move mappings over from vim file.
+New (must include newline): "zxdw"cdf "vd$dd`F :copy .
+f'"zp;;"cpx;"vp`G
+old (requires personal remappings): "zxdw"cdf "vd$dd`F ÂÃ¼Jf'"zp;;"cpx;"vp`G
+--]]
+--[[
+--Works in TTY session: "xxdw"cdt x"vDdd`K:copyukbkby .f'"xp";;"cp';;"vp`J
+--]]
+
+-- Place Maker G ["G] on your top vimscript mapping and Marker F ["F] over the lua code snippet below then run from vimscript
+-- quotations must be fixed. Will flip input line order.
+-- uncomment and place marker
+-- vim.api.nvim_set_keymap('', '', '', plugOpts)
