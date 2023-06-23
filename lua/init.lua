@@ -25,11 +25,13 @@ require'lazy'.setup'plugins'
 --------------------------------------------------------------------
 
 require'luaConf/mappings' -- general plugin remappings
+require'luaConf/commands' -- user defined commands using plugins
 
 --------------------------------------------------------------------
 --------------------------- Auto-Commands --------------------------
 --------------------------------------------------------------------
 
+-- Inside these filetypes, bind q to :close. When inside them press q to quit the buffer
 vim.api.nvim_create_autocmd('FileType', {
 	pattern = {
 		'help',
