@@ -22,7 +22,8 @@ Lazy Loaded with Lazy.nvim, nvim-cmp for completion, LSP integrationg with lspco
 ![image](https://user-images.githubusercontent.com/55282244/227053398-78597a9e-19e4-46b2-8c7b-dd749e41f9ef.png)
 
 ### Base Vim Config
-![Screenshot_20230623_181141](https://github.com/wrbright/nvim-config/assets/55282244/f9d44cfd-1b73-435f-bd8c-5b53c10e5051)
+![Screenshot_20230623_181141](https://github.com/wrbright/nvim-config/assets/55282244/88605c2d-a7b5-4024-9554-a6b61a08e035)
+
 
 ### ToggleTerm + extras
 #### Lazy Git
