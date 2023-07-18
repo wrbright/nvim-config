@@ -2,6 +2,9 @@
 -------------------------- Plugin Mappings --------------------------
 ---------------------------------------------------------------------
 
+-- vim.api.nvim_set_keymap('v', ',c', [[:'<,'>w! /tmp/sub_buffer.txt<CR><Esc>'>o<Esc>:r! cat /tmp/sub_buffer.txt <CR>gv]], {noremap = true, silent = true})
+
+
 ---------------------------
 -- All in one place, for ease of use. Will not be moved
 --------------------
@@ -64,7 +67,7 @@ vim.api.nvim_set_keymap('n', '<Leader>gf', '<cmd>Telescope live_grep<cr>', plugO
 vim.api.nvim_set_keymap(
 	'n',
 	'<Leader>gb',
-	":lua require('telescope.builtin').live_grep({prompt_title = 'find string in open buffers', grep_open_files=true})<cr>"
+	":lua require'telescope.builtin'.live_grep{prompt_title = 'find string in open buffers', grep_open_files=true}<cr>"
 	,
 	plugOpts
 )

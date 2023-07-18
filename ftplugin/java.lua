@@ -12,7 +12,7 @@ config['init_options'] = {
     bundles = bundles;
 }
 
-vim.cmd('set expandtab')
+vim.cmd'set expandtab'
 config['on_attach'] = require("luaConf/on_attach")
 
 

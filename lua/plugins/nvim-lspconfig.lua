@@ -18,7 +18,7 @@ return {
 		}
 
 		--------------------------------------------------------------------
-		---------------------------- lsp config ----------------------------
+		---------------------------- LSP config ----------------------------
 		--------------------------------------------------------------------
 
 		-- Mapping new bindings that do not conflict with any current mappings
@@ -73,7 +73,6 @@ return {
 		require'lspconfig'.clangd.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
-			flags = lsp_flags,
 		}
 
 		require'lspconfig'.marksman.setup {
@@ -124,6 +123,24 @@ return {
 			},
 		}
 
+		require'lspconfig'.zls.setup {
+			on_attach = on_attach,
+			capabilities =  capabilities,
+			settings = {
+				zls = {
+					enable_snippets = true,
+					enable_inlay_hints = true,
+					warn_style = true,
+					inlay_hints_show_builtin = true,
+				}
+			}
+		}
+
+		-- require'lspconfig'.html.setup {
+		-- 	on_attach = on_attach,
+		-- 	capabilities =  capabilities,
+		-- }
+
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 		require'lspconfig'.jsonls.setup {
@@ -137,8 +154,11 @@ return {
 		}
 
 		require'lspconfig'.html.setup {
+			on_attach = on_attach,
 			capabilities =  capabilities,
 		}
+
+
 	end,
 
 	dependencies = {

@@ -2,7 +2,7 @@ return {
   'nyngwang/NeoZoom.lua',
 	keys = 'Z',
   config = function ()
-    require('neo-zoom').setup {
+    require'neo-zoom'.setup {
       popup = { enabled = true }, -- this is the default.
       -- NOTE: Add popup-effect (replace the window on-zoom with a `[No Name]`).
       -- EXPLAIN: This improves the performance, and you won't see two
@@ -41,14 +41,14 @@ return {
         },
       },
     }
-    vim.keymap.set('n', 'Z', function () vim.cmd('NeoZoomToggle') end, { silent = true, nowait = true })
+    vim.keymap.set('n', 'Z', function () vim.cmd'NeoZoomToggle' end, { silent = true, nowait = true })
 
 
 		-- vim.api.nvim_create_autocmd({ 'WinEnter' }, {
 		-- 	callback = function ()
-		-- 		local zoom_book = require('neo-zoom').zoom_book
+		-- 		local zoom_book = require'neo-zoom'.zoom_book
 		--
-		-- 		if require('neo-zoom').is_neo_zoom_float()
+		-- 		if require'neo-zoom'.is_neo_zoom_float()
 		-- 			then
 		-- 				for z, _ in pairs(zoom_book) do vim.wo[z].winbl = 15 
 		-- 				
