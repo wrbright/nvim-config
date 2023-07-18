@@ -202,6 +202,7 @@ endif
 " """"""""""""""""""""""""" "
 "   General Configuration   "
 " """"""""""""""""""""""""" "
+let g:c_syntax_for_h = 1
 set shell=/bin/bash
 
 " enable 24bit color
