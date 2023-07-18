@@ -32,8 +32,16 @@ return {
 			},
 		}
 
-		local elinks_client = term:new {
-			cmd = 'elinks',
+		local browsh_client = term:new {
+			cmd = 'browsh',
+			hidden = true,
+			direction = 'float',
+			float_opts = {
+				border = 'single',
+			},
+		}
+		local gomuks_client = term:new {
+			cmd = 'gomuks',
 			hidden = true,
 			direction = 'float',
 			float_opts = {
@@ -56,14 +64,14 @@ return {
 				ctop_client:toggle()
 			end, {}
 		)
-		vim.api.nvim_create_user_command('Elinks',
+		vim.api.nvim_create_user_command('Browsh',
 			function ()
-				elinks_client:toggle()
+				browsh_client:toggle()
 			end, {}
 		)
-		vim.api.nvim_create_user_command('Elinks',
+		vim.api.nvim_create_user_command('Gomuks',
 			function ()
-				elinks_client:toggle()
+				gomuks_client:toggle()
 			end, {}
 		)
 	end
