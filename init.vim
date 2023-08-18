@@ -228,7 +228,7 @@ set confirm
 set undofile undodir=~/.vim/undo-dir
 
 " Why isn't this default?
-set fileencoding=utf-8
+" set fileencoding=utf-8
 
 " Tabs are shown 2 spaces wide
 set tabstop=2

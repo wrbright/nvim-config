@@ -75,7 +75,9 @@ return {
 				}
 			},
 			filesystem = {
-				follow_current_file = true,
+				follow_current_file = {
+					enabled = true
+				},
 				commands = {
 					delete = delete,
 					delete_visual = delete_visual,
