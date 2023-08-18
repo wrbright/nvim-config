@@ -35,8 +35,8 @@ vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]]
 local plugOpts = { noremap = true, silent = true }
 
 
-vim.api.nvim_set_keymap('n', '<C-t>', ':NeoTreeShowToggle<CR>', plugOpts)
-vim.api.nvim_set_keymap('n', '<Leader>t', ':NeoTreeFloatToggle<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<C-t>', ':Neotree toggle<CR>', plugOpts)
+vim.api.nvim_set_keymap('n', '<Leader>t', ':Neotree float toggle<CR>', plugOpts)
 -- vim.api.nvim_set_keymap('n', '<C-t>', ':NvimTreeToggle<CR>', plugOpts)
 
 vim.api.nvim_set_keymap('n', '<Leader>rr', ':RnvimrToggle<CR>', plugOpts)
