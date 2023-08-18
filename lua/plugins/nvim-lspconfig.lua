@@ -31,6 +31,7 @@ return {
 
 		-- Mappings, includes, etc. that must only be set when the LSP Client has been attached
 		local on_attach = require'luaConf/on_attach'
+		local on_attach_clean = require'luaConf/on_attach-clean'
 
 		-- Set up lspconfig.
 		local capabilities = require'cmp_nvim_lsp'.default_capabilities {}
@@ -156,6 +157,28 @@ return {
 		require'lspconfig'.html.setup {
 			on_attach = on_attach,
 			capabilities =  capabilities,
+		}
+
+		require'lspconfig'.vuels.setup {
+			command = 'vls',
+			on_attach = on_attach,
+			capabilities =  capabilities,
+		}
+
+		require'lspconfig'.unocss.setup {
+			on_attach = on_attach_clean,
+			capabilities =  capabilities,
+			filetypes = {
+				'html',
+				'javascriptreact',
+				'rescript',
+				'typescriptreact',
+				'vue',
+				'svelte'
+			},
+			root_dir = function(fname)
+				return require 'lspconfig.util'.root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')(fname)
+			end
 		}
 
 
