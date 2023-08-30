@@ -1,9 +1,9 @@
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
-"  Vim Based Configurations.                                                 "
+"                          Vim Based Configurations.                         "  
 "                                                                            "
 "  Goal: This file should work when using vim (not neovim) without plugins.  "
 "  Non-Goal: No errors on startup or during usage when used with vim.        "
-"  ToDo: Re-reate vim specific ColorScheme                                   "
+"  ToDo: Re-create Gruvbox ColorScheme for Vim Manually                      "
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
 
 " """""""""""""""""""""""" "
