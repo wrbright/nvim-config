@@ -32,18 +32,18 @@ require'luaConf/commands' -- user defined commands using plugins
 --------------------------------------------------------------------
 
 -- Inside these filetypes, bind q to :close. When inside them press q to quit the buffer
--- vim.api.nvim_create_autocmd ( 'FileType', {
--- 	pattern = {
--- 		'help',
--- 		'startuptime',
--- 		'qf',
--- 		'lspinfo',
--- 		'man',
--- 		'checkhealth',
--- 		'oil',
--- 	},
--- 	command = [[
--- 		nnoremap <buffer><silent> q :close<CR>
--- 		set nobuflisted
--- 	]],
--- })
+vim.api.nvim_create_autocmd ( 'FileType', {
+	pattern = {
+		'help',
+		'startuptime',
+		'qf',
+		'lspinfo',
+		'man',
+		'checkhealth',
+		'oil',
+	},
+	command = [[
+		nnoremap <buffer><silent> q :close<CR>
+		set nobuflisted
+	]],
+})
