@@ -75,11 +75,11 @@ nnoremap <C-j> :copy .<CR>
 
 " copy lines where visual selection is active to the line below the
 " current visual selection adding white space to pad the selection
-vnoremap g<C-j> V"cy`>o<Esc>"cp'[kv']<Esc>o<Esc>gvj
+vnoremap g<C-j> V"cy`>o<Esc>"cpkv']<Esc>o<Esc>gvj
 
 " copy lines where visual selection is active to the line below the
 " current visual selection
-vnoremap <C-j> V"cy`>"cp'[v']$
+vnoremap <C-j> V"cy`>"cpv']$
 
 " replace previous search
 nnoremap <A-r> :%s///g<Left><Left>

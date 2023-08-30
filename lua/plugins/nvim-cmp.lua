@@ -4,6 +4,7 @@ return {
 	events = 'InsertEnter',
 	-- keys = ':',
 	dependencies = {
+		'nvim-lua/plenary.nvim',
 		'hrsh7th/cmp-cmdline',
 		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-path',
