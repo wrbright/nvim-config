@@ -69,7 +69,7 @@ return {
 			},
 			window = {
 				mappings = {
-					['P'] = { 'toggle_preview', config = { use_float = false } },
+					['P'] = { 'toggle_preview', config = { use_float = true } },
 					['o'] = {command = open_in_default},
 					['/'] = {}
 				}
