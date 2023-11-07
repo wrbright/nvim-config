@@ -71,7 +71,8 @@ return {
 				mappings = {
 					['P'] = { 'toggle_preview', config = { use_float = true } },
 					['o'] = {command = open_in_default},
-					['/'] = {}
+					['/'] = {},
+					['q'] = {}
 				}
 			},
 			filesystem = {

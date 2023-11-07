@@ -1,5 +1,6 @@
 return {
 	'akinsho/toggleterm.nvim',
+	cmd = {'LazyGit', 'LazyDocker', 'Ctop', 'Browsh', 'Gomucks'},
 	config = function ()
 		require'toggleterm'.setup{}
 

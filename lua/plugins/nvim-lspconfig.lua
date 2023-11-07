@@ -1,5 +1,5 @@
 return {
-	'neovim/nvim-lspconfig',
+  'neovim/nvim-lspconfig',
 	config = function ()
 		--------------------------------------------------------------------
 		---------------------------- lsp Plugins ---------------------------
@@ -10,8 +10,8 @@ return {
 		local null_ls = require'null-ls'
 		null_ls.setup {
 			sources = {
-				null_ls.builtins.formatting.stylua,
-				null_ls.builtins.formatting.phpcsfixer,
+				-- null_ls.builtins.formatting.stylua,
+				-- null_ls.builtins.formatting.phpcsfixer,
 				-- null_ls.builtins.diagnostics.eslint,
 				-- null_ls.builtins.completion.spell,
 			},
@@ -35,6 +35,11 @@ return {
 
 		-- Set up lspconfig.
 		local capabilities = require'cmp_nvim_lsp'.default_capabilities {}
+
+		capabilities.textDocument.foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true
+		}
 
 		local lsp_flags = {
 			debounce_text_changes = 100,
@@ -165,6 +170,11 @@ return {
 			capabilities =  capabilities,
 		}
 
+		-- require'lspconfig'.tailwindcss.setup {
+		-- 	on_attach = on_attach_clean,
+		-- 	capabilities =  capabilities,
+		-- }
+
 		require'lspconfig'.unocss.setup {
 			on_attach = on_attach_clean,
 			capabilities =  capabilities,
@@ -185,7 +195,6 @@ return {
 	end,
 
 	dependencies = {
-		'mfussenegger/nvim-jdtls',
 		'jose-elias-alvarez/null-ls.nvim',
 	},
 }

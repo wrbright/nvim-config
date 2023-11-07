@@ -1,5 +1,6 @@
 return {
 	'petertriho/nvim-scrollbar',
+	event = 'VeryLazy',
 	config = function()
 		require'scrollbar'.setup {
 			excluded_buftypes = {
@@ -49,6 +50,6 @@ return {
 			end,
 		}
 
-		require'scrollbar.handlers.gitsigns'.setup {}
+		require'scrollbar.handlers.gitsigns'.setup { }
 	end,
 }

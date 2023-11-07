@@ -20,10 +20,9 @@ return {
 			},
 			sections = {
 				lualine_c = {
-					{ navic.get_location, cond = navic.is_available },
+						"navic"
 				},
 			},
 		}
 	end
 }
-
