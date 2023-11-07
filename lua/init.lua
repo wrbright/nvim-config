@@ -28,22 +28,46 @@ require'luaConf/mappings' -- general plugin remappings
 require'luaConf/commands' -- user defined commands using plugins
 
 --------------------------------------------------------------------
+---------------------------- Aesthetics  ---------------------------
+--------------------------------------------------------------------
+
+-- Set background of floating window and it's border to transparent
+local set_hl_for_floating_window = function()
+  vim.api.nvim_set_hl(0, 'NormalFloat', {
+    link = 'Normal',
+  })
+  vim.api.nvim_set_hl(0, 'FloatBorder', {
+    bg = 'none',
+  })
+end
+
+set_hl_for_floating_window()
+
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  desc = 'Avoid overwritten by loading color schemes later',
+  callback = set_hl_for_floating_window,
+})
+
+--------------------------------------------------------------------
 --------------------------- Auto-Commands --------------------------
 --------------------------------------------------------------------
 
 -- Inside these filetypes, bind q to :close. When inside them press q to quit the buffer
 vim.api.nvim_create_autocmd ( 'FileType', {
+	-- Find Filetype With :lua print(vim.bo.filetype)
 	pattern = {
 		'help',
-		'startuptime',
 		'qf',
 		'lspinfo',
 		'man',
 		'checkhealth',
 		'oil',
+		'neo-tree-popup',
+		'TelescopePrompt',
 	},
 	command = [[
-		nnoremap <buffer><silent> q :close<CR>
+		nnoremap <buffer> q :q!<CR>
 		set nobuflisted
 	]],
 })

@@ -91,6 +91,9 @@ nnoremap <A-/> /\c<Left><Left>
 " Search for visual selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+" Search for lines that don't end in a semicolon
+nnoremap <Leader>; /.*[^;]\s*$<cr>
+
 " Move text selection
 nnoremap <A-j> :m +1<CR>==
 nnoremap <A-k> :m -2<CR>==
@@ -409,7 +412,7 @@ endif
 highlight CursorLineNr guifg=#BEB6B0
 
 " Comment Left on purpose. COC can be re-enabled when inside an unfamiliar
-" languages codebase for completion and LSP support
+" languages codebase for completion and lsp support
 
 " " """"""""""""""""""" "
 " "  COC Configuration  "
