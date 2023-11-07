@@ -7,7 +7,7 @@ return {
 	-----------------------------------------------
 
 	-- { dir = '/home/m/openNew/yayb/' },
-	{ 'chaoren/vim-wordmotion' },
+	{ 'chaoren/vim-wordmotion', event='BufEnter'},
 	{ 'numToStr/Comment.nvim', opts = {}, keys = 'gc' },
 	'honza/vim-snippets',
 	{ 'machakann/vim-sandwich', keys = 's' },
@@ -31,8 +31,7 @@ return {
 
 	--Telescope
 	{ 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
-	"Shatur/neovim-session-manager",
-	-----------------------------
+	----------------------------
 	-- Alternate Functionality --
 	-----------------------------
 
@@ -42,13 +41,16 @@ return {
 	--   auto_display = true
 	-- }
 	-- },
+	
+	{ 'mfussenegger/nvim-jdtls', ft = 'java' },
 	'kevinhwang91/nvim-hlslens',
-	{ 'jedrzejboczar/possession.nvim', requires = 'nvim-lua/plenary.nvim', config = {} },
+	{ 'jedrzejboczar/possession.nvim', requires = 'nvim-lua/plenary.nvim', opts = {} },
 	{ 'saecki/crates.nvim', event = { 'BufRead Cargo.toml' }, opts = {} },
 	{ 'tpope/vim-fugitive', event = 'BufEnter' },
 	{'lambdalisue/suda.vim', cmd = 'SudaWrite' },
 	{ 'lewis6991/gitsigns.nvim', opts = {} },
 	{ 'wesQ3/vim-windowswap', keys = '<Leader>ww' },
+	{ "m4xshen/hardtime.nvim", cmd = 'Hardtime enable', dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" }, opts = {} },
 	-- 'samodostal/image.nvim',
 
 	----------------
