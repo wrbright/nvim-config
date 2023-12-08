@@ -1,6 +1,13 @@
 return {
 	'akinsho/toggleterm.nvim',
-	cmd = {'LazyGit', 'LazyDocker', 'Ctop', 'Browsh', 'Gomucks'},
+	cmd = {
+		'LazyGit',
+		'LazyDocker',
+		'Ctop',
+		'Browsh',
+		'Gomucks',
+		'Ranger'
+	},
 	config = function ()
 		require'toggleterm'.setup{}
 
@@ -14,6 +21,11 @@ return {
 				border = 'single',
 			},
 		}
+		vim.api.nvim_create_user_command('LazyDocker',
+			function ()
+				docker_client:toggle()
+			end, {}
+		)
 
 		local ctop_client = term:new {
 			cmd = 'ctop',
@@ -23,6 +35,11 @@ return {
 				border = 'single',
 			},
 		}
+		vim.api.nvim_create_user_command('Ctop',
+			function ()
+				ctop_client:toggle()
+			end, {}
+		)
 
 		local btop_client = term:new {
 			cmd = 'btop',
@@ -32,6 +49,11 @@ return {
 				border = 'single',
 			},
 		}
+		vim.api.nvim_create_user_command('Btop',
+			function ()
+				btop_client:toggle()
+			end, {}
+		)
 
 		local browsh_client = term:new {
 			cmd = 'browsh',
@@ -41,6 +63,11 @@ return {
 				border = 'single',
 			},
 		}
+		vim.api.nvim_create_user_command('Browsh',
+			function ()
+				browsh_client:toggle()
+			end, {}
+		)
 		local gomuks_client = term:new {
 			cmd = 'gomuks',
 			hidden = true,
@@ -49,31 +76,24 @@ return {
 				border = 'single',
 			},
 		}
-
-		vim.api.nvim_create_user_command('LazyDocker',
-			function ()
-				docker_client:toggle()
-			end, {}
-		)
-		vim.api.nvim_create_user_command('Btop',
-			function ()
-				btop_client:toggle()
-			end, {}
-		)
-		vim.api.nvim_create_user_command('Ctop',
-			function ()
-				ctop_client:toggle()
-			end, {}
-		)
-		vim.api.nvim_create_user_command('Browsh',
-			function ()
-				browsh_client:toggle()
-			end, {}
-		)
 		vim.api.nvim_create_user_command('Gomuks',
 			function ()
 				gomuks_client:toggle()
 			end, {}
 		)
+		local ranger_client = term:new {
+			cmd = 'ranger',
+			hidden = true,
+			direction = 'float',
+			float_opts = {
+				border = 'single',
+			},
+		}
+		vim.api.nvim_create_user_command('Ranger',
+			function ()
+				ranger_client:toggle()
+			end, {}
+		)
+
 	end
 }
