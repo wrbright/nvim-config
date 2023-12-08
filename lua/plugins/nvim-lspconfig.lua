@@ -21,6 +21,11 @@ return {
 		---------------------------- LSP config ----------------------------
 		--------------------------------------------------------------------
 
+
+		require('lspconfig.ui.windows').default_options = {
+			border = "single"
+		}
+
 		-- Mapping new bindings that do not conflict with any current mappings
 		-- See `:help vim.diagnostic.*` for documentation on any of the below functions
 		local opts = { noremap = true, silent = true }

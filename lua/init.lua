@@ -18,7 +18,11 @@ vim.opt.rtp:prepend ( lazypath )
 -- Map the Leader key to <Space>, or ensure it is mapped before Lazy
 vim.g.mapleader = ' '
 
-require'lazy'.setup'plugins'
+require'lazy'.setup( 'plugins', {
+	ui = {
+		border = "single"
+	}
+})
 
 --------------------------------------------------------------------
 ------------------------ Lua Config Requires------------------------
