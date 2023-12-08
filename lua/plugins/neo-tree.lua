@@ -54,7 +54,7 @@ return {
 			-- vim.cmd('!gwenview ' .. node.absolute_path .. ' &')
 			print(node.absolute_path)
 			-- open silently
-			vim.cmd('!xdg-open ' .. node.path .. ' &')
+			vim.cmd('!xdg-open \"' .. node.path .. '\" &')
 		end
 
 		require'neo-tree'.setup {
