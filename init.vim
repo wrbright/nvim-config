@@ -1,5 +1,5 @@
 " """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" "
-"                          Vim Based Configurations.                         "  
+"                          Vim Based Configurations.                         "
 "                                                                            "
 "  Goal: This file should work when using vim (not neovim) without plugins.  "
 "  Non-Goal: No errors on startup or during usage when used with vim.        "
@@ -74,18 +74,18 @@ vmap <C-_> gcgv
 nnoremap <C-j> :copy .<CR>
 
 " copy lines where visual selection is active to the line below the
-" current visual selection adding white space to pad the selection
-vnoremap g<C-j> V"cy`>o<Esc>"cpkv']<Esc>o<Esc>gvj
+" current visual selection
+vnoremap <C-j> V"cy`>"cpv`]
 
 " copy lines where visual selection is active to the line below the
-" current visual selection
-vnoremap <C-j> V"cy`>"cpv']$
+" current visual selection adding white space to pad the selection
+vnoremap g<C-j> V"cy`>o<Esc>"cpkv']<Esc>o<Esc>gvj
 
 " replace previous search
 nnoremap <A-r> :%s///g<Left><Left>
 nnoremap <A-R> :%s///cg<Left><Left><Left>
 
-" search, not case sensitive 
+" search, not case sensitive
 nnoremap <A-/> /\c<Left><Left>
 
 " Search for visual selection
@@ -112,6 +112,8 @@ vnoremap <A-l> >gv
 " Paste from the system clipboard
 nnoremap <A-p> "+p
 nnoremap <A-P> "+P
+
+" Past the last copied item
 nnoremap <Leader>p "0p
 
 " Alternatively, copy into system register
@@ -119,7 +121,7 @@ nnoremap <A-y> "+y
 nnoremap <A-y><A-y> "+yy
 vnoremap <A-y> "+y
 
-" Remove trailing space
+" Remove trailing space from current line
 nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
 
 " Add semicolon to the end of the current line
@@ -142,7 +144,7 @@ nnoremap <A-n> :noh<cr>
 " Move to end of line
 inoremap <A-a> <C-o>A
 
-" Rebind f1 off of help (now rebound to :Tagbar) 
+" Rebind f1 off of help (now rebound to :Tagbar)
 " inoremap <F1> <Esc>
 
 " Easier window navigation
@@ -189,10 +191,10 @@ cnoremap <A-w> <C-Right>
 "  Program Specific Configuration  "
 " """""""""""""""""""""""""""""""" "
 if has('nvim')
-  set signcolumn=yes 
+  set signcolumn=yes
   set history=10000 " sets amount of commands, searches, and inserts to store in history
 else
-  set wildmenu " Enable auto completion menu after pressing TAB. 
+  set wildmenu " Enable auto completion menu after pressing TAB.
   set mouse=a  " enable mouse
   set history=500 " sets amount of commands, searches, and inserts to store in history
   set autoindent " Automatically indent
@@ -206,7 +208,7 @@ endif
 "   General Configuration   "
 " """"""""""""""""""""""""" "
 let g:c_syntax_for_h = 1
-set shell=/bin/bash
+set shell=/bin/sh
 
 " enable 24bit color
 set termguicolors
@@ -218,13 +220,13 @@ set number relativenumber
 set numberwidth=2
 
 " disable text wrapping
-set nowrap 
+set nowrap
 
 " non-selected lines above/below cursor when scrolling
-set scrolloff=5 
+set scrolloff=5
 
 " When saving a file with a newer swap, quitting, or other issues with any
-" exit of the buffer arise, give list of choices on intended behavior 
+" exit of the buffer arise, give list of choices on intended behavior
 set confirm
 
 " Enable persistant undos and set the location of the persistant undo file
@@ -292,7 +294,7 @@ endif
 
 if !has('nvim')
 
-  " Tabline 
+  " Tabline
   set showtabline=2
   set tabline="%1T"
 
@@ -400,7 +402,7 @@ endif
 "  Colour Configuration  "
 " """"""""""""""""""""""" "
 
-if has('nvim') 
+if has('nvim')
 	let g:gruvbox_material_transparent_background=1
 	colorscheme gruvbox-material
 	autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
