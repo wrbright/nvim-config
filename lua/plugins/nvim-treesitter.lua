@@ -96,12 +96,15 @@ return {
 				'RainbowDelimiterViolet',
 				'RainbowDelimiterCyan',
 			},
+			blacklist = {
+				"comment"
+			}
 		}
 	end,
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-refactor',
 		'nvim-treesitter/nvim-treesitter-textobjects',
 		'windwp/nvim-ts-autotag',
-		'HiPhish/rainbow-delimiters.nvim'
+		{ 'HiPhish/rainbow-delimiters.nvim', branch = 'master' }
 	},
 }
