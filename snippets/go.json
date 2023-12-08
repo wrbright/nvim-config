@@ -1,0 +1,11 @@
+{
+	"Function": {
+		"prefix" :  "fu",
+		"body": [
+			"func ${1:main}() {",
+			"}"
+		],
+		"description": "Function in go"
+	}
+}
+	

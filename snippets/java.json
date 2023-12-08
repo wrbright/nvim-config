@@ -2,6 +2,6 @@
 	"Console Log Color Background": {
 		"prefix" :  "helloworld",
 		"body": ["class ${1} {\n    public static void main (String[] args) { \n        System.out.print(${2:\"Hello World\"}); \n    } \n}"],
-		"description": "Console log but coloured with a background"
+		"description": "Hello World in java"
 	}
 }
