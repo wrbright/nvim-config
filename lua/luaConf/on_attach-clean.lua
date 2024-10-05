@@ -48,7 +48,6 @@ local on_attach = function(bufnr)
 	vim.keymap.set('n', '<Leader>fm', function()
 		vim.lsp.buf.format { async = true }
 	end, bufopts)
-
 end
 
 return on_attach
