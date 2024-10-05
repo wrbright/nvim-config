@@ -72,6 +72,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('n', '<Leader>ff', '<cmd>Telescope find_files<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>fb', '<cmd>Telescope buffers<cr><Esc>', plugOpts)
 
+vim.keymap.set({ 'n', 'v' }, '<leader>n', ':Gen<CR>')
 
 -- Does not work
 -- vim.api.nvim_set_keymap('v', '<C-<Bslash>>', 'gc', plugOpts)
