@@ -27,8 +27,6 @@ return {
 	{ 'mbbill/undotree',                     cmd = 'UndotreeShow' },
 	-- { 'preservim/tagbar', keys = '<F1>', cmd = 'TagbarToggle' },
 
-	--Telescope
-	{ 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 	----------------------------
 	-- Alternate Functionality --
 	-----------------------------
