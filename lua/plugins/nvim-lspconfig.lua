@@ -1,21 +1,11 @@
 return {
-  'neovim/nvim-lspconfig',
-	config = function ()
+	'neovim/nvim-lspconfig',
+	config = function()
 		--------------------------------------------------------------------
 		---------------------------- lsp Plugins ---------------------------
 		--------------------------------------------------------------------
 
-		require'fidget'.setup{}
-
-		local null_ls = require'null-ls'
-		null_ls.setup {
-			sources = {
-				-- null_ls.builtins.formatting.stylua,
-				-- null_ls.builtins.formatting.phpcsfixer,
-				-- null_ls.builtins.diagnostics.eslint,
-				-- null_ls.builtins.completion.spell,
-			},
-		}
+		require 'fidget'.setup {}
 
 		--------------------------------------------------------------------
 		---------------------------- LSP config ----------------------------
@@ -32,25 +22,25 @@ return {
 		vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
 		vim.keymap.set('n', '<space>[', vim.diagnostic.goto_prev, opts)
 		vim.keymap.set('n', '<space>]', vim.diagnostic.goto_next, opts)
-		vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+		vim.keymap.set('n', '<space>q', vim.diagnostic.setqflist, opts)
 
 		-- Mappings, includes, etc. that must only be set when the LSP Client has been attached
-		local on_attach = require'luaConf/on_attach'
-		local on_attach_clean = require'luaConf/on_attach-clean'
+		local on_attach = require 'luaConf/on_attach'
+		local on_attach_clean = require 'luaConf/on_attach-clean'
 
 		-- Set up lspconfig.
-		local capabilities = require'cmp_nvim_lsp'.default_capabilities {}
+		local capabilities = require 'cmp_nvim_lsp'.default_capabilities {}
 
 		capabilities.textDocument.foldingRange = {
-				dynamicRegistration = false,
-				lineFoldingOnly = true
+			dynamicRegistration = false,
+			lineFoldingOnly = true
 		}
 
 		local lsp_flags = {
 			debounce_text_changes = 100,
 		}
 
-		require'lspconfig'.lua_ls.setup {
+		require 'lspconfig'.lua_ls.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
@@ -76,56 +66,61 @@ return {
 		--     }
 		-- }
 
-		require'lspconfig'.phpactor.setup {
+		require 'lspconfig'.phpactor.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
-		require'lspconfig'.clangd.setup {
+		require 'lspconfig'.clangd.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
-		require'lspconfig'.marksman.setup {
+		require 'lspconfig'.qmlls.setup {
+			cmd = { "qmlls6" },
+			on_attach = on_attach_clean,
+		}
+
+		require 'lspconfig'.marksman.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
-		require'lspconfig'.vimls.setup {
+		require 'lspconfig'.vimls.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
 
-		require'lspconfig'.eslint.setup {}
+		require 'lspconfig'.eslint.setup {}
 
-		require'lspconfig'.cmake.setup {
+		require 'lspconfig'.cmake.setup {
 			cmd = { '/home/m/.local/bin/cmake-language-server' },
 			on_attach = on_attach,
 			capabilities = capabilities,
 			flags = lsp_flags,
 		}
 
-		require'lspconfig'.pyright.setup {
+		require 'lspconfig'.pyright.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
-		require'lspconfig'.tsserver.setup {
-			on_attach = on_attach,
-			capabilities = capabilities,
-		}
-
-		require'lspconfig'.taplo.setup {
+		require 'lspconfig'.ts_ls.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
-		require'lspconfig'.bashls.setup {
+		require 'lspconfig'.taplo.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
-		require'lspconfig'.rust_analyzer.setup {
+		require 'lspconfig'.bashls.setup {
+			on_attach = on_attach,
+			capabilities = capabilities,
+		}
+
+		require 'lspconfig'.rust_analyzer.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 			flags = lsp_flags,
@@ -134,9 +129,9 @@ return {
 			},
 		}
 
-		require'lspconfig'.zls.setup {
+		require 'lspconfig'.zls.setup {
 			on_attach = on_attach,
-			capabilities =  capabilities,
+			capabilities = capabilities,
 			settings = {
 				zls = {
 					enable_snippets = true,
@@ -147,48 +142,48 @@ return {
 			}
 		}
 
-		-- require'lspconfig'.html.setup {
-		-- 	on_attach = on_attach,
-		-- 	capabilities =  capabilities,
-		-- }
-
-		capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-		require'lspconfig'.jsonls.setup {
+		require 'lspconfig'.html.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
 
-		require'lspconfig'.cssls.setup {
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+		require 'lspconfig'.jsonls.setup {
 			on_attach = on_attach,
-			capabilities =  capabilities
+			capabilities = capabilities,
 		}
 
-		require'lspconfig'.html.setup {
+		require 'lspconfig'.cssls.setup {
 			on_attach = on_attach,
-			capabilities =  capabilities,
+			capabilities = capabilities
 		}
 
-		require'lspconfig'.vuels.setup {
-			command = 'vls',
+		require 'lspconfig'.html.setup {
 			on_attach = on_attach,
-			capabilities =  capabilities,
+			capabilities = capabilities,
 		}
 
-		require'lspconfig'.gopls.setup {
-				on_attach = on_attach,
-				capabilities =  capabilities,
-
-		}
-
-		-- require'lspconfig'.tailwindcss.setup {
-		-- 	on_attach = on_attach_clean,
-		-- 	capabilities =  capabilities,
+		-- require 'lspconfig'.volar.setup {
+		-- 	on_attach = on_attach,
+		-- 	capabilities = capabilities,
+		-- 	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
 		-- }
 
-		require'lspconfig'.unocss.setup {
+		require 'lspconfig'.gopls.setup {
+			on_attach = on_attach,
+			capabilities = capabilities,
+
+		}
+
+		-- require 'lspconfig'.tailwindcss.setup {
+		-- 	on_attach = on_attach_clean,
+		-- 	capabilities = capabilities,
+		-- }
+
+		require 'lspconfig'.unocss.setup {
 			on_attach = on_attach_clean,
-			capabilities =  capabilities,
+			capabilities = capabilities,
 			filetypes = {
 				'html',
 				'javascriptreact',
@@ -198,14 +193,10 @@ return {
 				'svelte'
 			},
 			root_dir = function(fname)
-				return require 'lspconfig.util'.root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js', 'uno.config.ts')(fname)
+				return require 'lspconfig.util'.root_pattern('unocss.config.js', 'unocss.config.ts', 'uno.config.js',
+					'uno.config.ts')(fname)
 			end
 		}
-
-
 	end,
 
-	dependencies = {
-		'jose-elias-alvarez/null-ls.nvim',
-	},
 }
