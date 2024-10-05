@@ -1,0 +1,14 @@
+{
+  "Create Tests Block": {
+    "prefix": "tests",
+    "body": [
+      "#[cfg(test)]",
+      "mod tests {",
+      "\t#[test]",
+      "\tfn ${1:def_test}(){",
+      "\t\t${2:assert_eq(2+2)}",
+      "\t}",
+      "}"
+    ]
+  }
+}
