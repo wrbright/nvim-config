@@ -70,6 +70,9 @@ vmap <C-_> gcgv
 " """"""""""""""""""" "
 "  General Remapping  "
 " """"""""""""""""""" "
+
+nnoremap z[ [s
+nnoremap z] ]s
 " Copy current line down to next line
 nnoremap <C-j> :copy .<CR>
 
@@ -82,8 +85,8 @@ vnoremap <C-j> V"cy`>"cpv`]
 vnoremap g<C-j> V"cy`>o<Esc>"cpkv']<Esc>o<Esc>gvj
 
 " replace previous search
-nnoremap <A-r> :%s///g<Left><Left>
-nnoremap <A-R> :%s///cg<Left><Left><Left>
+nnoremap <A-r> :s///g<Left><Left><Left>
+vnoremap <A-r> :s///g<Left><Left><Left>
 
 " search, not case sensitive
 nnoremap <A-/> /\c<Left><Left>
@@ -134,9 +137,9 @@ nnoremap <A-,> mjA,<Esc>`j
 " add a trailing comma to the end of the current line
 inoremap <A-,> <Esc>mjA,<Esc>`ja
 
-" add a trailing comma to the end of the current line
+" add a trailing period to the end of the current line
 nnoremap <A-.> mjA.<Esc>`j
-" add a trailing comma to the end of the current line
+" add a trailing period to the end of the current line
 inoremap <A-.> <Esc>mjA.<Esc>`ja
 
 nnoremap <A-n> :noh<cr>
