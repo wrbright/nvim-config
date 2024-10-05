@@ -72,6 +72,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap('n', '<Leader>ff', '<cmd>Telescope find_files<cr>', plugOpts)
 vim.api.nvim_set_keymap('n', '<Leader>fb', '<cmd>Telescope buffers<cr><Esc>', plugOpts)
 
+
 -- Does not work
 -- vim.api.nvim_set_keymap('v', '<C-<Bslash>>', 'gc', plugOpts)
 -- vim.api.nvim_set_keymap('v', '<C-_>', 'gc', plugOpts)
@@ -79,7 +80,7 @@ vim.api.nvim_set_keymap('n', '<Leader>fb', '<cmd>Telescope buffers<cr><Esc>', pl
 -- vim.api.nvim_set_keymap('n', '<C-Bslash>', 'gcc', plugOpts)
 
 
--- ----------------------------------- -- 
+-- ----------------------------------- --
 --   Stored Recordings For This File   --
 -- ----------------------------------- --
 
@@ -91,7 +92,8 @@ f'"zp;;"cpx;"vp`G
 old (requires personal remappings): "zxdw"cdf "vd$dd`F ÂÃ¼Jf'"zp;;"cpx;"vp`G
 --]]
 --[[
---Works in TTY session: "xxdw"cdt x"vDdd`K:copyukbkby .f'"xp";;"cp';;"vp`J
+--Works in TTY session: "xxdw"cdt x"vDdd`K:copyukbkby .
+f'"xp";;"cp';;"vp`Jf'"xp";;"cp';;"vp`J
 --]]
 
 -- Place Maker G ["G] on your top vimscript mapping and Marker F ["F] over the lua code snippet below then run from vimscript
@@ -99,7 +101,7 @@ old (requires personal remappings): "zxdw"cdf "vd$dd`F ÂÃ¼Jf'"zp;;"cpx;"vp
 -- uncomment and place marker
 -- vim.api.nvim_set_keymap('', '', '', plugOpts)
 
--- ------------------------------------ -- 
+-- ------------------------------------ --
 --   General Mappings (useless in vim)  --
 -- ------------------------------------ --
 
