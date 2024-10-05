@@ -2,7 +2,7 @@ return {
 	'petertriho/nvim-scrollbar',
 	event = 'VeryLazy',
 	config = function()
-		require'scrollbar'.setup {
+		require 'scrollbar'.setup {
 			excluded_buftypes = {
 				'terminal',
 				'nofile',
@@ -16,7 +16,7 @@ return {
 			},
 		}
 
-		require'scrollbar.handlers.search'.setup {
+		require 'scrollbar.handlers.search'.setup {
 			show_current_context = true,
 			show_current_context_start = true,
 			-- override_lens = function() end, -- use hlslens to place search results in the scrollbar but don't actually enable the plugin
@@ -50,6 +50,6 @@ return {
 			end,
 		}
 
-		require'scrollbar.handlers.gitsigns'.setup { }
+		require 'scrollbar.handlers.gitsigns'.setup {}
 	end,
 }

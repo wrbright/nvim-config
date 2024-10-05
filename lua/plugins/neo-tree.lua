@@ -10,22 +10,22 @@ return {
 		-- })
 
 		local delete = function(state)
-			local inputs = require'neo-tree.ui.inputs'
+			local inputs = require 'neo-tree.ui.inputs'
 			local path = state.tree:get_node().path
 			inputs.confirm('Are you sure you want to trash ' .. path, function(confirmed)
 				if not confirmed then
 					return
 				end
 
-				vim.fn.system{ 'trash', vim.fn.fnameescape(path) }
+				vim.fn.system { 'trash', vim.fn.fnameescape(path) }
 
-				require'neo-tree.sources.manager'.refresh(state.name)
+				require 'neo-tree.sources.manager'.refresh(state.name)
 			end)
 		end
 
 		-- over write default 'delete_visual' command to 'trash' x n.
 		local delete_visual = function(state, selected_nodes)
-			local inputs = require'neo-tree.ui.inputs'
+			local inputs = require 'neo-tree.ui.inputs'
 
 			-- get table items count
 			function GetTableLen(tbl)
@@ -43,9 +43,9 @@ return {
 					return
 				end
 				for _, node in ipairs(selected_nodes) do
-					vim.fn.system{ 'trash', vim.fn.fnameescape(node.path) }
+					vim.fn.system { 'trash', vim.fn.fnameescape(node.path) }
 				end
-				require'neo-tree.sources.manager'.refresh(state.name)
+				require 'neo-tree.sources.manager'.refresh(state.name)
 			end)
 		end
 
@@ -57,11 +57,12 @@ return {
 			vim.cmd('!xdg-open \"' .. node.path .. '\" &')
 		end
 
-		require'neo-tree'.setup {
+		require 'neo-tree'.setup {
 			sources = {
 				'filesystem',
 				'buffers',
-				'git_status',
+				'document_symbols',
+				'diagnostics',
 			},
 			source_selector = {
 				winbar = true,
@@ -69,8 +70,12 @@ return {
 			},
 			window = {
 				mappings = {
-					['P'] = { 'toggle_preview', config = { use_float = true } },
-					['o'] = {command = open_in_default},
+					['P'] = { 'toggle_preview', config = {
+						use_float = true,
+						use_image_nvim = true
+					} },
+					['K'] = { command = "image_wezterm" },
+					['o'] = { command = open_in_default },
 					['/'] = {},
 					['q'] = {}
 				}
@@ -80,6 +85,12 @@ return {
 					enabled = true
 				},
 				commands = {
+					image_wezterm = function(state)
+						local node = state.tree:get_node()
+						if node.type == "file" then
+							require("image_preview").PreviewImage(node.path)
+						end
+					end,
 					delete = delete,
 					delete_visual = delete_visual,
 				},
@@ -88,5 +99,8 @@ return {
 			enable_git_status = true,
 		}
 	end,
-	dependencies = { 'MunifTanjim/nui.nvim' },
+	dependencies = {
+		'3rd/image.nvim',
+		'MunifTanjim/nui.nvim'
+	},
 }

@@ -1,11 +1,12 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
 	lazy = false,
-	build = function()
-		pcall(require'nvim-treesitter.install'.update{ with_sync = true })
-	end,
-	config = function ()
-		require'nvim-treesitter.configs'.setup {
+	-- build = function()
+	-- 	pcall(require'nvim-treesitter.install'.update{ with_sync = true })
+	-- end,
+	build = ":TSUpdate",
+	config = function()
+		require 'nvim-treesitter.configs'.setup {
 			highlight = {
 				enable = true,
 				auto_install = true,
@@ -71,8 +72,8 @@ return {
 			},
 			rainbow = {
 				enable = true,
-			-- 	extended_mode = true,
-			-- 	max_file_lines = nil,
+				-- 	extended_mode = true,
+				-- 	max_file_lines = nil,
 			},
 		}
 

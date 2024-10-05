@@ -1,10 +1,9 @@
 return {
 	'nvim-lualine/lualine.nvim',
-	config = function ()
-
+	config = function()
 		-- local navic = require'nvim-navic'
 
-		require'lualine'.setup {
+		require 'lualine'.setup {
 			theme = 'gruvbox',
 			options = {
 				ignore_focus = { -- lua print(vim.bo.filetype) to print filetype
@@ -20,7 +19,7 @@ return {
 			},
 			sections = {
 				lualine_c = {
-						"navic"
+					"navic"
 				},
 			},
 		}

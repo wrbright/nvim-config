@@ -1,9 +1,9 @@
 return {
 	'stevearc/oil.nvim',
-	opts = { },
+	opts = {},
 	cmd = 'Oil',
-	config = function ()
-		require'oil'.setup {
+	config = function()
+		require 'oil'.setup {
 			columns = {
 				"icon",
 				"permissions",
@@ -16,6 +16,5 @@ return {
 				show_hidden = false,
 			}
 		}
-
 	end
 }

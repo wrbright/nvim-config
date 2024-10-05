@@ -1,8 +1,8 @@
 return {
 	'bennypowers/nvim-regexplainer',
-	keys='<Leader>re',
-	config = function ()
-		require'regexplainer'.setup {
+	keys = '<Leader>re',
+	config = function()
+		require 'regexplainer'.setup {
 			-- 'narrative'
 			mode = 'narrative', -- TODO: 'ascii', 'graphical'
 
@@ -23,7 +23,7 @@ return {
 			},
 
 			-- Whether to log debug messages
-			debug = false, 
+			debug = false,
 
 			-- 'split', 'popup'
 			display = 'popup',
@@ -40,7 +40,7 @@ return {
 			narrative = {
 				separator = '\n',
 			},
-	}
-end,
-	dependencies = { 'nvim-treesitter/nvim-treesitter', 'MunifTanjim/nui.nvim',  },
+		}
+	end,
+	dependencies = { 'nvim-treesitter/nvim-treesitter', 'MunifTanjim/nui.nvim', },
 }

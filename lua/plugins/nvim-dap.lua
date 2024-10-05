@@ -1,7 +1,7 @@
 return {
 	"mfussenegger/nvim-dap",
 	keys = "<Leader>dd",
-	config = function ()
+	config = function()
 		--------------------------------------------------------------------
 		---------------------- Nvim-Dap Configuration ----------------------
 		--------------------------------------------------------------------
@@ -17,7 +17,7 @@ return {
 		vim.api.nvim_set_keymap("n", "<space>db", ":lua require'dap'.toggle_breakpoint()<cr>", plugOpts)
 		vim.api.nvim_set_keymap("n", "<space>b", ":lua require'dap'.toggle_breakpoint()<cr>", plugOpts)
 
-		require"dapui".setup {
+		require "dapui".setup {
 			layouts = {
 				{
 					elements = {
@@ -41,18 +41,18 @@ return {
 			},
 		}
 
-		require"nvim-dap-virtual-text".setup {
+		require "nvim-dap-virtual-text".setup {
 			commented = true,
 		}
 
-		local dap = require"dap"
+		local dap = require "dap"
 
 		function DapRunWithInput(input_file)
 			if not input_file then
 				input_file = vim.fn.input("Input File: ", "", "file")
 			end
 
-			print"starting with input file"
+			print "starting with input file"
 
 			dap.run {
 				runtimeArgs = { "args1", input_file },
@@ -113,7 +113,7 @@ return {
 		dap.adapters.firefox = {
 			type = "executable",
 			command = "node",
-			args = { os.getenv"HOME" .. "/m/InstalledApplicationsDev/vscode-firefox-debug/dist/adapter.bundle.js" },
+			args = { os.getenv "HOME" .. "/m/InstalledApplicationsDev/vscode-firefox-debug/dist/adapter.bundle.js" },
 		}
 
 		dap.configurations.typescript = {
@@ -126,7 +126,7 @@ return {
 			firefoxExecutable = "/usr/bin/firefox",
 		}
 
-		local dapui = require"dapui"
+		local dapui = require "dapui"
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()
 		end
@@ -134,7 +134,7 @@ return {
 
 		require("dap-vscode-js").setup({
 			-- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-			debugger_path = os.getenv"HOME" .. "/InstalledApplicationsDev/vscode-js-debug/dist/adapter.bundle.js",
+			debugger_path = os.getenv "HOME" .. "/InstalledApplicationsDev/vscode-js-debug/dist/adapter.bundle.js",
 			adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" }, -- which adapters to register in nvim-dap
 			-- log_file_path = "/dap_vscode_js.log" -- Path for file logging
 			-- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
@@ -169,7 +169,6 @@ return {
 	,
 	dependencies = {
 		"theHamsta/nvim-dap-virtual-text",
-		"rcarriga/nvim-dap-ui",
 		"mxsdev/nvim-dap-vscode-js",
 	},
 }

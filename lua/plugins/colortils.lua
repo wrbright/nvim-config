@@ -5,5 +5,5 @@ return {
 		register = 'c',
 		border = 'single',
 	},
-	cmd='Colortils'
+	cmd = 'Colortils'
 }

@@ -11,8 +11,7 @@ return {
 		'hrsh7th/cmp-nvim-lsp',
 		'David-Kunz/cmp-npm',
 	},
-	config = function ()
-
+	config = function()
 		-- fixing unpack error detection from mismatched lua versions for internal and external code
 		---@diagnostic disable-next-line: deprecated
 		table.unpack = table.unpack or unpack
@@ -21,11 +20,11 @@ return {
 		------------------------- Nvim CMP Plugins  ------------------------
 		--------------------------------------------------------------------
 
-		require'cmp-npm'.setup {}
+		require 'cmp-npm'.setup {}
 
-		local cmp = require'cmp'
-		local lspkind = require'lspkind'
-		local luasnip = require'luasnip'
+		local cmp = require 'cmp'
+		local lspkind = require 'lspkind'
+		local luasnip = require 'luasnip'
 
 		luasnip.setup {
 			region_check_events = 'InsertEnter',
@@ -37,7 +36,7 @@ return {
 
 		local has_words_before = function()
 			local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
-			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match'%s' == nil
+			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
 		end
 
 		cmp.setup {
@@ -55,9 +54,9 @@ return {
 				['<C-d>'] = cmp.mapping.scroll_docs(4),
 				['<C-c>'] = cmp.mapping.complete(),
 				['<C-e>'] = cmp.mapping.abort(),
-				['<CR>'] = cmp.mapping.confirm{ select = false },
-				['<C-l>'] = cmp.mapping.confirm{ select = true },
-				['<A-l>'] = cmp.mapping.confirm{ select = true },
+				['<CR>'] = cmp.mapping.confirm { select = false },
+				['<C-l>'] = cmp.mapping.confirm { select = true },
+				['<A-l>'] = cmp.mapping.confirm { select = true },
 				['<Tab>'] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
@@ -79,14 +78,14 @@ return {
 						fallback()
 					end
 				end, { 'i', 's' }),
-			} ,
+			},
 			sources = cmp.config.sources {
 				{ name = 'path' },
 				{ name = 'nvim_lsp' },
 				{ name = 'nvim_lua' },
 				{ name = 'luasnip' },
 				{ name = 'nvim_lsp_signature_help' },
-				{ name = 'npm', keyword_length = 3 },
+				{ name = 'npm',                    keyword_length = 3 },
 				{ name = 'crates' },
 			},
 			{
@@ -96,7 +95,7 @@ return {
 				ghost_text = true,
 			},
 			enabled = function()
-				return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or require'cmp_dap'.is_dap_buffer()
+				return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or require 'cmp_dap'.is_dap_buffer()
 			end,
 			formatting = {
 				format = lspkind.cmp_format {
@@ -113,7 +112,7 @@ return {
 			},
 		}
 
-		require'cmp'.setup.filetype(
+		require 'cmp'.setup.filetype(
 			{
 				'dap-repl',
 				'dapui_watches',
@@ -138,8 +137,8 @@ return {
 		-- 	end
 		-- })
 
-		require'luasnip.loaders.from_snipmate'.lazy_load {}
-		require'luasnip.loaders.from_vscode'.lazy_load { paths = { '~/.config/nvim/snippets/' } }
+		require 'luasnip.loaders.from_snipmate'.lazy_load {}
+		require 'luasnip.loaders.from_vscode'.lazy_load { paths = { '~/.config/nvim/snippets/' } }
 
 		-- luasnip.add_snippets = {
 		--     all = {
@@ -154,15 +153,15 @@ return {
 		cmp.setup.filetype('gitcommit', {
 			sources = cmp.config.sources({
 				{ name = 'cmp_git' },
-				}, {
-					{ name = 'buffer' },
+			}, {
+				{ name = 'buffer' },
 			}),
 		})
 
 		-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 		cmp.setup.cmdline(
 			{ ' / ', '?' },
-			{ mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'buffer' },  },  }
+			{ mapping = cmp.mapping.preset.cmdline(), sources = { { name = 'buffer' }, }, }
 		)
 
 		-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -172,6 +171,5 @@ return {
 				{ name = 'path' },
 			}, { { name = 'cmdline' }, }),
 		})
-
 	end
 }

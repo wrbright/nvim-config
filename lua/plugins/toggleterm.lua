@@ -8,10 +8,10 @@ return {
 		'Gomucks',
 		'Ranger'
 	},
-	config = function ()
-		require'toggleterm'.setup{}
+	config = function()
+		require 'toggleterm'.setup {}
 
-		local term = require'toggleterm.terminal'.Terminal
+		local term = require 'toggleterm.terminal'.Terminal
 
 		local docker_client = term:new {
 			cmd = 'lazydocker',
@@ -22,7 +22,7 @@ return {
 			},
 		}
 		vim.api.nvim_create_user_command('LazyDocker',
-			function ()
+			function()
 				docker_client:toggle()
 			end, {}
 		)
@@ -36,7 +36,7 @@ return {
 			},
 		}
 		vim.api.nvim_create_user_command('Ctop',
-			function ()
+			function()
 				ctop_client:toggle()
 			end, {}
 		)
@@ -50,7 +50,7 @@ return {
 			},
 		}
 		vim.api.nvim_create_user_command('Btop',
-			function ()
+			function()
 				btop_client:toggle()
 			end, {}
 		)
@@ -64,7 +64,7 @@ return {
 			},
 		}
 		vim.api.nvim_create_user_command('Browsh',
-			function ()
+			function()
 				browsh_client:toggle()
 			end, {}
 		)
@@ -77,7 +77,7 @@ return {
 			},
 		}
 		vim.api.nvim_create_user_command('Gomuks',
-			function ()
+			function()
 				gomuks_client:toggle()
 			end, {}
 		)
@@ -90,10 +90,9 @@ return {
 			},
 		}
 		vim.api.nvim_create_user_command('Ranger',
-			function ()
+			function()
 				ranger_client:toggle()
 			end, {}
 		)
-
 	end
 }
