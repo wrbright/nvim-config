@@ -31,7 +31,7 @@ return {
 	-- Alternate Functionality --
 	-----------------------------
 	-- { 'edluffy/hologram.nvim',               opts = { auto_display = true } },
-	{ "williamboman/mason-lspconfig.nvim",   opts = {} },
+	{ 'williamboman/mason-lspconfig.nvim',   opts = {} },
 	{ 'mfussenegger/nvim-jdtls',             ft = 'java' },
 	{ 'kevinhwang91/nvim-hlslens' },
 	{ 'jedrzejboczar/possession.nvim',       requires = 'nvim-lua/plenary.nvim', opts = {} },
