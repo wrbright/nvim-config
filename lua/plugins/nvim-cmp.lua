@@ -1,8 +1,7 @@
 return {
 	'hrsh7th/nvim-cmp',
-	-- Not Actually Dependancies, do not do this
 	events = 'InsertEnter',
-	-- keys = ':',
+	-- Not Actually Dependancies, do not do this
 	dependencies = {
 		'nvim-lua/plenary.nvim',
 		'hrsh7th/cmp-cmdline',
