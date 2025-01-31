@@ -105,6 +105,7 @@ f'"xp";;"cp';;"vp`Jf'"xp";;"cp';;"vp`J
 -- ------------------------------------ --
 --   General Mappings (useless in vim)  --
 -- ------------------------------------ --
+vim.api.nvim_set_keymap('n', 'Cargo run', ':lua print(vim.bo.filetype)<cr>', plugOpts)
 
 -- print filetype to console
 vim.api.nvim_set_keymap('n', '<Leader>ft', ':lua print(vim.bo.filetype)<cr>', plugOpts)
