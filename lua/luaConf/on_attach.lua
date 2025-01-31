@@ -37,7 +37,7 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
 
 	-- Find all places the item under the cursor is used
-	vim.keymap.set('n', '<Leader>gr', vim.lsp.buf.references, bufopts)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 
 	-- Rename the item under the cursor the entire project over
 	vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
