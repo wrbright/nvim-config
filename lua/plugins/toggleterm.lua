@@ -4,6 +4,8 @@ return {
 		'LazyGit',
 		'LazyDocker',
 		'Ctop',
+		'FTP',
+		'TermSCP',
 		'Browsh',
 		'Gomucks',
 		'Ranger'
@@ -24,6 +26,25 @@ return {
 		vim.api.nvim_create_user_command('LazyDocker',
 			function()
 				docker_client:toggle()
+			end, {}
+		)
+
+		local termscp_client = term:new {
+			cmd = 'termscp',
+			hidden = true,
+			direction = 'float',
+			float_opts = {
+				border = 'single',
+			},
+		}
+		vim.api.nvim_create_user_command('TermSCP',
+			function()
+				termscp_client:toggle()
+			end, {}
+		)
+		vim.api.nvim_create_user_command('FTP',
+			function()
+				termscp_client:toggle()
 			end, {}
 		)
 
