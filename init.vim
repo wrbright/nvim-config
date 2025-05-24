@@ -132,6 +132,10 @@ nnoremap <A-;> mjA;<Esc>`j
 " Add semicolon to the end of the current line
 inoremap <A-;> <Esc>mjA;<Esc>`ja
 
+" Add colon to the end of the current line
+nnoremap <A-:> mjA:<Esc>`j
+" Add colon to the end of the current line
+inoremap <A-:> <Esc>mjA:<Esc>`ja
 " add a trailing comma to the end of the current line
 nnoremap <A-,> mjA,<Esc>`j
 " add a trailing comma to the end of the current line
