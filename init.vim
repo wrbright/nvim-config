@@ -378,14 +378,6 @@ if !has('nvim')
 
 	endfunction
 
-	" function! GitInfo()
-	" 	let git = fugitive#head()
-	" 	if git != ''
-	" 		return ' '.fugitive#head()
-	" 	else
-	" 		return ''
-	" 	endfunction
-
 	" http://stackoverflow.com/a/10416234/213124
 	set laststatus=2
 	set statusline=
