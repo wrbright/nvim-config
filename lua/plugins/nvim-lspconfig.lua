@@ -102,9 +102,11 @@ return {
 		}
 
 		require 'lspconfig'.pyright.setup {
+			command = "pyright-langserver",
 			on_attach = on_attach,
 			capabilities = capabilities,
 		}
+
 		require 'lspconfig'.ts_ls.setup {
 			on_attach = on_attach,
 			capabilities = capabilities,
