@@ -85,8 +85,8 @@ vnoremap <C-j> V"cy`>"cpv`]
 vnoremap g<C-j> V"cy`>o<Esc>"cpkv']<Esc>o<Esc>gvj
 
 " replace previous search
-nnoremap <A-r> :s///g<Left><Left><Left>
-vnoremap <A-r> :s///g<Left><Left><Left>
+nnoremap <A-r> :s///g<Left><Left>
+vnoremap <A-r> :s///g<Left><Left>
 
 " search, not case sensitive
 nnoremap <A-/> /\c<Left><Left>
@@ -125,7 +125,7 @@ nnoremap <A-y><A-y> "+yy
 vnoremap <A-y> "+y
 
 " Remove trailing space from current line
-nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
+silent nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
 
 " Add semicolon to the end of the current line
 nnoremap <A-;> mjA;<Esc>`j
@@ -136,6 +136,7 @@ inoremap <A-;> <Esc>mjA;<Esc>`ja
 nnoremap <A-:> mjA:<Esc>`j
 " Add colon to the end of the current line
 inoremap <A-:> <Esc>mjA:<Esc>`ja
+
 " add a trailing comma to the end of the current line
 nnoremap <A-,> mjA,<Esc>`j
 " add a trailing comma to the end of the current line
