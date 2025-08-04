@@ -11,6 +11,10 @@
         "path": "./css.json"
       },
       {
+        "language": "typescriptreact",
+        "path": "./tsx.json"
+      },
+      {
         "language": "javascript",
         "path": "./javascript.json"
       },

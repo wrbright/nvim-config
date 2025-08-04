@@ -1,0 +1,12 @@
+{
+  "Create Function Component": {
+    "prefix": "functioncomponent",
+    "body": [
+      "import { type FC, type JSX } from \"react\";",
+      "const ${1:functionName}: FC = (): JSX.Element => {",
+      "\treturn <></>;",
+      "};",
+      "export default "
+    ]
+  }
+}
