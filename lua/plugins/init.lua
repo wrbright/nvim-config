@@ -17,11 +17,10 @@ return {
 	{ 'hrsh7th/cmp-nvim-lsp-signature-help', event = 'LspAttach' },
 	{ 'rcarriga/cmp-dap',                    keys = '<Leader>dd' },
 	{ 'saadparwaiz1/cmp_luasnip',            event = 'InsertEnter', },
-
 	----------------------
 	-- Additional Panes --
 	----------------------
-	{ 'kdheepak/lazygit.nvim' },
+	{ 'kdheepak/lazygit.nvim',               cmd = "LazyGit" },
 	-- {  'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
 	{ 'kevinhwang91/rnvimr',                 cmd = 'RnvimrToggle' },
 	{ 'mbbill/undotree',                     cmd = 'UndotreeShow' },
