@@ -4,6 +4,7 @@ return {
 		'LazyGit',
 		'LazyDocker',
 		'Ctop',
+		'Btop',
 		'FTP',
 		'TermSCP',
 		'Browsh',
@@ -89,6 +90,7 @@ return {
 				browsh_client:toggle()
 			end, {}
 		)
+
 		local gomuks_client = term:new {
 			cmd = 'gomuks',
 			hidden = true,
@@ -102,6 +104,7 @@ return {
 				gomuks_client:toggle()
 			end, {}
 		)
+
 		local ranger_client = term:new {
 			cmd = 'ranger',
 			hidden = true,
