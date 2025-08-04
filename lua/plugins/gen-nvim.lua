@@ -1,5 +1,7 @@
 return {
 	'David-Kunz/gen.nvim',
+	cmd = "Gen",
+	keys = "<Leader>n",
 	opts = {
 		model = 'deepseek-coder-v2', -- The default model to use.
 		quit_map = 'q',            -- set keymap for close the response window
