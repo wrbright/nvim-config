@@ -11,9 +11,6 @@ return {
 				enable = true,
 				auto_install = true,
 			},
-			autotag = {
-				enable = true,
-			},
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -105,7 +102,6 @@ return {
 	dependencies = {
 		'nvim-treesitter/nvim-treesitter-refactor',
 		'nvim-treesitter/nvim-treesitter-textobjects',
-		'windwp/nvim-ts-autotag',
 		{ 'HiPhish/rainbow-delimiters.nvim', branch = 'master' }
 	},
 }
