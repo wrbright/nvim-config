@@ -124,7 +124,8 @@ nnoremap <A-y> "+y
 nnoremap <A-y><A-y> "+yy
 vnoremap <A-y> "+y
 
-" Remove trailing space from current line
+" Remove trailing space from current line. Also highligh all trailing
+" whitespace
 silent nnoremap <Leader><Leader><Leader> mj:s/\s\+$//e<CR>`j
 
 " Add semicolon to the end of the current line
@@ -152,8 +153,8 @@ nnoremap <A-n> :noh<cr>
 " Move to end of line
 inoremap <A-a> <C-o>A
 
-" Rebind f1 off of help (now rebound to :Tagbar)
-" inoremap <F1> <Esc>
+" Rebind f1 off of help
+inoremap <F1> <Esc>
 
 " Easier window navigation
 nnoremap <A-H> <C-W>h
