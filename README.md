@@ -1,8 +1,8 @@
 ## NeoVim Configuration
 
-"It's absolute trash but it's -my- absolute trash"
+Why not both? Vim config and NeoVim config patched together lovingly.
 
-NeoVim configured for general programming use. Usability comperable to and exceeding VSCode. Most configuration uses Lua, however base Vim settings and keybindings are set in init.vim. This is so I can use the file on servers using the command `vim -Nu <(curl https://raw.githubusercontent.com/wrbright/nvim-config/master/init.vim)` in bash to source directly from this github repo
+NeoVim configured for general programming use. Usability comperable to an IDE. Most configuration uses Lua, however base Vim settings and keybindings are set in init.vim. This is so I can use the file on servers using the command `vim -Nu <(curl https://raw.githubusercontent.com/wrbright/nvim-config/master/init.vim)` in bash to source directly from this github repo
 
 Lazy Loaded with Lazy.nvim, nvim-cmp for completion, LSP integrationg with lspconfig boilerplate, Dap integration, gruvbox colors with transparent background. Requires transparent terminal for transparency
 
@@ -59,83 +59,81 @@ Loaded: Plugins loaded by default when entering a directory.
 Unloaded: Plugins not loaded until an event fires
 
 ```
-  Total: 74 plugins
+  Total: 73 plugins
 
-  Loaded (51)
-    ● bufferline.nvim 8.51ms  start
-    ● cmp-buffer 0.17ms  nvim-cmp
-    ● cmp-cmdline 0.33ms  nvim-cmp
-    ● cmp-npm 0.22ms  nvim-cmp
+  Loaded (43)
+    ● bufferline.nvim 4.12ms  start
+    ● cmp-buffer 0.16ms  nvim-cmp
+    ● cmp-cmdline 0.16ms  nvim-cmp
+    ● cmp-npm 0.17ms  nvim-cmp
     ● cmp-nvim-lsp 0.2ms  nvim-cmp
-    ● cmp-path 0.22ms  nvim-cmp
-    ● conform.nvim 1.26ms  start
-    ● fidget.nvim 1.08ms 󰢱 fidget  nvim-lspconfig
-    ● gen.nvim 0.76ms  start
-    ● gitsigns.nvim 3.15ms  start
-    ● gruvbox-material 0.22ms  start
-    ● image.nvim 34.22ms  neo-tree.nvim
-    ● image_preview.nvim 0.74ms  VeryLazy
-    ● indent-blankline.nvim 9.34ms  start
-    ● lazy.nvim 13.37ms  init.lua
-    ● lazygit.nvim 0.44ms  start
-    ● lspkind.nvim 0.21ms 󰢱 lspkind  nvim-cmp
-    ● lualine.nvim 14.59ms  start
-    ● LuaSnip 7.62ms 󰢱 luasnip  nvim-cmp
-    ● mason-lspconfig.nvim 3.55ms  start
-    ● mason.nvim 3.78ms  start
-    ● neo-tree-diagnostics.nvim 0.22ms  start
-    ● neo-tree.nvim 57.47ms  start
-    ● neovim-session-manager 5.77ms  start
-    ● nui.nvim 0.16ms  neo-tree.nvim
-    ● nvim-cmp 36.41ms  start
-    ● nvim-colorizer.lua 4.17ms  BufEnter
-    ● nvim-dap 11.87ms  nvim-dap-ui
-    ● nvim-dap-ui 12.25ms  start
-    ● nvim-dap-virtual-text 0.37ms  nvim-dap
-    ● nvim-dap-vscode-js 0.31ms  nvim-dap
-    ● nvim-hlslens 0.28ms  start
-    ● nvim-lspconfig 11.43ms  start
-    ● nvim-navic 0.08ms 󰢱 lualine.components.navic  lualine.nvim
-    ● nvim-nio 0.05ms 󰢱 nio  nvim-dap
-    ● nvim-scrollbar 7.9ms  VeryLazy
-    ● nvim-treesitter 14.5ms  start
-    ● nvim-treesitter-refactor 4.85ms  nvim-treesitter
-    ● nvim-treesitter-textobjects 2.48ms  nvim-treesitter
-    ● nvim-ts-autotag 1.75ms  nvim-treesitter
-    ● nvim-ufo 12.63ms  start
-    ● nvim-web-devicons 0.77ms  bufferline.nvim
-    ● plenary.nvim 0.24ms 󰢱 plenary.path  neovim-session-manager
-    ● possession.nvim 1.86ms  start
-    ● promise-async 1.06ms  nvim-ufo
-    ● rainbow-delimiters.nvim 1.72ms  nvim-treesitter
-    ● telescope-ui-select.nvim 0.28ms  telescope.nvim
-    ● telescope.nvim 12.68ms  start
-    ● vim-fugitive 1.58ms  BufEnter
-    ● vim-snippets 0.48ms  start
-    ● vim-wordmotion 1.93ms  BufEnter
+    ● cmp-path 0.14ms  nvim-cmp
+    ● conform.nvim 0.46ms  start
+    ● fidget.nvim 0.66ms 󰢱 fidget  nvim-lspconfig
+    ● gitsigns.nvim 1.38ms  start
+    ● gruvbox-material 0.11ms  start
+    ● image.nvim 0.16ms  neo-tree.nvim
+    ● indent-blankline.nvim 3.01ms  start
+    ● lazy.nvim 5.79ms  init.lua
+    ● lspkind.nvim 0.13ms 󰢱 lspkind  nvim-cmp
+    ● lualine.nvim 7.77ms  start
+    ● LuaSnip 3.85ms 󰢱 luasnip  nvim-cmp
+    ● mason-lspconfig.nvim 13.76ms  start
+    ● mason.nvim 1.14ms 󰢱 mason-core.functional  mason-lspconfig.nvim
+    ● neo-tree-diagnostics.nvim 0.08ms 󰢱 neo-tree.sources.diagnostics  neo-tree.nvim
+    ● neo-tree.nvim 10.54ms  start
+    ● neovim-session-manager 1.28ms  start
+    ● nui.nvim 0.12ms  neo-tree.nvim
+    ● nvim-cmp 17.94ms  start
+    ● nvim-colorizer.lua 1.57ms  BufEnter
+    ● nvim-hlslens 0.21ms  start
+    ● nvim-lspconfig 10.38ms  start
+    ● nvim-navic 0.06ms 󰢱 lualine.components.navic  lualine.nvim
+    ● nvim-scrollbar 2.61ms  VeryLazy
+    ● nvim-treesitter 7.34ms 󰢱 nvim-treesitter  nvim-ts-autotag
+    ● nvim-treesitter-refactor 3.77ms  nvim-treesitter
+    ● nvim-treesitter-textobjects 1.32ms  nvim-treesitter
+    ● nvim-ts-autotag 8.63ms  start
+    ● nvim-ufo 3.12ms  start
+    ● nvim-web-devicons 0.3ms  bufferline.nvim
+    ● plenary.nvim 0.22ms  telescope.nvim
+    ● possession.nvim 1.05ms  start
+    ● promise-async 0.14ms  nvim-ufo
+    ● rainbow-delimiters.nvim 0.3ms  nvim-treesitter
+    ● telescope-ui-select.nvim 0.2ms  telescope.nvim
+    ● telescope.nvim 6.77ms  start
+    ● vim-fugitive 0.75ms  BufEnter
+    ● vim-snippets 0.13ms  start
+    ● vim-wordmotion 0.86ms  BufEnter
 
-  Not Loaded (23)
+  Not Loaded (30)
     ○ cmp-dap  <Leader>dd
     ○ cmp-nvim-lsp-signature-help  LspAttach
     ○ cmp_luasnip  InsertEnter
     ○ colortils.nvim  Colortils
-    ○ Comment.nvim  gc (v)  gc  gcc
+    ○ Comment.nvim  gc  gcc  gc (v)
     ○ crates.nvim  BufRead Cargo.toml
+    ○ gen.nvim  Gen  <Leader>n
     ○ hardtime.nvim  Hardtime enable
+    ○ lazygit.nvim  LazyGit
     ○ markdown-preview.nvim  markdown
     ○ NeoZoom.lua  Z
     ○ nvim-autopairs  InsertEnter
+    ○ nvim-dap  <Leader>dd  nvim-dap-ui
+    ○ nvim-dap-go  <Leader>dd
+    ○ nvim-dap-ui  <leader>dd
+    ○ nvim-dap-virtual-text  nvim-dap
+    ○ nvim-dap-vscode-js  nvim-dap
     ○ nvim-jdtls  java
+    ○ nvim-nio  nvim-dap-ui
     ○ nvim-regexplainer  <Leader>re
-    ○ oil.nvim  Oil
     ○ pretty_hover  LspAttach
     ○ ReplaceWithRegister  grr
     ○ rnvimr  RnvimrToggle
     ○ suda.vim  SudaWrite
-    ○ toggleterm.nvim  LazyGit  Ctop  LazyDocker  Browsh  Ranger  Gomucks
+    ○ toggleterm.nvim  LazyGit  Ranger  Gomucks  Browsh  Btop  Ctop  FTP  TermSCP  LazyDocker
     ○ ts-node-action  <C-n>
     ○ tw-values.nvim  <leader>tw
     ○ undotree  UndotreeShow
     ○ vim-sandwich  s
-    ○ vim-windowswap  <Leader>ww
 ```
